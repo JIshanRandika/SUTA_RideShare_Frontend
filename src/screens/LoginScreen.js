@@ -17,7 +17,7 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Spinner visible={isLoading} />
+      {/*<Spinner visible={isLoading} />*/}
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
