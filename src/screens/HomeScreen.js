@@ -2,7 +2,9 @@ import React, {useContext} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
-import MapView from 'react-native-maps';
+
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+
 //
 // const HomeScreen = () => {
 //     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -79,17 +81,22 @@ function AddADriveScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
+        <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
-            <Text style={styles.welcome}>Add a Drive Screen</Text>
-            {/*<MapView*/}
-            {/*    initialRegion={{*/}
-            {/*        latitude: 37.78825,*/}
-            {/*        longitude: -122.4324,*/}
-            {/*        latitudeDelta: 0.0922,*/}
-            {/*        longitudeDelta: 0.0421,*/}
-            {/*    }}*/}
-            {/*/>*/}
+            <MapView
+                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                style={styles.map}
+                region={{
+                    latitude: 6.586622,
+                    longitude: 79.975817,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            />
+            <View style={{backgroundColor:'green', width:"100%"}}>
+                <Text style={styles.welcome}>Add a Drive Screen</Text>
+            </View>
+
         </View>
     );
 }
@@ -215,8 +222,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    addADriveContainer: {
+        flex: 1,
+        // alignItems: 'center',
+        // justifyContent: 'center',
+    },
+    map: {
+        // height:500,
+        ...StyleSheet.absoluteFillObject,
+    },
     welcome: {
         fontSize: 18,
-        marginBottom: 8,
+        marginBottom: 0,
     },
 });
