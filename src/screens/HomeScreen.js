@@ -41,30 +41,55 @@ function AddADriveScreen() {
 
     const [count, setCount] = useState(0);
 
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState('F');
-    const [text, setText] = useState('Empty');
+    const [originDate, setOriginDate] = useState(new Date());
+    const [originMode, setOriginMode] = useState('date');
+    const [originShow, setOriginShow] = useState('F');
+    const [originText, setOriginText] = useState('Select The Origin Date and Time');
+    const [originVisible, setOriginVisible] = useState(false);
 
-    const [visible, setVisible] = useState(false);
+    const [destinationDate, setDestinationDate] = useState(new Date());
+    const [destinationMode, setDestinationMode] = useState('date');
+    const [destinationShow, setDestinationShow] = useState('F');
+    const [destinationText, setDestinationText] = useState('Select The Destination Date and Time');
+    const [destinationVisible, setDestinationVisible] = useState(false);
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS ==='android');
-        setDate(currentDate);
+
+    const onOriginChange = (event, selectedDate) => {
+        const currentOriginDate = selectedDate || originDate;
+        setOriginShow(Platform.OS ==='android');
+        setOriginDate(currentOriginDate);
 
 
-        let tempDate = new Date (currentDate);
-        let fDate = tempDate.getDate()+'/'+(tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear();
-        let fTime = 'Hours :'+tempDate.getHours()+'| Minutes' + tempDate.getMinutes();
-        setShow('F');
-        setText(fDate + '('+fTime+')' + show);
+        let tempOriginDate = new Date (currentOriginDate);
+        let fDate = tempOriginDate.getDate()+'/'+(tempOriginDate.getMonth()+ 1)+'/'+tempOriginDate.getFullYear();
+        let fTime = 'Hours :'+tempOriginDate.getHours()+'| Minutes' + tempOriginDate.getMinutes();
+        setOriginShow('F');
+        setOriginText('Origin Date : '+fDate + '\nOrigin Time :'+fTime);
 
     }
 
-    const showMode = (currentMode) => {
-        setShow('T');
-        setMode(currentMode);
+    const onDestinationChange = (event, selectedDate) => {
+        const currentDestinationDate = selectedDate || originDate;
+        setDestinationShow(Platform.OS ==='android');
+        setDestinationDate(currentDestinationDate);
+
+
+        let tempDestinationDate = new Date (currentDestinationDate);
+        let fDate = tempDestinationDate.getDate()+'/'+(tempDestinationDate.getMonth()+ 1)+'/'+tempDestinationDate.getFullYear();
+        let fTime = 'Hours :'+tempDestinationDate.getHours()+'| Minutes' + tempDestinationDate.getMinutes();
+        setDestinationShow('F');
+        setDestinationText('Origin Date : '+fDate + '\nOrigin Time :'+fTime);
+
+    }
+
+    const showOriginMode = (currentMode) => {
+        setOriginShow('T');
+        setOriginMode(currentMode);
+    }
+
+    const showDestinationMode = (currentMode) => {
+        setDestinationShow('T');
+        setDestinationMode(currentMode);
     }
 
 
@@ -88,7 +113,7 @@ function AddADriveScreen() {
     // }, []);
 
 
-    const [startLocation, setStartLocation] = useState({
+    const [originLocation, setOriginLocation] = useState({
         latitude: 6.586622,
         longitude: 79.975817,
     });
@@ -102,6 +127,109 @@ function AddADriveScreen() {
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
 
+
+
+
+
+            <View style={{backgroundColor:'#87e7fa', width:"100%"}}>
+
+                <Text style={styles.welcome}>{originText}</Text>
+                <View style={{margin:5}}>
+                    <Button color='#96d600' title='Origin Date' onPress={()=>showOriginMode('date')}/>
+                </View>
+                <View style={{margin:5}}>
+                    <Button color='#96d600' title='Origin Time' onPress={()=>showOriginMode('time')}/>
+                </View>
+                <Text style={styles.welcome}>{destinationText}</Text>
+                <View style={{margin:5}}>
+                    <Button color='#f2d307' title='Destination Date' onPress={()=>showDestinationMode('date')}/>
+                </View>
+                <View style={{margin:5}}>
+                    <Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>
+                </View>
+
+                <Button
+                    title="Change Origin Location"
+                    onPress={() => {
+                        setOriginVisible(true);
+                    }}
+                />
+
+                <Dialog
+                    width={400}
+                    height={400}
+                    visible={originVisible}
+                    onTouchOutside={() => {
+                        setOriginVisible(false);
+                    }}
+                >
+                    <DialogFooter>
+                        <DialogButton
+                            text="OK"
+                            onPress={() => {
+                                setOriginVisible(false);
+                            }}
+                        />
+                    </DialogFooter>
+                    <DialogContent>
+                        <MapView
+                            // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                            style={{width:"100%",height:'100%'}}
+
+                            initialRegion={{
+                                latitude: originLocation.latitude,
+                                longitude: originLocation.longitude,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421,
+                            }}
+                            onRegionChange={region => {
+                                setOriginLocation({
+                                    latitude: region.latitude,
+                                    longitude: region.longitude,
+                                });
+                            }}
+                            onRegionChangeComplete={region => {
+                                setOriginLocation({
+                                    latitude: region.latitude,
+                                    longitude: region.longitude,
+                                });
+                            }}
+                        >
+                            <Marker
+                                coordinate={{
+                                    latitude: originLocation.latitude,
+                                    longitude: originLocation.longitude,
+                                }}
+                                title="Origin"
+                                description="Origin location"
+                            />
+
+                        </MapView>
+                    </DialogContent>
+                </Dialog>
+
+                {originShow ==='T' && (
+                    <RNDateTimePicker
+                        testID = 'dateTimePicker'
+                        value = {originDate}
+                        mode = {originMode}
+                        in24Hour={false}
+                        display='default'
+                        onChange = {onOriginChange}
+                    />
+                )}
+
+                {destinationShow ==='T' && (
+                    <RNDateTimePicker
+                        testID = 'dateTimePicker'
+                        value = {destinationDate}
+                        mode = {destinationMode}
+                        in24Hour={false}
+                        display='default'
+                        onChange = {onDestinationChange}
+                    />
+                )}
+            </View>
 
             <MapView
                 // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -129,11 +257,11 @@ function AddADriveScreen() {
 
                 <Marker
                     coordinate={{
-                        latitude: startLocation.latitude,
-                        longitude: startLocation.longitude,
+                        latitude: originLocation.latitude,
+                        longitude: originLocation.longitude,
                     }}
-                    title="Start"
-                    description="Start location"
+                    title="Origin"
+                    description="Origin location"
                 />
 
                 <Marker
@@ -146,7 +274,7 @@ function AddADriveScreen() {
                 />
 
                 <MapViewDirections
-                    origin={{latitude: startLocation.latitude, longitude: startLocation.longitude}}
+                    origin={{latitude: originLocation.latitude, longitude: originLocation.longitude}}
                     destination={{latitude: destinationLocation.latitude, longitude: destinationLocation.longitude}}
                     apikey={'AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8'}
                     strokeWidth={3}
@@ -154,91 +282,6 @@ function AddADriveScreen() {
                 />
 
             </MapView>
-
-
-            <View style={{backgroundColor:'green', width:"100%"}}>
-
-                <Text style={styles.welcome}>{text}</Text>
-                <View style={{margin:20}}>
-                    <Button title='DatePicker' onPress={()=>showMode('date')}/>
-                </View>
-                <View style={{margin:20}}>
-                    <Button title='TimePicker' onPress={()=>showMode('time')}/>
-                </View>
-
-                <Button
-                    title="Show Dialog"
-                    onPress={() => {
-                        setVisible(true);
-                    }}
-                />
-
-                <Dialog
-                    width={400}
-                    height={400}
-                    visible={visible}
-                    onTouchOutside={() => {
-                        setVisible(false);
-                    }}
-                >
-                    <DialogFooter>
-                        <DialogButton
-                            text="OK"
-                            onPress={() => {
-                                setVisible(false);
-                            }}
-                        />
-                    </DialogFooter>
-                    <DialogContent>
-                        <MapView
-                            // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                            style={{width:"100%",height:'100%'}}
-
-                            initialRegion={{
-                                latitude: startLocation.latitude,
-                                longitude: startLocation.longitude,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
-                            }}
-                            onRegionChange={region => {
-                                setStartLocation({
-                                    latitude: region.latitude,
-                                    longitude: region.longitude,
-                                });
-                            }}
-                            onRegionChangeComplete={region => {
-                                setStartLocation({
-                                    latitude: region.latitude,
-                                    longitude: region.longitude,
-                                });
-                            }}
-                        >
-                            <Marker
-                                coordinate={{
-                                    latitude: startLocation.latitude,
-                                    longitude: startLocation.longitude,
-                                }}
-                                title="Start"
-                                description="Start location"
-                            />
-
-                        </MapView>
-                    </DialogContent>
-                </Dialog>
-
-                {show ==='T' && (
-                    <RNDateTimePicker
-                        testID = 'dateTimePicker'
-                        value = {date}
-                        mode = {mode}
-                        in24Hour={true}
-                        display='default'
-                        onChange = {onChange}
-                    />
-                )}
-            </View>
-
-
         </View>
     );
 }
@@ -422,8 +465,8 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     map: {
-        // height:500,
-        ...StyleSheet.absoluteFillObject,
+        height:'50%',
+        // ...StyleSheet.absoluteFillObject,
     },
     welcome: {
         fontSize: 18,
