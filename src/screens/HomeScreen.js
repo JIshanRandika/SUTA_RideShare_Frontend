@@ -29,6 +29,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import DatePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import Dialog, { DialogContent, DialogFooter, DialogButton } from 'react-native-popup-dialog';
 
 function AddADriveScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -39,6 +40,8 @@ function AddADriveScreen() {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState('F');
     const [text, setText] = useState('Empty');
+
+    const [visible, setVisible] = useState(false);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -82,6 +85,42 @@ function AddADriveScreen() {
                 <View style={{margin:20}}>
                     <Button title='TimePicker' onPress={()=>showMode('time')}/>
                 </View>
+
+                <Button
+                    title="Show Dialog"
+                    onPress={() => {
+                        setVisible(true);
+                    }}
+                />
+
+                <Dialog
+                    width={400}
+                    height={400}
+                    visible={visible}
+                    onTouchOutside={() => {
+                        setVisible(false);
+                    }}
+                >
+                    <DialogFooter>
+                        <DialogButton
+                            text="OK"
+                            onPress={() => {setVisible(false);}}
+                        />
+                    </DialogFooter>
+                    <DialogContent>
+                        <MapView
+                            provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                            style={{height:'100%',width:'100%'}}
+                            region={{
+                                latitude: 6.586622,
+                                longitude: 79.975817,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421,
+                            }}
+                        />
+                    </DialogContent>
+                </Dialog>
+
                 {show ==='T' && (
                     <RNDateTimePicker
                         testID = 'dateTimePicker'
