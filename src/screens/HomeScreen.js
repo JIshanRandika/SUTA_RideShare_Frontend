@@ -74,12 +74,6 @@ function AddADriveScreen() {
                 }}
             />
             <View style={{backgroundColor:'green', width:"100%"}}>
-                <Text>{text}</Text>
-                {/*<Button title='DatePicker' onPress={()=>{setCount(count + 1)}}/>*/}
-                {/*<Button onClick={() => setCount(count + 1)}>*/}
-                {/*    Click me*/}
-                {/*</Button>*/}
-
 
                 <Text style={styles.welcome}>{text}</Text>
                 <View style={{margin:20}}>
