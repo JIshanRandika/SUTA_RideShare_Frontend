@@ -144,6 +144,15 @@ function AddADriveScreen() {
                     title="Destination"
                     description="Destination location"
                 />
+
+                <MapViewDirections
+                    origin={{latitude: startLocation.latitude, longitude: startLocation.longitude}}
+                    destination={{latitude: destinationLocation.latitude, longitude: destinationLocation.longitude}}
+                    apikey={'AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8'}
+                    strokeWidth={3}
+                    strokeColor="hotpink"
+                />
+
             </MapView>
 
 
