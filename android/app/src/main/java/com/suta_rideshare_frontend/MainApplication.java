@@ -20,6 +20,8 @@ import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
+
 import androidx.multidex.MultiDex;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -55,7 +57,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new RNScreensPackage(),
                     new ReanimatedPackage(),
                     new RNGestureHandlerPackage(),
-                    new SafeAreaContextPackage()
+                    new SafeAreaContextPackage(),
+                    new RNDateTimePickerPackage()
 //                    new RNCSafeAreaProviderPackage()
 //                    new SafeAreaContextPackage()
             );

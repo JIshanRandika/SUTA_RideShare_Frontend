@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {Button, Platform, StyleSheet, Text, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 
@@ -26,6 +26,85 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import DatePicker from '@react-native-community/datetimepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+
+function AddADriveScreen() {
+    const {userInfo, isLoading, logout} = useContext(AuthContext);
+
+    const [count, setCount] = useState(0);
+
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState('F');
+    const [text, setText] = useState('Empty');
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS ==='android');
+        setDate(currentDate);
+
+
+        let tempDate = new Date (currentDate);
+        let fDate = tempDate.getDate()+'/'+(tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear();
+        let fTime = 'Hours :'+tempDate.getHours()+'| Minutes' + tempDate.getMinutes();
+        setShow('F');
+        setText(fDate + '('+fTime+')' + show);
+
+    }
+
+    const showMode = (currentMode) => {
+        setShow('T');
+        setMode(currentMode);
+    }
+    return (
+        <View style={styles.addADriveContainer}>
+            {/*<Spinner visible={isLoading} />*/}
+
+
+            <MapView
+                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                style={styles.map}
+                region={{
+                    latitude: 6.586622,
+                    longitude: 79.975817,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            />
+            <View style={{backgroundColor:'green', width:"100%"}}>
+                <Text>{text}</Text>
+                {/*<Button title='DatePicker' onPress={()=>{setCount(count + 1)}}/>*/}
+                {/*<Button onClick={() => setCount(count + 1)}>*/}
+                {/*    Click me*/}
+                {/*</Button>*/}
+
+
+                <Text style={styles.welcome}>{text}</Text>
+                <View style={{margin:20}}>
+                    <Button title='DatePicker' onPress={()=>showMode('date')}/>
+                </View>
+                <View style={{margin:20}}>
+                    <Button title='TimePicker' onPress={()=>showMode('time')}/>
+                </View>
+                {show ==='T' && (
+                    <RNDateTimePicker
+                        testID = 'dateTimePicker'
+                        value = {date}
+                        mode = {mode}
+                        in24Hour={true}
+                        display='default'
+                        onChange = {onChange}
+                    />
+                )}
+            </View>
+
+
+        </View>
+    );
+}
+
 
 function DetailsScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -77,29 +156,6 @@ function YourDrivesScreen({ navigation }) {
     );
 }
 
-function AddADriveScreen() {
-    const {userInfo, isLoading, logout} = useContext(AuthContext);
-
-    return (
-        <View style={styles.addADriveContainer}>
-            {/*<Spinner visible={isLoading} />*/}
-            <MapView
-                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                style={styles.map}
-                region={{
-                    latitude: 6.586622,
-                    longitude: 79.975817,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            />
-            <View style={{backgroundColor:'green', width:"100%"}}>
-                <Text style={styles.welcome}>Add a Drive Screen</Text>
-            </View>
-
-        </View>
-    );
-}
 
 
 
