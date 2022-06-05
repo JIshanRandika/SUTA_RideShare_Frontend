@@ -21,6 +21,7 @@ import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 
 import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
+//import com.reactcommunity.rngeolocation.RNGeolocationPackage;
 
 import androidx.multidex.MultiDex;
 import com.facebook.react.shell.MainReactPackage;
@@ -59,6 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
                     new RNGestureHandlerPackage(),
                     new SafeAreaContextPackage(),
                     new RNDateTimePickerPackage()
+//                    new RNGeolocationPackage()
 //                    new RNCSafeAreaProviderPackage()
 //                    new SafeAreaContextPackage()
             );

@@ -1,9 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Platform, StyleSheet, Text, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+
+import MapViewDirections from 'react-native-maps-directions';
 
 //
 // const HomeScreen = () => {
@@ -30,6 +32,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DatePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import Dialog, { DialogContent, DialogFooter, DialogButton } from 'react-native-popup-dialog';
+// import Geolocation from '@react-native-community/geolocation';
+
+
 
 function AddADriveScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -61,21 +66,87 @@ function AddADriveScreen() {
         setShow('T');
         setMode(currentMode);
     }
+
+
+    // const [position, setPosition] = useState({
+    //     latitude: 10,
+    //     longitude: 10,
+    //     latitudeDelta: 0.001,
+    //     longitudeDelta: 0.001,
+    // });
+    //
+    // useEffect(() => {
+    //     Geolocation.getCurrentPosition((pos) => {
+    //         const crd = pos.coords;
+    //         setPosition({
+    //             latitude: crd.latitude,
+    //             longitude: crd.longitude,
+    //             latitudeDelta: 0.0421,
+    //             longitudeDelta: 0.0421,
+    //         });
+    //     })
+    // }, []);
+
+
+    const [startLocation, setStartLocation] = useState({
+        latitude: 6.586622,
+        longitude: 79.975817,
+    });
+
+    const [destinationLocation, setDestinationLocation] = useState({
+        latitude: 6.586622,
+        longitude: 79.975817,
+    });
+
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
 
 
             <MapView
-                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                 style={styles.map}
-                region={{
-                    latitude: 6.586622,
-                    longitude: 79.975817,
+                initialRegion={{
+                    latitude: destinationLocation.latitude,
+                    longitude: destinationLocation.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
-            />
+                onRegionChange={region => {
+                    setDestinationLocation({
+                        latitude: region.latitude,
+                        longitude: region.longitude,
+                    });
+                }}
+                onRegionChangeComplete={region => {
+                    setDestinationLocation({
+                        latitude: region.latitude,
+                        longitude: region.longitude,
+                    });
+                }}
+                // showsUserLocation={true}
+            >
+
+                <Marker
+                    coordinate={{
+                        latitude: startLocation.latitude,
+                        longitude: startLocation.longitude,
+                    }}
+                    title="Start"
+                    description="Start location"
+                />
+
+                <Marker
+                    coordinate={{
+                        latitude: destinationLocation.latitude,
+                        longitude: destinationLocation.longitude,
+                    }}
+                    title="Destination"
+                    description="Destination location"
+                />
+            </MapView>
+
+
             <View style={{backgroundColor:'green', width:"100%"}}>
 
                 <Text style={styles.welcome}>{text}</Text>
@@ -104,20 +175,45 @@ function AddADriveScreen() {
                     <DialogFooter>
                         <DialogButton
                             text="OK"
-                            onPress={() => {setVisible(false);}}
+                            onPress={() => {
+                                setVisible(false);
+                            }}
                         />
                     </DialogFooter>
                     <DialogContent>
                         <MapView
-                            provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                            style={{height:'100%',width:'100%'}}
-                            region={{
-                                latitude: 6.586622,
-                                longitude: 79.975817,
+                            // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                            style={{width:"100%",height:'100%'}}
+
+                            initialRegion={{
+                                latitude: startLocation.latitude,
+                                longitude: startLocation.longitude,
                                 latitudeDelta: 0.0922,
                                 longitudeDelta: 0.0421,
                             }}
-                        />
+                            onRegionChange={region => {
+                                setStartLocation({
+                                    latitude: region.latitude,
+                                    longitude: region.longitude,
+                                });
+                            }}
+                            onRegionChangeComplete={region => {
+                                setStartLocation({
+                                    latitude: region.latitude,
+                                    longitude: region.longitude,
+                                });
+                            }}
+                        >
+                            <Marker
+                                coordinate={{
+                                    latitude: startLocation.latitude,
+                                    longitude: startLocation.longitude,
+                                }}
+                                title="Start"
+                                description="Start location"
+                            />
+
+                        </MapView>
                     </DialogContent>
                 </Dialog>
 
