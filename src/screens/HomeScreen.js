@@ -58,16 +58,36 @@ function YourRidesScreen() {
     );
 }
 
-function YourDrivesScreen() {
+function YourDrivesScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
 
     return (
         <View style={styles.container}>
             {/*<Spinner visible={isLoading} />*/}
             <Text style={styles.welcome}>Your Drives Screen</Text>
+            <Button
+                color='green'
+                title="Add a Drive"
+                onPress={() => navigation.navigate('Add a Drive')}
+            />
         </View>
     );
 }
+
+function AddADriveScreen() {
+    const {userInfo, isLoading, logout} = useContext(AuthContext);
+
+    return (
+        <View style={styles.container}>
+            {/*<Spinner visible={isLoading} />*/}
+            <Text style={styles.welcome}>Add a Drive Screen</Text>
+        </View>
+    );
+}
+
+
+
+
 
 function AvailableRidesScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -107,6 +127,7 @@ function DriverStackScreen() {
             <DriverStack.Screen name="Driver" component={DriverScreen} options={{headerShown: false}}/>
             <DriverStack.Screen name="Your Drives" component={YourDrivesScreen} />
             <DriverStack.Screen name="Available Rides" component={AvailableRidesScreen} />
+            <DriverStack.Screen name="Add a Drive" component={AddADriveScreen} />
         </DriverStack.Navigator>
     );
 }
