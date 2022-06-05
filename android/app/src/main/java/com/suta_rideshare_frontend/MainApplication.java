@@ -1,3 +1,4 @@
+
 package com.suta_rideshare_frontend;
 
 import android.app.Application;
@@ -13,8 +14,28 @@ import com.suta_rideshare_frontend.newarchitecture.MainApplicationReactNativeHos
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+import com.swmansion.rnscreens.RNScreensPackage;
 
+import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
+
+import androidx.multidex.MultiDex;
+import com.facebook.react.shell.MainReactPackage;
+
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import java.util.Arrays;
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.react.ReactPackage;
+
+import com.airbnb.android.react.maps.MapsPackage;
+
+public class MainApplication extends Application implements ReactApplication {
+    @Override
+     protected void attachBaseContext(Context base) {
+                  super.attachBaseContext(base);
+                  MultiDex.install(this);
+              }
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
         @Override
@@ -24,12 +45,31 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+            return Arrays.<ReactPackage>asList(
+//                    List<ReactPackage> packages = new PackageList(this).getPackages(),
+                    new MainReactPackage(),
+                    new MapsPackage(),
+                    new AsyncStoragePackage(),
+//                    new ReanimatedPackage(),
+//                    new RNGestureHandlerPackage(),
+                    new RNScreensPackage(),
+                    new ReanimatedPackage(),
+                    new RNGestureHandlerPackage(),
+                    new SafeAreaContextPackage()
+//                    new RNCSafeAreaProviderPackage()
+//                    new SafeAreaContextPackage()
+            );
         }
+
+//        protected List<ReactPackage> getPackages() {
+//          @SuppressWarnings("UnnecessaryLocalVariable")
+//          List<ReactPackage> packages = new PackageList(this).getPackages();
+//          // Packages that cannot be autolinked yet can be added manually here, for example:
+////           packages.add(new MyReactNativePackage());
+//           packages.add(new MainReactPackage());
+//           packages.add(new MapsPackage());
+//          return packages;
+//        }
 
         @Override
         protected String getJSMainModuleName() {

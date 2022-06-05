@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
+import MapView from 'react-native-maps';
 //
 // const HomeScreen = () => {
 //     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -81,6 +82,14 @@ function AddADriveScreen() {
         <View style={styles.container}>
             {/*<Spinner visible={isLoading} />*/}
             <Text style={styles.welcome}>Add a Drive Screen</Text>
+            {/*<MapView*/}
+            {/*    initialRegion={{*/}
+            {/*        latitude: 37.78825,*/}
+            {/*        longitude: -122.4324,*/}
+            {/*        latitudeDelta: 0.0922,*/}
+            {/*        longitudeDelta: 0.0421,*/}
+            {/*    }}*/}
+            {/*/>*/}
         </View>
     );
 }
