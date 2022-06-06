@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Platform, StyleSheet, Text, View} from 'react-native';
+import {Button, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 
@@ -41,17 +41,23 @@ function AddADriveScreen() {
 
     const [count, setCount] = useState(0);
 
+    const [next, setNext] = useState(false);
+
     const [originDate, setOriginDate] = useState(new Date());
     const [originMode, setOriginMode] = useState('date');
     const [originShow, setOriginShow] = useState('F');
     const [originText, setOriginText] = useState('Select The Origin Date and Time');
+
     const [originVisible, setOriginVisible] = useState(false);
 
     const [destinationDate, setDestinationDate] = useState(new Date());
     const [destinationMode, setDestinationMode] = useState('date');
     const [destinationShow, setDestinationShow] = useState('F');
     const [destinationText, setDestinationText] = useState('Select The Destination Date and Time');
-    const [destinationVisible, setDestinationVisible] = useState(false);
+
+    const [availableSeats, setAvailableSeats] = useState(null);
+    const [vehicleNumber, setVehicleNumber] = useState(null);
+    const [contactNumber, setContactNumber] = useState(null);
 
 
     const onOriginChange = (event, selectedDate) => {
@@ -153,6 +159,26 @@ function AddADriveScreen() {
                     onPress={() => {
                         setOriginVisible(true);
                     }}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    value={availableSeats}
+                    placeholder="Number of Seats"
+                    onChangeText={text => setAvailableSeats(text)}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    value={vehicleNumber}
+                    placeholder="Vehicle Number"
+                    onChangeText={text => setVehicleNumber(text)}
+                />
+                <TextInput
+                    style={styles.input}
+                    value={contactNumber}
+                    placeholder="Your contact Number"
+                    onChangeText={text => setContactNumber(text)}
                 />
 
                 <Dialog
@@ -285,6 +311,21 @@ function AddADriveScreen() {
         </View>
     );
 }
+
+
+
+
+
+// ===========================================================================
+
+
+
+
+
+
+
+
+
 
 
 function DetailsScreen() {
@@ -463,6 +504,13 @@ const styles = StyleSheet.create({
         flex: 1,
         // alignItems: 'center',
         // justifyContent: 'center',
+    },
+    input: {
+        marginBottom: 12,
+        borderWidth: 1,
+        borderColor: '#bbb',
+        borderRadius: 5,
+        paddingHorizontal: 14,
     },
     map: {
         height:'50%',
