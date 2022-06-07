@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, Platform, StyleSheet, Text, TextInput, View, FlatList, SafeAreaView, TouchableOpacity} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 import MapViewDirections from 'react-native-maps-directions';
+import {BASE_URL} from '../config';
 
 //
 // const HomeScreen = () => {
@@ -36,7 +37,7 @@ import Dialog, { DialogContent, DialogFooter, DialogButton } from 'react-native-
 
 
 
-function AddADriveScreen() {
+function AddADriveScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
 
     const [count, setCount] = useState(0);
@@ -129,6 +130,36 @@ function AddADriveScreen() {
         longitude: 79.975817,
     });
 
+    const addADrive = () => {
+        fetch(`${BASE_URL}/drive`, {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                originDateTime: originText,
+                originLongitude: originLocation.longitude,
+                originLatitude: originLocation.latitude,
+
+                destinationDateTime: destinationText,
+                destinationLongitude: destinationLocation.longitude,
+                destinationLatitude: destinationLocation.latitude,
+
+                availableSeats: availableSeats,
+                VehicleNumber: vehicleNumber,
+                contactNumber: contactNumber,
+                username: userInfo.name
+
+            }),
+        }).then(alert('Successfully Completed'));
+        // if(contactNumber.length>0){
+        //     alert('Successfully Completed')
+        // }else {
+        //     alert('Error')
+        // }
+    }
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
@@ -136,7 +167,7 @@ function AddADriveScreen() {
 
 
 
-
+            {!next && (
             <View style={{backgroundColor:'#87e7fa', width:"100%"}}>
 
                 <Text style={styles.welcome}>{originText}</Text>
@@ -154,12 +185,7 @@ function AddADriveScreen() {
                     <Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>
                 </View>
 
-                <Button
-                    title="Change Origin Location"
-                    onPress={() => {
-                        setOriginVisible(true);
-                    }}
-                />
+
 
                 <TextInput
                     style={styles.input}
@@ -181,58 +207,12 @@ function AddADriveScreen() {
                     onChangeText={text => setContactNumber(text)}
                 />
 
-                <Dialog
-                    width={400}
-                    height={400}
-                    visible={originVisible}
-                    onTouchOutside={() => {
-                        setOriginVisible(false);
-                    }}
-                >
-                    <DialogFooter>
-                        <DialogButton
-                            text="OK"
-                            onPress={() => {
-                                setOriginVisible(false);
-                            }}
-                        />
-                    </DialogFooter>
-                    <DialogContent>
-                        <MapView
-                            // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                            style={{width:"100%",height:'100%'}}
 
-                            initialRegion={{
-                                latitude: originLocation.latitude,
-                                longitude: originLocation.longitude,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
-                            }}
-                            onRegionChange={region => {
-                                setOriginLocation({
-                                    latitude: region.latitude,
-                                    longitude: region.longitude,
-                                });
-                            }}
-                            onRegionChangeComplete={region => {
-                                setOriginLocation({
-                                    latitude: region.latitude,
-                                    longitude: region.longitude,
-                                });
-                            }}
-                        >
-                            <Marker
-                                coordinate={{
-                                    latitude: originLocation.latitude,
-                                    longitude: originLocation.longitude,
-                                }}
-                                title="Origin"
-                                description="Origin location"
-                            />
+                <View style={{margin:5}}>
+                    <Button color='blue' title='Next' onPress={()=>{setNext(true)}}/>
+                </View>
 
-                        </MapView>
-                    </DialogContent>
-                </Dialog>
+
 
                 {originShow ==='T' && (
                     <RNDateTimePicker
@@ -256,6 +236,9 @@ function AddADriveScreen() {
                     />
                 )}
             </View>
+            )}
+            {next && (
+                <>
 
             <MapView
                 // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -308,6 +291,76 @@ function AddADriveScreen() {
                 />
 
             </MapView>
+                    <View style={{margin:5}}>
+                        <Button color='blue' title='Back' onPress={()=>{setNext(false)}}/>
+                    </View>
+            <View style={{margin:5}}>
+                    <Button
+                        title="Change Origin Location"
+                        onPress={() => {
+                            setOriginVisible(true);
+                        }}
+                    />
+            </View>
+                    <View style={{margin:5}}>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Your Drives'); addADrive();}}/>
+                    </View>
+                    <Dialog
+                        width={400}
+                        height={400}
+                        visible={originVisible}
+                        onTouchOutside={() => {
+                            setOriginVisible(false);
+                        }}
+                    >
+                        <DialogFooter>
+                            <DialogButton
+                                text="OK"
+                                onPress={() => {
+                                    setOriginVisible(false);
+                                }}
+                            />
+                        </DialogFooter>
+                        <DialogContent>
+                            <MapView
+                                // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                                style={{width:"100%",height:'100%'}}
+
+                                initialRegion={{
+                                    latitude: originLocation.latitude,
+                                    longitude: originLocation.longitude,
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+                                onRegionChange={region => {
+                                    setOriginLocation({
+                                        latitude: region.latitude,
+                                        longitude: region.longitude,
+                                    });
+                                }}
+                                onRegionChangeComplete={region => {
+                                    setOriginLocation({
+                                        latitude: region.latitude,
+                                        longitude: region.longitude,
+                                    });
+                                }}
+                            >
+                                <Marker
+                                    coordinate={{
+                                        latitude: originLocation.latitude,
+                                        longitude: originLocation.longitude,
+                                    }}
+                                    title="Origin"
+                                    description="Origin location"
+                                />
+
+                            </MapView>
+                        </DialogContent>
+                    </Dialog>
+
+
+                </>
+                )}
         </View>
     );
 }
@@ -341,15 +394,118 @@ function DetailsScreen() {
 }
 
 function AvailableVehiclesScreen() {
-    const {userInfo, isLoading, logout} = useContext(AuthContext);
+    const {userInfo, logout} = useContext(AuthContext);
 
+    const [isLoading, setLoading] = useState(true);
+
+    const [data, setData] = useState([]);
+    console.log(data);
+
+
+    useEffect(() => {
+        fetch(`${BASE_URL}/getDrives`)
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
+
+    // useEffect(() => {
+    //     // declare the async data fetching function
+    //     const fetchData = async () => {
+    //         // get the data from the api
+    //         const data = await fetch(`${BASE_URL}/getDrives`);
+    //         // convert the data to json
+    //         const json = await data.json();
+    //         // set state with the result
+    //         setDrivesData(json);
+    //         // console.log(json)
+    //     }
+    //
+    //     // call the function
+    //     fetchData()
+    //         // make sure to catch any error
+    //         .catch(console.error);
+    //
+    //     setInterval(function(){
+    //         console.log(drivesData)
+    //     },3000);
+    //
+    //     console.log('asd')
+    // },[]);
+
+    const [selectedId, setSelectedId] = useState(null);
+    const Item = ({ item }) => (
+
+
+        <TouchableOpacity
+            // onPress={onPress}
+            style={{
+                // flex: 1,
+                marginTop:"3%",
+                alignSelf: 'center',
+                width: "47%",
+                // height: 37,
+                paddingLeft:10,
+                paddingRight:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: "#e3b505",
+                borderRadius:10,
+                shadowColor: "#0090ff",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
+
+                elevation: 10,
+            }}
+
+        >
+
+
+            <Text style={{fontSize: 20, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>
+            <Text style={{fontSize: 20, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>
+
+
+        </TouchableOpacity>
+    );
+    const renderItem = ({ item }) => {
+        return (
+            <Item
+                item={item}
+            />
+        );
+    };
     return (
         <View style={styles.container}>
             {/*<Spinner visible={isLoading} />*/}
-            <Text style={styles.welcome}>Available Vehicles Screen</Text>
+
+
+            {isLoading ? <Text>Loading...</Text> :(
+                <View>
+                    <Text style={styles.welcome}>Loaded</Text>
+                    <View style={{flex:7}}>
+                        <SafeAreaView>
+
+                            <FlatList
+                                style={{height:"47%"}}
+                                data={data}
+                                renderItem={renderItem}
+                                keyExtractor={(data) => data._id}
+                                extraData={selectedId}
+                            />
+
+                        </SafeAreaView>
+                    </View>
+                </View>
+                )}
+
         </View>
     );
-}
+};
 
 function YourRidesScreen() {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -427,9 +583,14 @@ function DriverStackScreen() {
 }
 
 function HomeScreen({ navigation }) {
+    const {userInfo, isLoading, logout} = useContext(AuthContext);
+
+
+
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Home screen</Text>
+            <Text>Welcome {userInfo.name} </Text>
             <Button
                 title="Go to Details"
                 onPress={() => navigation.navigate('Details')}
@@ -513,8 +674,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 14,
     },
     map: {
-        height:'50%',
-        // ...StyleSheet.absoluteFillObject,
+        // height:'50%',
+        ...StyleSheet.absoluteFillObject,
     },
     welcome: {
         fontSize: 18,
