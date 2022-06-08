@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
@@ -7,7 +7,7 @@ import MapView, {Circle, Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import Dialog, {DialogButton, DialogContent, DialogFooter} from 'react-native-popup-dialog';
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
-
+import Geolocation from '@react-native-community/geolocation';
 
 function AddADriveScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -91,10 +91,7 @@ function AddADriveScreen({ navigation }) {
     //     })
     // }, []);
 
-    const [ pin, setPin ] = useState({
-        latitude: 6.586622,
-        longitude: 79.975817,
-    })
+
     const [originLocation, setOriginLocation] = useState({
         latitude: 6.586622,
         longitude: 79.975817,
@@ -105,6 +102,8 @@ function AddADriveScreen({ navigation }) {
     const [destinationLocation, setDestinationLocation] = useState({
         latitude: 6.586622,
         longitude: 79.975817,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
     });
 
     const addADrive = () => {
@@ -142,7 +141,127 @@ function AddADriveScreen({ navigation }) {
 
 
     // ===============================
+    const [
+        currentLongitude,
+        setCurrentLongitude
+    ] = useState('...');
+    const [
+        currentLatitude,
+        setCurrentLatitude
+    ] = useState('...');
+    const [
+        locationStatus,
+        setLocationStatus
+    ] = useState('');
 
+    useEffect(() => {
+        const requestLocationPermission = async () => {
+            if (Platform.OS === 'android') {
+                getOneTimeLocation();
+                subscribeLocationLocation();
+            } else {
+                try {
+                    const granted = await PermissionsAndroid.request(
+                        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                        {
+                            title: 'Location Access Required',
+                            message: 'This App needs to Access your location',
+                        },
+                    );
+                    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                        //To Check, If Permission is granted
+                        getOneTimeLocation();
+                        subscribeLocationLocation();
+                    } else {
+                        setLocationStatus('Permission Denied');
+                    }
+                } catch (err) {
+                    console.warn(err);
+                }
+            }
+        };
+        requestLocationPermission();
+        return () => {
+            Geolocation.clearWatch(watchID);
+        };
+    }, []);
+
+    const getOneTimeLocation = () => {
+        setLocationStatus('Getting Location ...');
+        Geolocation.getCurrentPosition(
+            //Will give you the current location
+            (position) => {
+                setLocationStatus('You are Here');
+
+                //getting the Longitude from the location json
+                const currentLongitude =
+                    JSON.stringify(position.coords.longitude);
+
+                //getting the Latitude from the location json
+                const currentLatitude =
+                    JSON.stringify(position.coords.latitude);
+
+                //Setting Longitude state
+                setCurrentLongitude(currentLongitude);
+
+
+                setOriginLocation({
+                    latitude: parseFloat(currentLatitude),
+                    longitude: parseFloat(currentLongitude),
+                });
+                setDestinationLocation({
+                    latitude: parseFloat(currentLatitude),
+                    longitude: parseFloat(currentLongitude),
+                });
+
+
+                //Setting Longitude state
+                setCurrentLatitude(currentLatitude);
+            },
+            (error) => {
+                setLocationStatus(error.message);
+            },
+            {
+                enableHighAccuracy: false,
+                timeout: 30000,
+                maximumAge: 1000
+            },
+        );
+    };
+
+    const subscribeLocationLocation = () => {
+        watchID = Geolocation.watchPosition(
+            (position) => {
+                //Will give you the location on location change
+
+                setLocationStatus('You are Here');
+                console.log(position);
+
+                //getting the Longitude from the location json
+                const currentLongitude =
+                    JSON.stringify(position.coords.longitude);
+
+                //getting the Latitude from the location json
+                const currentLatitude =
+                    JSON.stringify(position.coords.latitude);
+
+                //Setting Longitude state
+                setCurrentLongitude(currentLongitude);
+
+
+
+                //Setting Latitude state
+                setCurrentLatitude(currentLatitude);
+            },
+            (error) => {
+                setLocationStatus(error.message);
+            },
+            {
+                enableHighAccuracy: false,
+                maximumAge: 1000
+            },
+        );
+    };
 
     return (
         <View style={styles.addADriveContainer}>
@@ -155,17 +274,17 @@ function AddADriveScreen({ navigation }) {
                 <View style={{width:"100%"}}>
 
                     <Text style={styles.welcome}>{originText}</Text>
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='#96d600' title='Origin Date' onPress={()=>showOriginMode('date')}/>
                     </View>
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='#96d600' title='Origin Time' onPress={()=>showOriginMode('time')}/>
                     </View>
                     <Text style={styles.welcome}>{destinationText}</Text>
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='#f2d307' title='Destination Date' onPress={()=>showDestinationMode('date')}/>
                     </View>
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>
                     </View>
 
@@ -192,7 +311,7 @@ function AddADriveScreen({ navigation }) {
                     />
 
 
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
                     </View>
 
@@ -475,7 +594,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     input: {
-        marginBottom: 12,
+        margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',
         borderRadius: 5,

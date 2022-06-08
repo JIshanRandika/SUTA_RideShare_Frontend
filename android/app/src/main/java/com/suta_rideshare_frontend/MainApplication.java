@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -51,6 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
             return Arrays.<ReactPackage>asList(
 //                    List<ReactPackage> packages = new PackageList(this).getPackages(),
                     new MainReactPackage(),
+            new GeolocationPackage(),
                     new MapsPackage(),
                     new AsyncStoragePackage(),
 //                    new ReanimatedPackage(),
