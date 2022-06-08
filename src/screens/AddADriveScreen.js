@@ -310,69 +310,69 @@ function AddADriveScreen({ navigation }) {
                     <View style={{margin:5}}>
                         <Button color='blue' title='Back' onPress={()=>{setScreen('2')}}/>
                     </View>
-                    <View style={{margin:5}}>
-                        <Button
-                            title="Change Origin Location"
-                            onPress={() => {
-                                setOriginVisible(true);
-                            }}
-                        />
-                    </View>
+                    {/*<View style={{margin:5}}>*/}
+                    {/*    <Button*/}
+                    {/*        title="Change Origin Location"*/}
+                    {/*        onPress={() => {*/}
+                    {/*            setOriginVisible(true);*/}
+                    {/*        }}*/}
+                    {/*    />*/}
+                    {/*</View>*/}
                     <View style={{margin:5}}>
                         <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Your Drives'); addADrive();}}/>
                     </View>
-                    <Dialog
-                        width={400}
-                        height={400}
-                        visible={originVisible}
-                        onTouchOutside={() => {
-                            setOriginVisible(false);
-                        }}
-                    >
-                        <DialogFooter>
-                            <DialogButton
-                                text="OK"
-                                onPress={() => {
-                                    setOriginVisible(false);
-                                }}
-                            />
-                        </DialogFooter>
-                        <DialogContent>
-                            <MapView
-                                // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                                style={{width:"100%",height:'100%'}}
+                    {/*<Dialog*/}
+                    {/*    width={400}*/}
+                    {/*    height={400}*/}
+                    {/*    visible={originVisible}*/}
+                    {/*    onTouchOutside={() => {*/}
+                    {/*        setOriginVisible(false);*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    <DialogFooter>*/}
+                    {/*        <DialogButton*/}
+                    {/*            text="OK"*/}
+                    {/*            onPress={() => {*/}
+                    {/*                setOriginVisible(false);*/}
+                    {/*            }}*/}
+                    {/*        />*/}
+                    {/*    </DialogFooter>*/}
+                    {/*    <DialogContent>*/}
+                    {/*        <MapView*/}
+                    {/*            // provider={PROVIDER_GOOGLE} // remove if not using Google Maps*/}
+                    {/*            style={{width:"100%",height:'100%'}}*/}
 
-                                initialRegion={{
-                                    latitude: originLocation.latitude,
-                                    longitude: originLocation.longitude,
-                                    latitudeDelta: 0.0922,
-                                    longitudeDelta: 0.0421,
-                                }}
-                                onRegionChange={region => {
-                                    setOriginLocation({
-                                        latitude: region.latitude,
-                                        longitude: region.longitude,
-                                    });
-                                }}
-                                onRegionChangeComplete={region => {
-                                    setOriginLocation({
-                                        latitude: region.latitude,
-                                        longitude: region.longitude,
-                                    });
-                                }}
-                            >
-                                <Marker
-                                    coordinate={{
-                                        latitude: originLocation.latitude,
-                                        longitude: originLocation.longitude,
-                                    }}
-                                    title="Origin"
-                                    description="Origin location"
-                                />
+                    {/*            initialRegion={{*/}
+                    {/*                latitude: originLocation.latitude,*/}
+                    {/*                longitude: originLocation.longitude,*/}
+                    {/*                latitudeDelta: 0.0922,*/}
+                    {/*                longitudeDelta: 0.0421,*/}
+                    {/*            }}*/}
+                    {/*            onRegionChange={region => {*/}
+                    {/*                setOriginLocation({*/}
+                    {/*                    latitude: region.latitude,*/}
+                    {/*                    longitude: region.longitude,*/}
+                    {/*                });*/}
+                    {/*            }}*/}
+                    {/*            onRegionChangeComplete={region => {*/}
+                    {/*                setOriginLocation({*/}
+                    {/*                    latitude: region.latitude,*/}
+                    {/*                    longitude: region.longitude,*/}
+                    {/*                });*/}
+                    {/*            }}*/}
+                    {/*        >*/}
+                    {/*            <Marker*/}
+                    {/*                coordinate={{*/}
+                    {/*                    latitude: originLocation.latitude,*/}
+                    {/*                    longitude: originLocation.longitude,*/}
+                    {/*                }}*/}
+                    {/*                title="Origin"*/}
+                    {/*                description="Origin location"*/}
+                    {/*            />*/}
 
-                            </MapView>
-                        </DialogContent>
-                    </Dialog>
+                    {/*        </MapView>*/}
+                    {/*    </DialogContent>*/}
+                    {/*</Dialog>*/}
 
 
                 </>
