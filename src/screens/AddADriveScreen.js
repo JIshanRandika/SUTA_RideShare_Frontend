@@ -3,9 +3,10 @@ import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View} 
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Circle, Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import Dialog, {DialogButton, DialogContent, DialogFooter} from 'react-native-popup-dialog';
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
 
 
 function AddADriveScreen({ navigation }) {
@@ -90,10 +91,15 @@ function AddADriveScreen({ navigation }) {
     //     })
     // }, []);
 
-
+    const [ pin, setPin ] = useState({
+        latitude: 6.586622,
+        longitude: 79.975817,
+    })
     const [originLocation, setOriginLocation] = useState({
         latitude: 6.586622,
         longitude: 79.975817,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
     });
 
     const [destinationLocation, setDestinationLocation] = useState({
@@ -131,6 +137,13 @@ function AddADriveScreen({ navigation }) {
         //     alert('Error')
         // }
     }
+
+
+
+
+    // ===============================
+
+
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
@@ -234,6 +247,8 @@ function AddADriveScreen({ navigation }) {
                             });
                         }}
                     >
+
+
                         <Marker
                             coordinate={{
                                 latitude: originLocation.latitude,
@@ -242,15 +257,48 @@ function AddADriveScreen({ navigation }) {
                             title="Origin"
                             description="Origin location"
                         />
-
+                        <Circle center={originLocation} radius={1000} />
                     </MapView>
-                    <View style={{margin:5}}>
+
+                    <GooglePlacesAutocomplete
+
+                        placeholder="Search"
+                        fetchDetails={true}
+                        GooglePlacesSearchQuery={{
+                            rankby: "distance"
+                        }}
+                        onPress={(data, details = null) => {
+                            // 'details' is provided when fetchDetails = true
+                            console.log(data, details)
+                            setOriginLocation({
+                                latitude: details.geometry.location.lat,
+                                longitude: details.geometry.location.lng,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421
+                            })
+                        }}
+                        query={{
+                            key: "AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8",
+                            language: "en",
+                            components: "country:lk",
+                            types: "establishment",
+                            radius: 30000,
+                            location: `${originLocation.latitude}, ${originLocation.longitude}`
+                        }}
+                        styles={{
+                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55 },
+                            listView: { backgroundColor: "white" }
+                        }}
+                    />
+
+                    <View style={{flex: 2,margin:10 }}>
                         <Button title='Back' onPress={()=>{setScreen('1')}}/>
                     </View>
 
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>
                     </View>
+
 
                 </>
             )}
@@ -288,7 +336,7 @@ function AddADriveScreen({ navigation }) {
                             title="Origin"
                             description="Origin location"
                         />
-
+                        <Circle center={originLocation} radius={1000} />
                         <Marker
                             coordinate={{
                                 latitude: destinationLocation.latitude,
@@ -297,7 +345,7 @@ function AddADriveScreen({ navigation }) {
                             title="Destination"
                             description="Destination location"
                         />
-
+                        <Circle center={destinationLocation} radius={1000} />
                         <MapViewDirections
                             origin={{latitude: originLocation.latitude, longitude: originLocation.longitude}}
                             destination={{latitude: destinationLocation.latitude, longitude: destinationLocation.longitude}}
@@ -307,8 +355,40 @@ function AddADriveScreen({ navigation }) {
                         />
 
                     </MapView>
-                    <View style={{margin:5}}>
-                        <Button color='blue' title='Back' onPress={()=>{setScreen('2')}}/>
+
+                    <GooglePlacesAutocomplete
+
+                        placeholder="Search"
+                        fetchDetails={true}
+                        GooglePlacesSearchQuery={{
+                            rankby: "distance"
+                        }}
+                        onPress={(data, details = null) => {
+                            // 'details' is provided when fetchDetails = true
+                            console.log(data, details)
+                            setDestinationLocation({
+                                latitude: details.geometry.location.lat,
+                                longitude: details.geometry.location.lng,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421
+                            })
+                        }}
+                        query={{
+                            key: "AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8",
+                            language: "en",
+                            components: "country:lk",
+                            types: "establishment",
+                            radius: 30000,
+                            location: `${destinationLocation.latitude}, ${destinationLocation.longitude}`
+                        }}
+                        styles={{
+                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55 },
+                            listView: { backgroundColor: "white" }
+                        }}
+                    />
+
+                    <View style={{flex: 2,margin:10}}>
+                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
                     </View>
                     {/*<View style={{margin:5}}>*/}
                     {/*    <Button*/}
@@ -318,7 +398,7 @@ function AddADriveScreen({ navigation }) {
                     {/*        }}*/}
                     {/*    />*/}
                     {/*</View>*/}
-                    <View style={{margin:5}}>
+                    <View style={{margin:10}}>
                         <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Your Drives'); addADrive();}}/>
                     </View>
                     {/*<Dialog*/}
