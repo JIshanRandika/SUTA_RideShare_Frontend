@@ -205,6 +205,7 @@ function AddADriveScreen({ navigation }) {
                 setCurrentLongitude(currentLongitude);
 
 
+
                 setOriginLocation({
                     latitude: parseFloat(currentLatitude),
                     longitude: parseFloat(currentLongitude),
