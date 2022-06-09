@@ -15,6 +15,12 @@ function RiderScreen({ navigation }) {
                 title="Your Rides"
                 onPress={() => navigation.navigate('Your Rides')}
             />
+
+            <Button
+                color='green'
+                title="Your Request To Drivers"
+                onPress={() => navigation.navigate('Your Request To Drivers')}
+            />
         </View>
     );
 }
