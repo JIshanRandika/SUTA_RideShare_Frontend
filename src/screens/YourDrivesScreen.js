@@ -211,6 +211,7 @@ function YourDrivesScreen({ navigation }) {
         >
 
 
+
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.status}</Text>
             {item.status === 'new' && (
             <View style={{margin:10}}>
