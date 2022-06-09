@@ -4,7 +4,15 @@ import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
 import {BASE_URL} from '../config';
 
-export const AuthContext = createContext();
+// export const AuthContext = createContext();
+
+export const AuthContext = React.createContext()
+
+// export const AuthProvider = AuthContext.Provider
+// export const UserConsumer = AuthContext.Consumer
+
+// export default AuthContext
+
 
 export const AuthProvider = ({children}) => {
   const [userInfo, setUserInfo] = useState({});
