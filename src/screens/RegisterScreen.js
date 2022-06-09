@@ -46,7 +46,7 @@ const RegisterScreen = ({navigation}) => {
         <Button
           title="Register"
           onPress={() => {
-            register(name, email, password);
+            register(name, email, password, 'new');
           }}
         />
 
