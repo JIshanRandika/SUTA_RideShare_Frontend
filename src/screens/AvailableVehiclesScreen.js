@@ -14,6 +14,9 @@ import {BASE_URL} from '../config';
 import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
+var FCM = require('fcm-node');
+
+
 function AvailableVehiclesScreen({ navigation }) {
     const {userInfo, logout} = useContext(AuthContext);
 
@@ -73,12 +76,31 @@ function AvailableVehiclesScreen({ navigation }) {
                 status: 'new'
 
             }),
-        }).then(alert('Successfully Completed'));
+        });
+
+
+        fetch(`${BASE_URL}/notification/send`, {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                to: userInfo.deviseToken,
+                notificationTitle: 'Send Request',
+                notificationBody: 'Body of your push notification',
+
+            }),
+        });
+
         // if(contactNumber.length>0){
         //     alert('Successfully Completed')
         // }else {
         //     alert('Error')
         // }
+
+
     }
 
     const [originLongitude,setOriginLongitude] = useState(6.586622);
@@ -120,6 +142,7 @@ function AvailableVehiclesScreen({ navigation }) {
                 paddingTop:10,
                 paddingBottom:10,
                 backgroundColor: "#e3b505",
+
                 borderRadius:10,
                 shadowColor: "#0090ff",
                 shadowOffset: {
