@@ -19,16 +19,27 @@ function YourDrivesScreen({ navigation }) {
     const {userInfo, logout} = useContext(AuthContext);
 
     const [isLoading, setLoading] = useState(true);
+    const [isRequestLoading, setRequestLoading] = useState(true);
 
     const [data, setData] = useState([]);
+    const [requestData, setRequestData] = useState([]);
     console.log(data);
 
     useEffect(() => {
+        fetch(`${BASE_URL}/getRiderToDriverRequests`)
+            .then((response) => response.json())
+            .then((json) => setRequestData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setRequestLoading(false));
+
         fetch(`${BASE_URL}/getDrives`)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
+
+
+
 
 
     }, []);
@@ -87,6 +98,7 @@ function YourDrivesScreen({ navigation }) {
 
     const [screen,setScreen] = useState('1');
 
+    // ================================
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -141,6 +153,61 @@ function YourDrivesScreen({ navigation }) {
             />
         );
     };
+
+
+    // ================================
+
+    // ==========request=======
+
+
+    const [selectedRequestId, setSelectedRequestId] = useState(null);
+    const ItemRequest = ({ item }) => (
+
+
+
+        <TouchableOpacity
+
+            style={{
+                // flex: 1,
+                marginTop:"3%",
+                alignSelf: 'center',
+                width: "47%",
+                // height: 37,
+                paddingLeft:10,
+                paddingRight:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: "#e3b505",
+                borderRadius:10,
+                shadowColor: "#0090ff",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
+
+                elevation: 10,
+            }}
+
+        >
+
+
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.neededSeats}</Text>
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
+
+
+        </TouchableOpacity>
+    );
+    const renderRequestItem = ({ item }) => {
+        return (
+            <ItemRequest
+                item={item}
+            />
+        );
+    };
+
+    // =====================
     return (
 
         <View style={{
@@ -174,6 +241,7 @@ function YourDrivesScreen({ navigation }) {
                         justifyContent: 'center',
                         width:'100%'
                     }}>
+
                         <Text style={{justifyContent:'center'}}>Loaded</Text>
                         <View style={{width:'100%'}}>
                             <SafeAreaView style={{width:'100%'}}>
@@ -238,8 +306,50 @@ function YourDrivesScreen({ navigation }) {
                 <View style={{flex: 2,margin:10}}>
                     <Button title='Back' onPress={()=>{setScreen('1')}}/>
                 </View>
+                    <View style={{margin:10}}>
+                        <Button color='orange' title='Received Requests' onPress={()=>{setScreen('3')}}/>
+                    </View>
                 </>
             )}
+            {screen === '3' && (
+                <>
+                    <View style={{margin:10}}>
+                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
+                    </View>
+                    <View style={styles.container}>
+                        {/*<Spinner visible={isLoading} />*/}
+
+
+                        {isRequestLoading ? <Text>Loading Requests...</Text> :(
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width:'100%'
+                            }}>
+
+                                <Text style={{justifyContent:'center'}}>Loaded</Text>
+                                <View style={{width:'100%'}}>
+                                    <SafeAreaView style={{width:'100%'}}>
+
+                                        <FlatList
+                                            style={{height:"90%", width:'100%'}}
+                                            data={requestData}
+                                            renderItem={renderRequestItem}
+                                            keyExtractor={(data) => data._id}
+                                            extraData={selectedId}
+                                        />
+
+                                    </SafeAreaView>
+                                </View>
+                            </View>
+                        )}
+
+                    </View>
+
+                </>
+            )}
+
         </View>
     );
 }
