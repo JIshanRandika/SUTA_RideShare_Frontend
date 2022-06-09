@@ -23,14 +23,36 @@ function YourDrivesScreen({ navigation }) {
     const [data, setData] = useState([]);
     console.log(data);
 
-
     useEffect(() => {
         fetch(`${BASE_URL}/getDrives`)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
+
+
     }, []);
+
+    // useEffect(() => {
+    //     fetch(`${BASE_URL}/yourDrives`,{
+    //         method:'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             username: userInfo.name,
+    //             email:userInfo.email
+    //
+    //         }),
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => console.log(data))
+    //         .catch((error) => console.error(error))
+    //         .finally(() => setLoading(false));
+    //
+    //
+    // }, []);
 
     // useEffect(() => {
     //     // declare the async data fetching function

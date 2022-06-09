@@ -5,7 +5,7 @@ import {
     FlatList,
     SafeAreaView,
     StyleSheet,
-    Text,
+    Text, TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -14,7 +14,7 @@ import {BASE_URL} from '../config';
 import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
-function AvailableVehiclesScreen() {
+function AvailableVehiclesScreen({ navigation }) {
     const {userInfo, logout} = useContext(AuthContext);
 
     const [isLoading, setLoading] = useState(true);
@@ -29,6 +29,8 @@ function AvailableVehiclesScreen() {
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
+
+
     }, []);
 
     // useEffect(() => {
@@ -55,15 +57,40 @@ function AvailableVehiclesScreen() {
     //     console.log('asd')
     // },[]);
 
+    const addADrive = (navigation) => {
+        fetch(`${BASE_URL}/AddRiderToDriverRequest`, {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
 
+            body: JSON.stringify({
+                riderEmail: userInfo.email,
+                driverEmail: itemEmail,
+                neededSeats: neededSeats,
+                originDateTime: itemOriginDateTime
+
+            }),
+        }).then(alert('Successfully Completed'));
+        // if(contactNumber.length>0){
+        //     alert('Successfully Completed')
+        // }else {
+        //     alert('Error')
+        // }
+    }
 
     const [originLongitude,setOriginLongitude] = useState(6.586622);
     const [originLatitude,setOriginLatitude] = useState(6.586622);
     const [destinationLongitude,setDestinationLongitude] = useState(6.586622);
     const [destinationLatitude,setDestinationLatitude] = useState(6.586622);
 
+    const [itemEmail, setItemEmail] = useState('email');
+    const [itemOriginDateTime, setItemOriginDateTime] = useState('null')
+
     const [screen,setScreen] = useState('1');
 
+    const [neededSeats, setNeededSeats] = useState(0)
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -74,8 +101,10 @@ function AvailableVehiclesScreen() {
             onPress={()=>{{
                 setOriginLatitude(item.originLatitude);
                 setOriginLongitude(item.originLongitude);
-                setDestinationLatitude(item.destinationLatitude)
-                setDestinationLongitude(item.destinationLongitude)
+                setDestinationLatitude(item.destinationLatitude);
+                setDestinationLongitude(item.destinationLongitude);
+                setItemEmail(item.email);
+                setItemOriginDateTime(item.originDateTime)
                 setScreen('2');
             }}
             }
@@ -204,9 +233,19 @@ function AvailableVehiclesScreen() {
                             strokeColor="hotpink"
                         />
 
+
                     </MapView>
                     <View style={{flex: 2,margin:10}}>
                         <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                    </View>
+                    <TextInput
+                        style={{margin:10,backgroundColor:'yellow'}}
+                        value={neededSeats}
+                        placeholder="Number of Seats"
+                        onChangeText={text => setNeededSeats(text)}
+                    />
+                    <View style={{margin:10}}>
+                        <Button color={'green'} title='Send the Request' onPress={()=>{navigation.navigate('Rider');addADrive();}}/>
                     </View>
                 </>
             )}

@@ -126,7 +126,8 @@ function AddADriveScreen({ navigation }) {
                 availableSeats: availableSeats,
                 VehicleNumber: vehicleNumber,
                 contactNumber: contactNumber,
-                username: userInfo.name
+                username: userInfo.name,
+                email:userInfo.email
 
             }),
         }).then(alert('Successfully Completed'));
