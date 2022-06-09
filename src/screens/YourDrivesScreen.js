@@ -44,6 +44,8 @@ function YourDrivesScreen({ navigation }) {
 
     }, []);
 
+
+
     // useEffect(() => {
     //     fetch(`${BASE_URL}/yourDrives`,{
     //         method:'POST',
@@ -159,13 +161,29 @@ function YourDrivesScreen({ navigation }) {
 
     // ==========request=======
 
+    const updateStatus = (status,_id) => {
+        fetch(`${BASE_URL}/updateRiderToDriverRequests`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
 
+            body: JSON.stringify({
+
+                status: status,
+                _id:_id
+
+            }),
+        }).then(alert('Successfully Updated'));
+    }
     const [selectedRequestId, setSelectedRequestId] = useState(null);
     const ItemRequest = ({ item }) => (
 
 
 
-        <TouchableOpacity
+
+        <View
 
             style={{
                 // flex: 1,
@@ -177,7 +195,7 @@ function YourDrivesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#e3b505",
+                backgroundColor: item.status ==="accept"? "#107e7d" : item.status ==="reject"? "#d5573b" : "#e3b505",
                 borderRadius:10,
                 shadowColor: "#0090ff",
                 shadowOffset: {
@@ -193,11 +211,21 @@ function YourDrivesScreen({ navigation }) {
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.neededSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.status}</Text>
+            {item.status === 'new' && (
+            <View style={{margin:10}}>
+                <Button color='green' title='Accept' onPress={()=>{updateStatus('accept',item._id);navigation.navigate('Driver')}}/>
+                <Button color='red' title='Reject' onPress={()=>{updateStatus('reject',item._id);navigation.navigate('Driver')}}/>
+            </View>
+            )}
+            {/*<View style={{margin:10}}>*/}
+            {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}
+            {/*</View>*/}
+
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
 
 
-        </TouchableOpacity>
+        </View>
     );
     const renderRequestItem = ({ item }) => {
         return (

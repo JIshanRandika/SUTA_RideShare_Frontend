@@ -69,7 +69,8 @@ function AvailableVehiclesScreen({ navigation }) {
                 riderEmail: userInfo.email,
                 driverEmail: itemEmail,
                 neededSeats: neededSeats,
-                originDateTime: itemOriginDateTime
+                originDateTime: itemOriginDateTime,
+                status: 'new'
 
             }),
         }).then(alert('Successfully Completed'));
