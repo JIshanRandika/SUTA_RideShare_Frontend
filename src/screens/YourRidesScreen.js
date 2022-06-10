@@ -14,6 +14,7 @@ import {BASE_URL} from '../config';
 import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
+
 function YourRidesScreen({ navigation }) {
 
     const {userInfo, logout} = useContext(AuthContext);
@@ -26,11 +27,12 @@ function YourRidesScreen({ navigation }) {
     console.log(data);
 
     useEffect(() => {
-        fetch(`${BASE_URL}/getDriverToRiderRequest`)
-            .then((response) => response.json())
-            .then((json) => setRequestData(json))
-            .catch((error) => console.error(error))
-            .finally(() => setRequestLoading(false));
+
+        // fetch(`${BASE_URL}/getDriverToRiderRequest`)
+        //     .then((response) => response.json())
+        //     .then((json) => setRequestData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setRequestLoading(false));
 
 
         // fetch(`${BASE_URL}/getRides`)
@@ -109,7 +111,25 @@ function YourRidesScreen({ navigation }) {
     //     console.log('asd')
     // },[]);
 
+    const getRiderReceivedRequestsForEach = (originDateTime) => {
+        fetch(`${BASE_URL}/riderReceivedRequestsForEach`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email,
+                originDateTime:originDateTime
 
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setRequestData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setRequestLoading(false));
+    }
 
 
     const [originLongitude,setOriginLongitude] = useState(6.586622);
@@ -130,9 +150,10 @@ function YourRidesScreen({ navigation }) {
             onPress={()=>{{
                 setOriginLatitude(item.originLatitude);
                 setOriginLongitude(item.originLongitude);
-                setDestinationLatitude(item.destinationLatitude)
-                setDestinationLongitude(item.destinationLongitude)
+                setDestinationLatitude(item.destinationLatitude);
+                setDestinationLongitude(item.destinationLongitude);
                 setScreen('2');
+                getRiderReceivedRequestsForEach(item.originDateTime);
             }}
             }
             style={{
