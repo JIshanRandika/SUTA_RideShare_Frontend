@@ -27,15 +27,30 @@ function YourDrivesScreen({ navigation }) {
 
     useEffect(() => {
 
-        fetch(`${BASE_URL}/getRiderToDriverRequests`)
-            .then((response) => response.json())
-            .then((json) => setRequestData(json))
-            .catch((error) => console.error(error))
-            .finally(() => setRequestLoading(false));
+        // fetch(`${BASE_URL}/getRiderToDriverRequests`)
+        //     .then((response) => response.json())
+        //     .then((json) => setRequestData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setRequestLoading(false));
 
 
-
-
+        // fetch(`${BASE_URL}/driverReceivedRequestsForEach`,{
+        //     method:'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         username: userInfo.name,
+        //         email:userInfo.email,
+        //         originDateTime:originDateTime
+        //
+        //     }),
+        // })
+        //     .then((response) => response.json())
+        //     .then((json) => setRequestData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setRequestLoading(false));
 
 
 
@@ -134,9 +149,29 @@ function YourDrivesScreen({ navigation }) {
     // },[]);
 
 
+    const getDriverReceivedRequestsForEach = (originDateTime) => {
+        fetch(`${BASE_URL}/driverReceivedRequestsForEach`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email,
+                originDateTime:originDateTime
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setRequestData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setRequestLoading(false));
+    }
 
 
-    const [originDateTime,setOriginDateTime] = useState('')
+
+    const [originDateTime,setOriginDateTime] = useState('null')
 
     const [originLongitude,setOriginLongitude] = useState(6.586622);
     const [originLatitude,setOriginLatitude] = useState(6.586622);
@@ -158,8 +193,10 @@ function YourDrivesScreen({ navigation }) {
                 setOriginLongitude(item.originLongitude);
                 setDestinationLatitude(item.destinationLatitude)
                 setDestinationLongitude(item.destinationLongitude)
-                setScreen('2');
                 setOriginDateTime(item.originDateTime);
+                setScreen('2');
+                getDriverReceivedRequestsForEach(item.originDateTime);
+
             }}
             }
             style={{
