@@ -12,13 +12,29 @@ function YourRequestToDriversScreen() {
     const [requestData, setRequestData] = useState([]);
 
     useEffect(() => {
-        fetch(`${BASE_URL}/getRiderToDriverRequests`)
+
+        // fetch(`${BASE_URL}/getRiderToDriverRequests`)
+        //     .then((response) => response.json())
+        //     .then((json) => setRequestData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setRequestLoading(false));
+
+        fetch(`${BASE_URL}/yourRequestsToDrivers`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
             .then((response) => response.json())
             .then((json) => setRequestData(json))
             .catch((error) => console.error(error))
             .finally(() => setRequestLoading(false));
-
-
 
     }, []);
 
