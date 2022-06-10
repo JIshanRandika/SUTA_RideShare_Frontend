@@ -25,8 +25,41 @@ function AvailableVehiclesScreen({ navigation }) {
     const [data, setData] = useState([]);
     console.log(data);
 
+    const [userData, setUserData] = useState(null);
+
+    const set = () => {
+        userData.map((item)=>{
+
+            // console.log(item.deviseToken)
+
+            setUserToken(item.deviseToken)
+        })
+    }
+
+
 
     useEffect(() => {
+
+        // ==========
+        fetch(`${BASE_URL}/userToken`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setUserData(json))
+            .catch((error) => console.error(error))
+
+
+
+
         fetch(`${BASE_URL}/getDrives`)
             .then((response) => response.json())
             .then((json) => setData(json))
@@ -81,6 +114,8 @@ function AvailableVehiclesScreen({ navigation }) {
 
             }),
         });
+
+
 
 
         fetch(`${BASE_URL}/notification/send`, {
@@ -140,7 +175,8 @@ function AvailableVehiclesScreen({ navigation }) {
                 setScreen('2');
                 setDriverName(item.username);
                 setVehicleNumber(item.VehicleNumber);
-                setUserToken(item.userToken);
+                set()
+                // setUserToken(item.userToken);
             }}
             }
             style={{

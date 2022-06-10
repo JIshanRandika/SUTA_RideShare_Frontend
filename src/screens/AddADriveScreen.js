@@ -332,6 +332,7 @@ function AddADriveScreen({ navigation }) {
                         <Text style={{fontSize:15}}>{destinationText}</Text>
                     </View>
 
+
                     <View style={{margin:10, flex:1}}>
                         <TextInput
                             style={styles.input}
