@@ -121,13 +121,13 @@ function YourDrivesScreen({ navigation }) {
                 // flex: 1,
                 marginTop:"3%",
                 alignSelf: 'center',
-                width: "47%",
+                width: "90%",
                 // height: 37,
                 paddingLeft:10,
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#e3b505",
+                backgroundColor: "#6ac131",
                 borderRadius:10,
                 shadowColor: "#0090ff",
                 shadowOffset: {
@@ -143,7 +143,8 @@ function YourDrivesScreen({ navigation }) {
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.availableSeats}</Text>
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
 
 
@@ -191,13 +192,13 @@ function YourDrivesScreen({ navigation }) {
                 // flex: 1,
                 marginTop:"3%",
                 alignSelf: 'center',
-                width: "47%",
+                width: "90%",
                 // height: 37,
                 paddingLeft:10,
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: item.status ==="accept"? "#107e7d" : item.status ==="reject"? "#d5573b" : "#e3b505",
+                backgroundColor: item.status ==="Accepted"? "#107e7d" : item.status ==="Rejected"? "#d5573b" : "#46bd89",
                 borderRadius:10,
                 shadowColor: "#0090ff",
                 shadowOffset: {
@@ -214,12 +215,20 @@ function YourDrivesScreen({ navigation }) {
 
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.status}</Text>
-            {item.status === 'new' && (
-            <View style={{margin:10}}>
-                <Button color='green' title='Accept' onPress={()=>{updateStatus('accept',item._id);navigation.navigate('Driver')}}/>
-                <Button color='red' title='Reject' onPress={()=>{updateStatus('reject',item._id);navigation.navigate('Driver')}}/>
-            </View>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Rider Name: {item.riderName}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Needed Seats: {item.neededSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
+
+            {item.status === 'Pending Request' && (
+                <>
+                    <View style={{margin:10}}>
+                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id);navigation.navigate('Driver')}}/>
+                    </View>
+                    <View style={{margin:10}}>
+                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id);navigation.navigate('Driver')}}/>
+                    </View>
+                </>
             )}
             {/*<View style={{margin:10}}>*/}
             {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}
@@ -252,7 +261,7 @@ function YourDrivesScreen({ navigation }) {
             {/*<Text style={styles.welcome}>Your Drives Screen</Text>*/}
             {screen === '1' && (
                 <>
-            <View style={{margin:10}}>
+            <View style={{flex:1, margin:10}}>
                 <Button
 
                     color='green'
@@ -261,7 +270,7 @@ function YourDrivesScreen({ navigation }) {
                 />
             </View>
 
-            <View style={styles.container}>
+            <View style={{flex:11}}>
                 {/*<Spinner visible={isLoading} />*/}
 
 
@@ -273,7 +282,7 @@ function YourDrivesScreen({ navigation }) {
                         width:'100%'
                     }}>
 
-                        <Text style={{justifyContent:'center'}}>Loaded</Text>
+                        {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                         <View style={{width:'100%'}}>
                             <SafeAreaView style={{width:'100%'}}>
 
@@ -359,12 +368,12 @@ function YourDrivesScreen({ navigation }) {
                                 width:'100%'
                             }}>
 
-                                <Text style={{justifyContent:'center'}}>Loaded</Text>
+                                {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
 
                                         <FlatList
-                                            style={{height:"90%", width:'100%'}}
+                                            style={{height:"100%", width:'100%'}}
                                             data={requestData}
                                             renderItem={renderRequestItem}
                                             keyExtractor={(data) => data._id}
