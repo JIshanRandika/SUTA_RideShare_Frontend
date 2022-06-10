@@ -34,13 +34,13 @@ function YourRequestToDriversScreen() {
                 // flex: 1,
                 marginTop:"3%",
                 alignSelf: 'center',
-                width: "47%",
+                width: "90%",
                 // height: 37,
                 paddingLeft:10,
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: item.status ==="accept"? "#107e7d" : item.status ==="reject"? "#d5573b" : "#e3b505",
+                backgroundColor: item.status ==="Accepted"? "#107e7d" : item.status ==="Rejected"? "#d5573b" : "#46bd89",
                 borderRadius:10,
                 shadowColor: "#0090ff",
                 shadowOffset: {
@@ -57,7 +57,10 @@ function YourRequestToDriversScreen() {
 
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.status}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Vehicle Number: {item.vehicleNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Driver Name: {item.driverName}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
 
             {/*<View style={{margin:10}}>*/}
             {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}
@@ -92,12 +95,12 @@ function YourRequestToDriversScreen() {
                     width:'100%'
                 }}>
 
-                    <Text style={{justifyContent:'center'}}>Loaded</Text>
+                    {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                     <View style={{width:'100%'}}>
                         <SafeAreaView style={{width:'100%'}}>
 
                             <FlatList
-                                style={{height:"90%", width:'100%'}}
+                                style={{height:"100%", width:'100%'}}
                                 data={requestData}
                                 renderItem={renderRequestItem}
                                 keyExtractor={(data) => data._id}
