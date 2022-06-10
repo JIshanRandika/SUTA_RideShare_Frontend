@@ -70,10 +70,13 @@ function AvailableVehiclesScreen({ navigation }) {
 
             body: JSON.stringify({
                 riderEmail: userInfo.email,
+                riderName: userInfo.name,
                 driverEmail: itemEmail,
+                driverName: driverName,
                 neededSeats: neededSeats,
                 originDateTime: itemOriginDateTime,
-                status: 'new'
+                vehicleNumber:vehicleNumber,
+                status: 'Pending Request'
 
             }),
         });
@@ -108,6 +111,9 @@ function AvailableVehiclesScreen({ navigation }) {
     const [destinationLongitude,setDestinationLongitude] = useState(6.586622);
     const [destinationLatitude,setDestinationLatitude] = useState(6.586622);
 
+    const [driverName, setDriverName] = useState('null');
+    const [vehicleNumber,setVehicleNumber] = useState('null')
+
     const [itemEmail, setItemEmail] = useState('email');
     const [itemOriginDateTime, setItemOriginDateTime] = useState('null')
 
@@ -127,15 +133,17 @@ function AvailableVehiclesScreen({ navigation }) {
                 setDestinationLatitude(item.destinationLatitude);
                 setDestinationLongitude(item.destinationLongitude);
                 setItemEmail(item.email);
-                setItemOriginDateTime(item.originDateTime)
+                setItemOriginDateTime(item.originDateTime);
                 setScreen('2');
+                setDriverName(item.username);
+                setVehicleNumber(item.VehicleNumber);
             }}
             }
             style={{
                 // flex: 1,
                 marginTop:"3%",
                 alignSelf: 'center',
-                width: "47%",
+                width: "90%",
                 // height: 37,
                 paddingLeft:10,
                 paddingRight:10,
@@ -159,7 +167,12 @@ function AvailableVehiclesScreen({ navigation }) {
 
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Name: {item.username}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Name: {item.VehicleNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.destinationDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Contact Number: {item.contactNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.destinationDateTime}</Text>
 
 
         </TouchableOpacity>
@@ -192,17 +205,18 @@ function AvailableVehiclesScreen({ navigation }) {
 
                         {isLoading ? <Text>Loading...</Text> :(
                             <View style={{
-                                flex: 1,
+                                flex: 12,
+                                height:'100%',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 width:'100%'
                             }}>
-                                <Text style={{justifyContent:'center'}}>Loaded</Text>
+                                {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
 
                                         <FlatList
-                                            style={{height:"90%", width:'100%'}}
+                                            style={{height:"100%", width:'100%'}}
                                             data={data}
                                             renderItem={renderItem}
                                             keyExtractor={(data) => data._id}
@@ -281,6 +295,7 @@ function AvailableVehiclesScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height:'100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
