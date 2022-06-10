@@ -33,7 +33,24 @@ function YourRidesScreen({ navigation }) {
             .finally(() => setRequestLoading(false));
 
 
-        fetch(`${BASE_URL}/getRides`)
+        // fetch(`${BASE_URL}/getRides`)
+        //     .then((response) => response.json())
+        //     .then((json) => setData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
+
+        fetch(`${BASE_URL}/yourRides`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
