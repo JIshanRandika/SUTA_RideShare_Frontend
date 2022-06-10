@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
+import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View, SafeAreaView,ScrollView} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
@@ -57,7 +57,7 @@ function AddADriveScreen({ navigation }) {
         let fDate = tempDestinationDate.getDate()+'/'+(tempDestinationDate.getMonth()+ 1)+'/'+tempDestinationDate.getFullYear();
         let fTime = 'Hours :'+tempDestinationDate.getHours()+'| Minutes' + tempDestinationDate.getMinutes();
         setDestinationShow('F');
-        setDestinationText('Origin Date : '+fDate + '\nOrigin Time :'+fTime);
+        setDestinationText('Destination Date : '+fDate + '\nDestination Time :'+fTime);
 
     }
 
@@ -273,47 +273,57 @@ function AddADriveScreen({ navigation }) {
 
 
             {screen === '1' && (
-                <View style={{width:"100%"}}>
+                <SafeAreaView style={{width:'100%',flex:1}}>
+                    <ScrollView>
+                <View style={{width:"100%", flex:1}}>
 
-                    <Text style={styles.welcome}>{originText}</Text>
-                    <View style={{margin:10}}>
+                    <View style={{margin:10, flex:1}}>
                         <Button color='#96d600' title='Origin Date' onPress={()=>showOriginMode('date')}/>
                     </View>
-                    <View style={{margin:10}}>
+                    <View style={{margin:10, flex:1}}>
                         <Button color='#96d600' title='Origin Time' onPress={()=>showOriginMode('time')}/>
                     </View>
-                    <Text style={styles.welcome}>{destinationText}</Text>
-                    <View style={{margin:10}}>
+                    <View style={{margin:10, flex:1}}>
+                        <Text style={{fontSize:15}}>{originText}</Text>
+                    </View>
+
+                    <View style={{margin:10, flex:1}}>
                         <Button color='#f2d307' title='Destination Date' onPress={()=>showDestinationMode('date')}/>
                     </View>
-                    <View style={{margin:10}}>
+                    <View style={{margin:10, flex:1}}>
                         <Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>
                     </View>
+                    <View style={{margin:10, flex:1}}>
+                        <Text style={{fontSize:15}}>{destinationText}</Text>
+                    </View>
 
-
-
-                    <TextInput
-                        style={styles.input}
-                        value={availableSeats}
-                        placeholder="Number of Seats"
-                        onChangeText={text => setAvailableSeats(text)}
-                    />
-
+                    <View style={{margin:10, flex:1}}>
+                        <TextInput
+                            style={styles.input}
+                            value={availableSeats}
+                            placeholder="Number of Seats"
+                            onChangeText={text => setAvailableSeats(text)}
+                        />
+                    </View>
+                    <View style={{margin:10, flex:1}}>
                     <TextInput
                         style={styles.input}
                         value={vehicleNumber}
                         placeholder="Vehicle Number"
                         onChangeText={text => setVehicleNumber(text)}
                     />
+                    </View>
+                    <View style={{margin:10, flex:1}}>
                     <TextInput
                         style={styles.input}
                         value={contactNumber}
                         placeholder="Your contact Number"
                         onChangeText={text => setContactNumber(text)}
                     />
+                    </View>
 
 
-                    <View style={{margin:10}}>
+                    <View style={{margin:10, flex:1}}>
                         <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
                     </View>
 
@@ -341,6 +351,8 @@ function AddADriveScreen({ navigation }) {
                         />
                     )}
                 </View>
+                    </ScrollView>
+                </SafeAreaView>
             )}
             {screen === '2' && (
 
@@ -520,7 +532,7 @@ function AddADriveScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Your Drives'); addADrive();}}/>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); addADrive();}}/>
                     </View>
                     {/*<Dialog*/}
                     {/*    width={400}*/}
@@ -596,7 +608,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     input: {
-        margin: 10,
+        // margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',
         borderRadius: 5,
