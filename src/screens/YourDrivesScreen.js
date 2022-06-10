@@ -26,6 +26,7 @@ function YourDrivesScreen({ navigation }) {
     console.log(data);
 
     useEffect(() => {
+
         fetch(`${BASE_URL}/getRiderToDriverRequests`)
             .then((response) => response.json())
             .then((json) => setRequestData(json))
@@ -33,13 +34,53 @@ function YourDrivesScreen({ navigation }) {
             .finally(() => setRequestLoading(false));
 
 
-        fetch(`${BASE_URL}/getDrives`)
+
+
+
+
+
+        // fetch(`${BASE_URL}/getDrives`)
+        //     .then((response) => response.json())
+        //     .then((json) => setData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
+
+
+
+
+        fetch(`${BASE_URL}/yourDrives`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
 
 
+        // fetch(`${BASE_URL}/yourDrives`,{
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         username: userInfo.name,
+        //         email:userInfo.email
+        //     })
+        // })
+        //     .then((response) => response.json())
+        //     .then((json) => setData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
+
+        // .then(data => this.setState({orderData: data}))
+        // .then(data =>console.log(this.state.orderData))
 
 
 
@@ -95,6 +136,8 @@ function YourDrivesScreen({ navigation }) {
 
 
 
+    const [originDateTime,setOriginDateTime] = useState('')
+
     const [originLongitude,setOriginLongitude] = useState(6.586622);
     const [originLatitude,setOriginLatitude] = useState(6.586622);
     const [destinationLongitude,setDestinationLongitude] = useState(6.586622);
@@ -116,6 +159,7 @@ function YourDrivesScreen({ navigation }) {
                 setDestinationLatitude(item.destinationLatitude)
                 setDestinationLongitude(item.destinationLongitude)
                 setScreen('2');
+                setOriginDateTime(item.originDateTime);
             }}
             }
             style={{
