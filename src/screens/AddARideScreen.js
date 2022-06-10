@@ -105,7 +105,16 @@ function AddARideScreen({ navigation }) {
         longitudeDelta: 0.0421
     });
 
-    const addADrive = () => {
+    const set = () => {
+        userData.map((item)=>{
+
+            console.log(item.deviseToken)
+
+            addADrive(item.deviseToken);
+        })
+    }
+
+    const addADrive = (userToken) => {
         fetch(`${BASE_URL}/ride`, {
             method:'POST',
             headers: {
@@ -125,7 +134,8 @@ function AddARideScreen({ navigation }) {
                 neededSeats: neededSeats,
                 contactNumber: contactNumber,
                 username: userInfo.name,
-                email:userInfo.email
+                email:userInfo.email,
+                userToken:userToken
 
             }),
         }).then(alert('Successfully Completed'));
@@ -153,7 +163,33 @@ function AddARideScreen({ navigation }) {
         setLocationStatus
     ] = useState('');
 
+
+    const [userData, setUserData] = useState(null);
+
     useEffect(() => {
+
+        fetch(`${BASE_URL}/userToken`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setUserData(json))
+            .catch((error) => console.error(error))
+
+
+
+
+
+
+
         const requestLocationPermission = async () => {
             if (Platform.OS === 'android') {
                 getOneTimeLocation();
@@ -530,7 +566,7 @@ function AddARideScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); addADrive();}}/>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>
                     </View>
 
                 </>
