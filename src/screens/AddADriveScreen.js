@@ -105,8 +105,15 @@ function AddADriveScreen({ navigation }) {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     });
+    const set = () => {
+        userData.map((item)=>{
 
-    const addADrive = () => {
+            console.log(item.deviseToken)
+
+            addADrive(item.deviseToken);
+        })
+    }
+    const addADrive = (userToken) => {
         fetch(`${BASE_URL}/drive`, {
             method:'POST',
             headers: {
@@ -127,7 +134,8 @@ function AddADriveScreen({ navigation }) {
                 VehicleNumber: vehicleNumber,
                 contactNumber: contactNumber,
                 username: userInfo.name,
-                email:userInfo.email
+                email:userInfo.email,
+                userToken:userToken
 
             }),
         }).then(alert('Successfully Completed'));
@@ -155,7 +163,34 @@ function AddADriveScreen({ navigation }) {
         setLocationStatus
     ] = useState('');
 
+
+    const [userData, setUserData] = useState(null);
+
     useEffect(() => {
+
+
+        // ==========
+        fetch(`${BASE_URL}/userToken`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setUserData(json))
+            .catch((error) => console.error(error))
+            // .finally(() => setLoading(false));
+
+
+
+
+
         const requestLocationPermission = async () => {
             if (Platform.OS === 'android') {
                 getOneTimeLocation();
@@ -532,7 +567,7 @@ function AddADriveScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); addADrive();}}/>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>
                     </View>
                     {/*<Dialog*/}
                     {/*    width={400}*/}
