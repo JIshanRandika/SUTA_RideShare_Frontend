@@ -10,7 +10,7 @@ function DetailsScreen() {
         <View style={styles.container}>
             {/*<Token/>*/}
             {/*<Spinner visible={isLoading} />*/}
-            <Text style={styles.welcome}>Welcome {userInfo.message}</Text>
+            {/*<Text style={styles.welcome}>Welcome {userInfo.message}</Text>*/}
             <Button title="Logout" color="red" onPress={logout} />
         </View>
     );
