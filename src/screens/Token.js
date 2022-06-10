@@ -44,7 +44,7 @@ export default class Token extends Component {
 
                 body: JSON.stringify({
 
-                    email: 'jishanrandika@gmail.com',
+                    email: userInfo.email,
                     deviseToken:this.state.registerToken
 
                 }),
@@ -62,8 +62,9 @@ export default class Token extends Component {
         return (
 
             <>
+
                 {/*<View>*/}
-                {/*    <Text>{userInfo.email}</Text>*/}
+                    {/*<Text>{userInfo.email}</Text>*/}
 
                 {/*    <Text>{this.state.registerToken}</Text>*/}
                 {/*</View>*/}
