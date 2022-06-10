@@ -180,6 +180,8 @@ function YourDrivesScreen({ navigation }) {
 
     const [screen,setScreen] = useState('1');
 
+    const [userToken,setUserToken] = useState('');
+
     // ================================
 
     const [selectedId, setSelectedId] = useState(null);
@@ -195,6 +197,7 @@ function YourDrivesScreen({ navigation }) {
                 setDestinationLongitude(item.destinationLongitude)
                 setOriginDateTime(item.originDateTime);
                 setScreen('2');
+                setUserToken(item.userToken);
                 getDriverReceivedRequestsForEach(item.originDateTime);
 
             }}
@@ -247,6 +250,10 @@ function YourDrivesScreen({ navigation }) {
 
 
     const updateStatus = (status,_id) => {
+
+
+
+
         fetch(`${BASE_URL}/updateRiderToDriverRequests`, {
             method: 'PUT',
             headers: {
@@ -261,6 +268,28 @@ function YourDrivesScreen({ navigation }) {
 
             }),
         }).then(alert('Successfully Updated'));
+
+
+        // ==========
+
+        fetch(`${BASE_URL}/notification/send`, {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                to: userToken,
+                notificationTitle: 'SUTA RideShare',
+                notificationBody: `Your Request ${status} by ${userInfo.name}`,
+
+            }),
+        });
+
+
+
+
     }
     const [selectedRequestId, setSelectedRequestId] = useState(null);
     const ItemRequest = ({ item }) => (
