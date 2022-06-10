@@ -28,11 +28,11 @@ function AvailableRidesScreen({ navigation }) {
     const [userData, setUserData] = useState(null);
 
     const set = () => {
-        userData.map((item)=>{
+        userData.map((items)=>{
+            console.log('Ishan')
+            console.log(items.deviseToken)
 
-            // console.log(item.deviseToken)
-
-            setUserToken(item.deviseToken)
+            setUserToken(items.deviseToken)
         })
     }
 
@@ -118,7 +118,7 @@ function AvailableRidesScreen({ navigation }) {
             },
 
             body: JSON.stringify({
-                to: userToken,
+                to: riderToken,
                 notificationTitle: 'SUTA RideShare',
                 notificationBody: `From ${userInfo.name} you have a new request for your Ride`,
 
@@ -152,7 +152,11 @@ function AvailableRidesScreen({ navigation }) {
     const [neededSeats, setNeededSeats] = useState(0)
 
     const [selectedId, setSelectedId] = useState(null);
+
+    const [riderToken, setRiderToken] = useState(null);
+
     const Item = ({ item }) => (
+
 
 
 
@@ -168,7 +172,7 @@ function AvailableRidesScreen({ navigation }) {
                 setDriverName(item.username);
                 setVehicleNumber(item.VehicleNumber);
                 set()
-                // setUserToken(item.userToken);
+                setRiderToken(item.userToken);
 
             }}
             }

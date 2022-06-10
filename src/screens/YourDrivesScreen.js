@@ -197,7 +197,7 @@ function YourDrivesScreen({ navigation }) {
                 setDestinationLongitude(item.destinationLongitude)
                 setOriginDateTime(item.originDateTime);
                 setScreen('2');
-                setUserToken(item.userToken);
+                // setUserToken(item.userToken);
                 getDriverReceivedRequestsForEach(item.originDateTime);
 
             }}
@@ -249,7 +249,7 @@ function YourDrivesScreen({ navigation }) {
     // ==========request=======
 
 
-    const updateStatus = (status,_id) => {
+    const updateStatus = (status,_id,userToken) => {
 
 
 
@@ -334,10 +334,10 @@ function YourDrivesScreen({ navigation }) {
             {item.status === 'Pending Request' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id);navigation.navigate('Driver')}}/>
+                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Driver')}}/>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id);navigation.navigate('Driver')}}/>
+                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Driver')}}/>
                     </View>
                 </>
             )}
@@ -351,6 +351,9 @@ function YourDrivesScreen({ navigation }) {
         </View>
     );
     const renderRequestItem = ({ item }) => {
+        // setUserToken(item.userToken)
+        // console.log('HI')
+        // console.log(item.userToken)
         return (
             <ItemRequest
                 item={item}

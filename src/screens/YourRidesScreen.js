@@ -142,7 +142,7 @@ function YourRidesScreen({ navigation }) {
 
     const [screen,setScreen] = useState('1');
 
-    const [userToken,setUserToken] = useState('');
+    // const [userToken,setUserToken] = useState('');
 
     // ================================
 
@@ -158,7 +158,7 @@ function YourRidesScreen({ navigation }) {
                 setDestinationLatitude(item.destinationLatitude);
                 setDestinationLongitude(item.destinationLongitude);
                 setScreen('2');
-                setUserToken(item.userToken);
+                // setUserToken(item.userToken);
                 getRiderReceivedRequestsForEach(item.originDateTime);
             }}
             }
@@ -208,7 +208,7 @@ function YourRidesScreen({ navigation }) {
     // ==========request=======
 
 
-    const updateStatus = (status,_id) => {
+    const updateStatus = (status,_id,userToken) => {
         fetch(`${BASE_URL}/updateDriverToRiderRequests`, {
             method: 'PUT',
             headers: {
@@ -286,10 +286,10 @@ function YourRidesScreen({ navigation }) {
             {item.status === 'Pending Request' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id);navigation.navigate('Rider')}}/>
+                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Rider')}}/>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id);navigation.navigate('Rider')}}/>
+                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Rider')}}/>
                     </View>
                 </>
             )}
@@ -303,6 +303,9 @@ function YourRidesScreen({ navigation }) {
         </View>
     );
     const renderRequestItem = ({ item }) => {
+        // setUserToken(item.userToken)
+        // console.log('HI')
+        // console.log(item.userToken)
         return (
             <ItemRequest
                 item={item}
