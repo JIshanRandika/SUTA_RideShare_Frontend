@@ -8,11 +8,18 @@ function HomeScreen({ navigation }) {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Welcome {userInfo.deviseToken} </Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
-            />
+            <View style={{ flex: 10, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{fontSize:20}}>Hi {userInfo.name}</Text>
+                <Text style={{fontSize:15}}>Welcome to SUTA RideShare</Text>
+                <Text>Sabaragamuwa University Of Sri Lanka</Text>
+            </View>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Button
+                    title="Go to Details"
+                    onPress={() => navigation.navigate('Details')}
+                />
+            </View>
+
         </View>
     );
 }
