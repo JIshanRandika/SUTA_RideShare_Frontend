@@ -76,7 +76,8 @@ function AvailableVehiclesScreen({ navigation }) {
                 neededSeats: neededSeats,
                 originDateTime: itemOriginDateTime,
                 vehicleNumber:vehicleNumber,
-                status: 'Pending Request'
+                status: 'Pending Request',
+                userToken:userToken
 
             }),
         });
@@ -90,9 +91,9 @@ function AvailableVehiclesScreen({ navigation }) {
             },
 
             body: JSON.stringify({
-                to: userInfo.deviseToken,
-                notificationTitle: 'Send Request',
-                notificationBody: 'Body of your push notification',
+                to: userToken,
+                notificationTitle: 'SUTA RideShare',
+                notificationBody: `From ${userInfo.name} you have a new request for your Drive`,
 
             }),
         });
@@ -119,7 +120,9 @@ function AvailableVehiclesScreen({ navigation }) {
 
     const [screen,setScreen] = useState('1');
 
-    const [neededSeats, setNeededSeats] = useState(0)
+    const [userToken,setUserToken] = useState('');
+
+    const [neededSeats, setNeededSeats] = useState(0);
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -137,6 +140,7 @@ function AvailableVehiclesScreen({ navigation }) {
                 setScreen('2');
                 setDriverName(item.username);
                 setVehicleNumber(item.VehicleNumber);
+                setUserToken(item.userToken);
             }}
             }
             style={{
