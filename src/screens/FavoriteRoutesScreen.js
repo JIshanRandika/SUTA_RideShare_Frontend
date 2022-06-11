@@ -3,7 +3,7 @@ import {ActivityIndicator, Button, StyleSheet, Text, View} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 // import Token from './Token';
 
-function SettingsScreen({ navigation }) {
+function FavoriteRoutesScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
 
     return (
@@ -11,14 +11,6 @@ function SettingsScreen({ navigation }) {
             {/*<Token/>*/}
             {/*<Spinner visible={isLoading} />*/}
             {/*<Text style={styles.welcome}>Welcome {userInfo.message}</Text>*/}
-
-            <View style={{margin:10}}>
-                <Button
-                    title="Favorite Routes"
-                    color="orange"
-                    onPress={() => navigation.navigate('Favorite Routes Screen')}
-                />
-            </View>
 
             <View style={{margin:10}}>
                 <Button
@@ -43,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SettingsScreen;
+export default FavoriteRoutesScreen;
