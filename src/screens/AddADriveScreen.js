@@ -124,6 +124,7 @@ function AddADriveScreen({ navigation }) {
             addADrive(item.deviseToken);
         })
     }
+
     const addADrive = (userToken) => {
         fetch(`${BASE_URL}/drive`, {
             method:'POST',
@@ -178,7 +179,35 @@ function AddADriveScreen({ navigation }) {
     const [userData, setUserData] = useState(null);
     const [data, setData] = useState([]);
 
+    // const [isLoading, setLoading] = useState(true);
+
+    const [vehiclesData, setVehiclesData] =useState([]);
+
     useEffect(() => {
+
+
+
+        fetch(`${BASE_URL}/yourVehicles`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setVehiclesData(json))
+            .catch((error) => console.error(error))
+            // .finally(() => setLoading(false));
+
+
+
+
 
         fetch(`${BASE_URL}/yourFavoriteRoutes`,{
             method:'POST',
@@ -328,8 +357,84 @@ function AddADriveScreen({ navigation }) {
             },
         );
     };
+// ===========================
+
+    const ItemRequest = ({ item }) => (
 
 
+
+
+        <TouchableOpacity
+            onPress={()=>{{
+                console.log(item.availableSeats);
+                console.log(item.vehicleNumber);
+                console.log(item.contactNumber);
+
+               setAvailableSeats(item.availableSeats);
+               setVehicleNumber(item.vehicleNumber);
+               setContactNumber(item.contactNumber);
+               setScreen('2');
+
+            }}
+            }
+
+
+            style={{
+                // flex: 1,
+                marginTop:"3%",
+                alignSelf: 'center',
+                width: "90%",
+                // height: 37,
+                paddingLeft:10,
+                paddingRight:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: item.status ==="Accepted"? "#107e7d" : item.status ==="Rejected"? "#d5573b" : "#46bd89",
+                borderRadius:10,
+                shadowColor: "#0090ff",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
+
+                elevation: 10,
+            }}
+
+        >
+
+
+
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.title}</Text>
+
+
+            {/*<View style={{margin:10}}>*/}
+            {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}
+            {/*</View>*/}
+
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
+
+
+
+        </TouchableOpacity>
+    );
+    const renderRequestItem = ({ item }) => {
+        return (
+            <ItemRequest
+                item={item}
+            />
+        );
+    };
+
+
+
+
+
+
+
+
+    // =======================
     // =========
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -393,6 +498,10 @@ function AddADriveScreen({ navigation }) {
         );
     };
 
+    const [vehicleSelector, setVehicleSelector] = useState(null);
+
+
+
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
@@ -425,39 +534,74 @@ function AddADriveScreen({ navigation }) {
                         <Text style={{fontSize:15}}>{destinationText}</Text>
                     </View>
 
+                    <View style={{ flex:1, flexDirection:'row'}}>
+                        <View style={{margin:10, flex:1}}>
+                        <Button color='#32a852' title='Saved Vehicle' onPress={()=>setVehicleSelector('1')}/>
+                        </View>
+                        <View style={{margin:10, flex:1}}>
+                            <Button color='#3289a8' title='New Vehicle' onPress={()=>setVehicleSelector('2')}/>
+                        </View>
 
-                    <View style={{margin:10, flex:1}}>
-                        <TextInput
-                            style={styles.input}
-                            value={availableSeats}
-                            placeholder="Number of Seats"
-                            onChangeText={text => setAvailableSeats(text)}
-                        />
-                    </View>
-                    <View style={{margin:10, flex:1}}>
-                    <TextInput
-                        style={styles.input}
-                        value={vehicleNumber}
-                        placeholder="Vehicle Number"
-                        onChangeText={text => setVehicleNumber(text)}
-                    />
-                    </View>
-                    <View style={{margin:10, flex:1}}>
-                    <TextInput
-                        style={styles.input}
-                        value={contactNumber}
-                        placeholder="Your contact Number"
-                        onChangeText={text => setContactNumber(text)}
-                    />
                     </View>
 
+                    {vehicleSelector === '1' && (
+                        <View style={{width:'100%'}}>
 
-                    <View style={{margin:10, flex:1}}>
-                        <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
-                    </View>
+                            <SafeAreaView style={{width:'100%'}}>
+
+                                <FlatList
+                                    style={{height:"100%", width:'100%'}}
+                                    data={vehiclesData}
+                                    renderItem={renderRequestItem}
+                                    keyExtractor={(data) => data._id}
+                                    extraData={selectedId}
+                                />
+
+                            </SafeAreaView>
+                        </View>
+                    )}
 
 
+                    {vehicleSelector === '2' && (
+                        <>
+                            <View style={{margin:10, flex:1}}>
+                                <TextInput
+                                    style={styles.input}
+                                    value={availableSeats}
+                                    placeholder="Number of Seats"
+                                    onChangeText={text => setAvailableSeats(text)}
+                                />
+                            </View>
+                            <View style={{margin:10, flex:1}}>
+                                <TextInput
+                                    style={styles.input}
+                                    value={vehicleNumber}
+                                    placeholder="Vehicle Number"
+                                    onChangeText={text => setVehicleNumber(text)}
+                                />
+                            </View>
+                            <View style={{margin:10, flex:1}}>
+                                <TextInput
+                                    style={styles.input}
+                                    value={contactNumber}
+                                    placeholder="Your contact Number"
+                                    onChangeText={text => setContactNumber(text)}
+                                />
+                            </View>
 
+                            <View style={{margin:10, flex:1}}>
+                                <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
+                            </View>
+
+
+                        </>
+
+                        )}
+                    {/*{vehicleSelector   && (*/}
+                    {/*<View style={{margin:10, flex:1}}>*/}
+                    {/*    <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
+                    {/*</View>*/}
+                    {/*)}*/}
                     {originShow ==='T' && (
                         <RNDateTimePicker
                             testID = 'dateTimePicker'
