@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {ActivityIndicator, Button, Text, View} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Ionicons from 'react-native-vector-icons/MaterialIcons';
 
     function HomeScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
@@ -9,9 +10,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ flex: 10, justifyContent: 'center', alignItems: 'center' }}>
+                <Ionicons name="person" size={100}  />
                 <Text style={{fontSize:20}}>Hi {userInfo.name}</Text>
                 <Text style={{fontSize:15}}>Welcome to SUTA RideShare</Text>
                 <Text>Sabaragamuwa University Of Sri Lanka</Text>
+
             </View>
             <View style={{ flex: 1,width:'100%' }}>
 

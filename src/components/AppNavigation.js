@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import Ionicons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import RiderScreen from '../screens/RiderScreen';
 import DriverScreen from '../screens/DriverScreen';
@@ -73,10 +74,52 @@ const Tab = createBottomTabNavigator();
 
 export default function AppNavigation() {
     return (
-            <Tab.Navigator initialRouteName="Home">
-                <Tab.Screen name="Rider" component={RiderStackScreen} />
-                <Tab.Screen name="Home" component={HomeStackScreen} />
-                <Tab.Screen name="Driver" component={DriverStackScreen} />
+        // <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarBadge: 3 }} />
+            <Tab.Navigator initialRouteName="Home"
+                           // screenOptions={({ route }) => ({
+                           //     tabBarIcon: ({ focused, color, size }) => {
+                           //         let iconName = "rocket";
+                           //
+                           //         if (route.name === 'Rider') {
+                           //             iconName = focused
+                           //                 ? 'ios-information-circle'
+                           //                 : 'ios-information-circle-outline';
+                           //         } else if (route.name === 'Settings') {
+                           //             iconName = focused ? 'ios-list-box' : 'ios-list';
+                           //         }
+
+                                   // You can return any component that you like here!
+                                   // return <Ionicons name="rocket" size={size} color={color} />;
+                               // },
+                               // tabBarActiveTintColor: 'tomato',
+                               // tabBarInactiveTintColor: 'gray',
+                           // })}
+            >
+                <Tab.Screen name="Rider"
+                            component={RiderStackScreen}
+                            options={{
+                                tabBarIcon:() =>(
+                                    <Ionicons name="directions-walk" size={30} color="#900" />
+                                ),
+
+
+                            }}
+                />
+                <Tab.Screen name="Home" component={HomeStackScreen}
+                            options={{
+                                tabBarIcon:() =>(
+                                    <Ionicons name="home" size={30} color="#6055c9"/>
+                                ),}}
+                />
+                <Tab.Screen name="Driver" component={DriverStackScreen}
+                            options={{
+                                tabBarIcon:() =>(
+                                    <Ionicons name="directions-car" size={30} color="#900" />
+                                ),
+
+
+                            }}
+                />
             </Tab.Navigator>
     );
 }

@@ -35,6 +35,8 @@ import com.facebook.react.ReactPackage;
 
 import com.airbnb.android.react.maps.MapsPackage;
 
+import com.oblador.vectoricons.VectorIconsPackage;
+
 public class MainApplication extends Application implements ReactApplication {
     @Override
      protected void attachBaseContext(Context base) {
@@ -63,7 +65,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new ReanimatedPackage(),
                     new RNGestureHandlerPackage(),
                     new SafeAreaContextPackage(),
-                    new RNDateTimePickerPackage()
+                    new RNDateTimePickerPackage(),
+                    new VectorIconsPackage()
 //                    new RNGeolocationPackage()
 //                    new RNCSafeAreaProviderPackage()
 //                    new SafeAreaContextPackage()
