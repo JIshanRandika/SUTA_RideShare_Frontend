@@ -137,7 +137,7 @@ function YourRequestToDriversScreen({navigation}) {
 
                             <FlatList
                                 style={{height:"100%", width:'100%'}}
-                                data={requestData}
+                                data={requestData.reverse()}
                                 renderItem={renderRequestItem}
                                 keyExtractor={(data) => data._id}
                                 extraData={selectedId}

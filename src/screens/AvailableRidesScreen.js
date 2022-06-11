@@ -253,7 +253,7 @@ function AvailableRidesScreen({ navigation }) {
 
                                         <FlatList
                                             style={{height:"100%", width:'100%'}}
-                                            data={data}
+                                            data={data.reverse()}
                                             renderItem={renderItem}
                                             keyExtractor={(data) => data._id}
                                             extraData={selectedId}
