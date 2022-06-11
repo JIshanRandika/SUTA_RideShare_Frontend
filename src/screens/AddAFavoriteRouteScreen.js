@@ -73,6 +73,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
 
 
+
     const [originLocation, setOriginLocation] = useState({
         latitude: 6.586622,
         longitude: 79.975817,
@@ -86,16 +87,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     });
-    const set = () => {
-        userData.map((item)=>{
 
-            console.log(item.deviseToken)
-
-            addADrive(item.deviseToken);
-        })
-    }
-    const addADrive = (userToken) => {
-        fetch(`${BASE_URL}/drive`, {
+    const addADrive = () => {
+        fetch(`${BASE_URL}/addAFavoriteRoute`, {
             method:'POST',
             headers: {
                 'Accept': 'application/json',
@@ -103,20 +97,14 @@ function AddAFavoriteRouteScreen({ navigation }) {
             },
 
             body: JSON.stringify({
-                originDateTime: originText,
                 originLongitude: originLocation.longitude,
                 originLatitude: originLocation.latitude,
 
-                destinationDateTime: destinationText,
                 destinationLongitude: destinationLocation.longitude,
                 destinationLatitude: destinationLocation.latitude,
 
-                availableSeats: availableSeats,
-                VehicleNumber: vehicleNumber,
-                contactNumber: contactNumber,
-                username: userInfo.name,
+                routeName:routeName,
                 email:userInfo.email,
-                userToken:userToken
 
             }),
         }).then(alert('Successfully Completed'));
@@ -147,6 +135,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
     const [userData, setUserData] = useState(null);
 
+    const [routeName, setRouteName] = useState(null)
     useEffect(() => {
 
 
@@ -259,6 +248,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
             },
         );
     };
+
 
     return (
         <View style={styles.addADriveContainer}>
@@ -446,8 +436,14 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     {/*        }}*/}
                     {/*    />*/}
                     {/*</View>*/}
+                    <TextInput
+                        style={{margin:10,backgroundColor:'yellow'}}
+                        value={routeName}
+                        placeholder="Route Name"
+                        onChangeText={text => setRouteName(text)}
+                    />
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Favorite Routes Screen'); addADrive();}}/>
                     </View>
                     {/*<Dialog*/}
                     {/*    width={400}*/}
