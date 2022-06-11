@@ -27,12 +27,13 @@ function FavoriteRoutesScreen({ navigation }) {
 
 
 
-        fetch(`${BASE_URL}/yourDrives`,{
+        fetch(`${BASE_URL}/yourFavoriteRoutes`,{
             method:'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+
             body: JSON.stringify({
                 username: userInfo.name,
                 email:userInfo.email
@@ -106,8 +107,8 @@ function FavoriteRoutesScreen({ navigation }) {
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.availableSeats}</Text>
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Route Name : {item.routeName}</Text>
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
 
 
@@ -254,6 +255,7 @@ function FavoriteRoutesScreen({ navigation }) {
 
                 </>
             )}
+
 
 
         </View>
