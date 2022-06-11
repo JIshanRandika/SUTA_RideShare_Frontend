@@ -1,5 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View, SafeAreaView,ScrollView} from 'react-native';
+import {
+    ActivityIndicator,
+    Button,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    SafeAreaView,
+    ScrollView,
+    FlatList, TouchableOpacity,
+} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
@@ -166,7 +177,28 @@ function AddARideScreen({ navigation }) {
 
     const [userData, setUserData] = useState(null);
 
+    const [data, setData] = useState([]);
+
     useEffect(() => {
+
+        fetch(`${BASE_URL}/yourFavoriteRoutes`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+
 
         fetch(`${BASE_URL}/userToken`,{
             method:'POST',
@@ -298,7 +330,68 @@ function AddARideScreen({ navigation }) {
             },
         );
     };
+    // =========
+    const [selectedId, setSelectedId] = useState(null);
+    const Item = ({ item }) => (
 
+
+
+        <TouchableOpacity
+            onPress={()=>{{
+                setOriginLocation({
+                    latitude: item.originLatitude,
+                    longitude: item.originLongitude,
+                });
+                setDestinationLocation({
+                    latitude: item.destinationLatitude,
+                    longitude: item.destinationLongitude,
+                })
+
+                setScreen('5');
+                // setUserToken(item.userToken);
+
+            }}
+            }
+            style={{
+                // flex: 1,
+                marginTop:"3%",
+                alignSelf: 'center',
+                width: "90%",
+                // height: 37,
+                paddingLeft:10,
+                paddingRight:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: "#6ac131",
+                borderRadius:10,
+                shadowColor: "#0090ff",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
+
+                elevation: 10,
+            }}
+
+        >
+
+
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Route Name : {item.routeName}</Text>
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
+
+
+        </TouchableOpacity>
+    );
+    const renderItem = ({ item }) => {
+        return (
+            <Item
+                item={item}
+            />
+        );
+    };
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
@@ -461,7 +554,9 @@ function AddARideScreen({ navigation }) {
                     <View style={{flex: 2,margin:10 }}>
                         <Button title='Back' onPress={()=>{setScreen('1')}}/>
                     </View>
-
+                    <View style={{margin:10}}>
+                        <Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>
+                    </View>
                     <View style={{margin:10}}>
                         <Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>
                     </View>
@@ -573,6 +668,108 @@ function AddARideScreen({ navigation }) {
 
             )}
 
+            {screen === '4' && (
+                <>
+                    <View style={{flex:11}}>
+                        {/*<Spinner visible={isLoading} />*/}
+
+
+                        {isLoading ? <Text>Loading...</Text> :(
+                            <>
+                                <View style={{margin:10 }}>
+                                    <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                                </View>
+                                <View style={{
+                                    flex: 1,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width:'100%'
+                                }}>
+
+                                    {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
+                                    <View style={{width:'100%'}}>
+                                        <SafeAreaView style={{width:'100%'}}>
+
+                                            <FlatList
+                                                style={{height:"90%", width:'100%'}}
+                                                data={data}
+                                                renderItem={renderItem}
+                                                keyExtractor={(data) => data._id}
+                                                extraData={selectedId}
+                                            />
+
+                                        </SafeAreaView>
+                                    </View>
+                                </View>
+
+                            </>
+                        )}
+
+                    </View>
+                </>
+            )}
+            {screen === '5' && (
+                <>
+                    <MapView
+                        // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: destinationLocation.latitude,
+                            longitude: destinationLocation.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+
+                        // showsUserLocation={true}
+                    >
+
+                        <Marker
+                            coordinate={{
+                                latitude: originLocation.latitude,
+                                longitude: originLocation.longitude,
+                            }}
+                            title="Origin"
+                            description="Origin location"
+                        />
+                        <Circle center={originLocation} radius={1000} />
+                        <Marker
+                            coordinate={{
+                                latitude: destinationLocation.latitude,
+                                longitude: destinationLocation.longitude,
+                            }}
+                            title="Destination"
+                            description="Destination location"
+                        />
+                        <Circle center={destinationLocation} radius={1000} />
+                        <MapViewDirections
+                            origin={{latitude: originLocation.latitude, longitude: originLocation.longitude}}
+                            destination={{latitude: destinationLocation.latitude, longitude: destinationLocation.longitude}}
+                            apikey={'AIzaSyCT1sEzJHHoRDcScafHAebRp7tP_ZYc6p8'}
+                            strokeWidth={3}
+                            strokeColor="hotpink"
+                        />
+
+                    </MapView>
+
+
+                    <View style={{flex: 2,margin:10}}>
+                        <Button title='Back' onPress={()=>{setScreen('4')}}/>
+                    </View>
+                    {/*<View style={{margin:5}}>*/}
+                    {/*    <Button*/}
+                    {/*        title="Change Origin Location"*/}
+                    {/*        onPress={() => {*/}
+                    {/*            setOriginVisible(true);*/}
+                    {/*        }}*/}
+                    {/*    />*/}
+                    {/*</View>*/}
+                    <View style={{margin:10}}>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>
+                    </View>
+
+                </>
+
+            )}
         </View>
     );
 }
