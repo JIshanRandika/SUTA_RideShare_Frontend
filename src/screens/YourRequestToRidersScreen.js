@@ -3,7 +3,7 @@ import {ActivityIndicator, Button, FlatList, SafeAreaView, StyleSheet, Text, Vie
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 
-function YourRequestToRidersScreen() {
+function YourRequestToRidersScreen({navigation}) {
     const {userInfo, logout} = useContext(AuthContext);
     const [selectedId, setSelectedId] = useState(null);
 
@@ -77,7 +77,9 @@ function YourRequestToRidersScreen() {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Driver Name: {item.driverName}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
-
+            <View style={{margin:10}}>
+                <Button color='red' title='Delete' onPress={()=>{deleteARequest(item._id);navigation.navigate('Driver')}}/>
+            </View>
             {/*<View style={{margin:10}}>*/}
             {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}
             {/*</View>*/}
@@ -97,6 +99,24 @@ function YourRequestToRidersScreen() {
     };
 
 
+    // ===========
+    const deleteARequest = (id) => {
+        console.log(id)
+        fetch(`${BASE_URL}/deleteDriverToRiderRequests/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // this.getOrderDetail
+            console.log("Remove Done!");
+            // let updatedItems = [...this.state.items].filter(i => i._id !== id);
+            // this.setState({items: updatedItems});
+
+        });
+    }
+    // =====================
 
     return (
         <View style={styles.container}>
