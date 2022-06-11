@@ -6,21 +6,33 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  SafeAreaView,
+  ScrollView, Alert,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
+
+
+
 
 const RegisterScreen = ({navigation}) => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const {isLoading, register} = useContext(AuthContext);
+  const {isLoading, register, userInfo} = useContext(AuthContext);
+
+
 
   return (
     <View style={styles.container}>
       <Spinner visible={isLoading} />
+
+
+
       <View style={styles.wrapper}>
+<SafeAreaView>
+  <ScrollView>
         <TextInput
           style={styles.input}
           value={name}
@@ -47,8 +59,12 @@ const RegisterScreen = ({navigation}) => {
           title="Register"
           onPress={() => {
             register(name, email, password, 'new');
+              // setTimeout(() => {alert(userInfo.message)}, 5000)
+
           }}
         />
+
+
 
         <View style={{flexDirection: 'row', marginTop: 20}}>
           <Text>Already have an account? </Text>
@@ -56,7 +72,18 @@ const RegisterScreen = ({navigation}) => {
             <Text style={styles.link}>Login</Text>
           </TouchableOpacity>
         </View>
+        <Text style={{marginTop:40}}>Your password need: </Text>
+        <Text style={{marginLeft:10}}>Minimum 8 characters</Text>
+        <Text style={{marginLeft:10}}>Maximum 26 characters</Text>
+        <Text style={{marginLeft:10}}>At least 1 lowe case letter</Text>
+        <Text style={{marginLeft:10}}>At least 1 upper case letter</Text>
+        <Text style={{marginLeft:10}}>At least 1 numerical value</Text>
+        <Text style={{marginLeft:10}}>At least 1 symbol</Text>
+  </ScrollView>
+</SafeAreaView>
+
       </View>
+
     </View>
   );
 };
