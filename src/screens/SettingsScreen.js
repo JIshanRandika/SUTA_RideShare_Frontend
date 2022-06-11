@@ -22,6 +22,14 @@ function SettingsScreen({ navigation }) {
 
             <View style={{margin:10}}>
                 <Button
+                    title="Your Vehicles"
+                    color="green"
+                    onPress={() => navigation.navigate('Your Vehicles Screen')}
+                />
+            </View>
+
+            <View style={{margin:10}}>
+                <Button
                     title="Logout"
                     color="red"
                     onPress={logout}
