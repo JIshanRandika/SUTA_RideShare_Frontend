@@ -231,7 +231,9 @@ function YourDrivesScreen({ navigation }) {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.availableSeats}</Text>
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
-
+            <View style={{margin:10}}>
+                <Button color='red' title='Delete' onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}/>
+            </View>
 
         </TouchableOpacity>
     );
@@ -361,6 +363,24 @@ function YourDrivesScreen({ navigation }) {
         );
     };
 
+
+    // ===========
+    const deleteADrive = (id) => {
+        console.log(id)
+        fetch(`${BASE_URL}/deleteDrive/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // this.getOrderDetail
+            console.log("Remove Done!");
+            // let updatedItems = [...this.state.items].filter(i => i._id !== id);
+            // this.setState({items: updatedItems});
+
+        });
+    }
     // =====================
     return (
 
