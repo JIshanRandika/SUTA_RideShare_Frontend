@@ -443,7 +443,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                         onChangeText={text => setRouteName(text)}
                     />
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Favorite Routes Screen'); addADrive();}}/>
+                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}/>
                     </View>
                     {/*<Dialog*/}
                     {/*    width={400}*/}
