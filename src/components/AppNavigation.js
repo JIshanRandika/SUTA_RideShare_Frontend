@@ -5,7 +5,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import RiderScreen from '../screens/RiderScreen';
 import DriverScreen from '../screens/DriverScreen';
 import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '../screens/DetailsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import YourRidesScreen from '../screens/YourRidesScreen';
 import AvailableRidesScreen from '../screens/AvailableRidesScreen';
 import YourDrivesScreen from '../screens/YourDrivesScreen';
@@ -41,7 +41,7 @@ function HomeStackScreen() {
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-            <HomeStack.Screen name="Details" component={DetailsScreen} />
+            <HomeStack.Screen name="Settings Screen" component={SettingsScreen} />
         </HomeStack.Navigator>
     );
 }
