@@ -15,6 +15,7 @@ import YourRequestToDriversScreen from '../screens/YourRequestToDriversScreen';
 import AddARideScreen from '../screens/AddARideScreen';
 import YourRequestToRidersScreen from '../screens/YourRequestToRidersScreen';
 import FavoriteRoutesScreen from '../screens/FavoriteRoutesScreen';
+import AddAFavoriteRouteScreen from '../screens/AddAFavoriteRouteScreen';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -44,6 +45,7 @@ function HomeStackScreen() {
             <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
             <HomeStack.Screen name="Settings Screen" component={SettingsScreen} />
             <HomeStack.Screen name="Favorite Routes Screen" component={FavoriteRoutesScreen} />
+            <HomeStack.Screen name="Add A Favorite Routes Screen" component={AddAFavoriteRouteScreen} />
         </HomeStack.Navigator>
     );
 }
