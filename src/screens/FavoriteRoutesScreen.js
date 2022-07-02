@@ -108,7 +108,7 @@ function FavoriteRoutesScreen({ navigation }) {
 
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Route Name : {item.routeName}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.routeName}</Text>
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
 
 
@@ -169,11 +169,23 @@ function FavoriteRoutesScreen({ navigation }) {
             {screen === '1' && (
                 <>
                     <View style={{flex:1, margin:10}}>
-                        <Button
-                            color='orange'
-                            title="Add a Favorite"
+                        {/*<Button*/}
+                        {/*    color='orange'*/}
+                        {/*    title="Add a Favorite"*/}
+                        {/*    onPress={() => navigation.navigate('Add A Favorite Routes Screen')}*/}
+                        {/*/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
                             onPress={() => navigation.navigate('Add A Favorite Routes Screen')}
-                        />
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a favorite</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{flex:11}}>
@@ -250,7 +262,18 @@ function FavoriteRoutesScreen({ navigation }) {
 
                     </MapView>
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
 
                 </>

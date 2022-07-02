@@ -1,5 +1,15 @@
 import React, {useContext, useState} from 'react';
-import {ActivityIndicator, Button, StyleSheet, Text, TextInput, View, SafeAreaView, ScrollView} from 'react-native';
+import {
+    ActivityIndicator,
+    Button,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 // import Token from './Token';
@@ -67,12 +77,14 @@ function SettingsScreen({ navigation }) {
                         style={styles.input}
                         value={availableSeats}
                         placeholder="Available Seats"
+                        keyboardType="numeric"
                         onChangeText={text => setAvailableSeats(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={contactNumber}
                         placeholder="Contact Number"
+                        keyboardType="numeric"
                         onChangeText={text => setContactNumber(text)}
                     />
 
@@ -80,7 +92,19 @@ function SettingsScreen({ navigation }) {
             </SafeAreaView>
 
             <View style={{margin:10}}>
-                <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen');addAVehicle()}}/>
+                {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen');addAVehicle()}}/>*/}
+
+                <TouchableOpacity
+                    style={{
+                        height:42,
+                        backgroundColor: "#2b1153",
+                        borderRadius:20,
+                        padding:10
+                    }}
+                    onPress={()=>{navigation.navigate('Settings Screen');addAVehicle()}}
+                >
+                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                </TouchableOpacity>
             </View>
 
         </View>

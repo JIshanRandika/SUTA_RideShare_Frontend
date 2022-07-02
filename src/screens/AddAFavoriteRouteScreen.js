@@ -1,5 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Button, Platform, StyleSheet, Text, TextInput, View, SafeAreaView,ScrollView} from 'react-native';
+import {
+    ActivityIndicator,
+    Button,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
@@ -335,7 +346,18 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     </View>
 
                     <View style={{margin:10}}>
-                        <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
+                        {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -427,7 +449,18 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     />
 
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*<View style={{margin:5}}>*/}
                     {/*    <Button*/}
@@ -438,13 +471,24 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <TextInput
-                        style={{margin:10,backgroundColor:'yellow'}}
+                        style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={routeName}
                         placeholder="Route Name"
                         onChangeText={text => setRouteName(text)}
                     />
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}/>
+                        {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*<Dialog*/}
                     {/*    width={400}*/}

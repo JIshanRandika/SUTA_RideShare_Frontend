@@ -37,7 +37,7 @@ function SettingsScreen({ navigation }) {
                 <TouchableOpacity
                     style={{
                         height:50,
-                        backgroundColor: "#114953",
+                        backgroundColor: "#2b1153",
                         borderRadius:20,
                         padding:10
                     }}

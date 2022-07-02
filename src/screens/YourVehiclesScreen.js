@@ -82,27 +82,30 @@ function YourVehiclesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#6ac131",
-                borderRadius:10,
-                shadowColor: "#0090ff",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.34,
-                shadowRadius: 6.27,
+                backgroundColor: "#ffffff",
+                borderWidth:10,
+                borderColor:"#2b1153",
 
-                elevation: 10,
+                borderRadius:10,
+                // shadowColor: "#0090ff",
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 5,
+                // },
+                // shadowOpacity: 0.34,
+                // shadowRadius: 6.27,
+                //
+                // elevation: 10,
             }}
 
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Title : {item.title}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Type : {item.type}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Vehicle Number : {item.vehicleNumber}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats : {item.availableSeats}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Contact Number : {item.contactNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Title : {item.title}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Type : {item.type}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Vehicle Number : {item.vehicleNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Available Seats : {item.availableSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Contact Number : {item.contactNumber}</Text>
 
 
         </TouchableOpacity>
@@ -162,11 +165,23 @@ function YourVehiclesScreen({ navigation }) {
 
                 <>
                     <View style={{flex:1, margin:10}}>
-                        <Button
-                            color='orange'
-                            title="Add a Vehicle"
+                        {/*<Button*/}
+                        {/*    color='orange'*/}
+                        {/*    title="Add a Vehicle"*/}
+                        {/*    onPress={() => navigation.navigate('Add A Vehicle Screen')}*/}
+                        {/*/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
                             onPress={() => navigation.navigate('Add A Vehicle Screen')}
-                        />
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a vehicle</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{flex:11}}>
