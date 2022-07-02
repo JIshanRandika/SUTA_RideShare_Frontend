@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
-  const register = (name, email, password, deviseToken) => {
+  const register = (name, email, password,groupID, deviseToken) => {
     setIsLoading(true);
 
     axios
@@ -27,6 +27,7 @@ export const AuthProvider = ({children}) => {
         name,
         email,
         password,
+        groupID,
         deviseToken
       })
       .then(res => {

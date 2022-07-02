@@ -104,6 +104,7 @@ function AvailableRidesScreen({ navigation }) {
                 driverName: driverName,
                 originDateTime: itemOriginDateTime,
                 status: 'Pending Request',
+                groupID: userInfo.groupID,
                 userToken:userToken
 
             }),

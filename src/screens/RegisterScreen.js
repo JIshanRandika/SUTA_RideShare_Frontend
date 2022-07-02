@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
+import {BASE_URL} from '../config';
 
 
 
@@ -22,6 +23,32 @@ const RegisterScreen = ({navigation}) => {
 
   const {isLoading, register, userInfo} = useContext(AuthContext);
 
+  const [group, setGroup] =useState(false)
+
+  const [groupID,setGroupID] = useState(null)
+
+  const [data,setData] = useState(null)
+
+  const [loading,setLoading] = useState(false)
+
+  const addData = () =>{
+    fetch(`${BASE_URL}/addAGroup`,{
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({
+        groupID: groupID,
+
+      }),
+    })
+        .then((response) => response.json())
+        .then((json) => setData(json))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+  }
 
 
   return (
@@ -33,6 +60,80 @@ const RegisterScreen = ({navigation}) => {
       <View style={styles.wrapper}>
 <SafeAreaView>
   <ScrollView>
+
+      {group && (
+<>
+          <TextInput
+              style={styles.input}
+              value={groupID}
+              placeholder="Group ID"
+              onChangeText={text => setGroupID(text)}
+          />
+
+  <View style={{marginBottom:10}}>
+    <Button
+        title="Create the group"
+        onPress={() => {
+          setLoading(true)
+          // setGroup(false)
+          addData()
+          // setTimeout(() => {alert(data.message)}, 5000)
+          // setTimeout(alert(data.message), 5000);
+
+        }}
+    />
+  </View>
+
+          {loading && (
+              <Text>Loading..</Text>
+          )}
+
+  {!loading && data && (
+      <Text>{data.message}</Text>
+  )}
+          <View style={{marginTop:10}}>
+  <Button
+      color='orange'
+      title="Back"
+      onPress={() => {
+        // setLoading(true)
+        setGroup(false)
+        // addData()
+        // setTimeout(() => {alert(data.message)}, 5000)
+        // setTimeout(alert(data.message), 5000);
+
+      }}
+  />
+          </View>
+
+</>
+      )}
+
+      {!group && (
+          <>
+      <Button
+          color='green'
+          title="New Group"
+          onPress={() => {
+              setGroup(true)
+
+          }}
+      />
+
+            <TextInput
+                style={{
+                  marginBottom: 12,
+                  marginTop: 12,
+                  borderWidth: 1,
+                  borderColor: '#bbb',
+                  borderRadius: 5,
+                  paddingHorizontal: 14
+                }}
+                value={groupID}
+                placeholder="Group ID"
+                onChangeText={text => setGroupID(text)}
+            />
+
         <TextInput
           style={styles.input}
           value={name}
@@ -58,8 +159,9 @@ const RegisterScreen = ({navigation}) => {
         <Button
           title="Register"
           onPress={() => {
-            register(name, email, password, 'new');
-            alert(userInfo.message)
+            register(name, email, password, groupID, 'new');
+            // alert(userInfo.message)
+            // myalert();
             //   setTimeout(() => {alert(userInfo.message)}, 5000)
 
           }}
@@ -80,6 +182,8 @@ const RegisterScreen = ({navigation}) => {
         <Text style={{marginLeft:10}}>At least 1 upper case letter</Text>
         <Text style={{marginLeft:10}}>At least 1 numerical value</Text>
         <Text style={{marginLeft:10}}>At least 1 symbol</Text>
+          </>
+          )}
   </ScrollView>
 </SafeAreaView>
 

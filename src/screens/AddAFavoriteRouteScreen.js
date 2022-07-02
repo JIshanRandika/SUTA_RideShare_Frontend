@@ -105,6 +105,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
                 routeName:routeName,
                 email:userInfo.email,
+                groupID: userInfo.groupID,
 
             }),
         }).then(alert('Successfully Completed'));

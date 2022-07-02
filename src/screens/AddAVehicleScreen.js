@@ -30,6 +30,7 @@ function SettingsScreen({ navigation }) {
                 availableSeats: availableSeats,
                 contactNumber: contactNumber,
                 email:userInfo.email,
+                groupID: userInfo.groupID,
 
             }),
         }).then(alert('Successfully Completed'));

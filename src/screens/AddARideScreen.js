@@ -146,6 +146,7 @@ function AddARideScreen({ navigation }) {
                 contactNumber: contactNumber,
                 username: userInfo.name,
                 email:userInfo.email,
+                groupID: userInfo.groupID,
                 userToken:userToken
 
             }),

@@ -111,6 +111,7 @@ function AvailableVehiclesScreen({ navigation }) {
                 originDateTime: itemOriginDateTime,
                 vehicleNumber:vehicleNumber,
                 status: 'Pending Request',
+                groupID: userInfo.groupID,
                 userToken:userToken
 
             }),
