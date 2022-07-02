@@ -31,6 +31,9 @@ const RegisterScreen = ({navigation}) => {
 
   const [loading,setLoading] = useState(false)
 
+  const [regLoading,setRegLoading] = useState(false)
+
+
   const addData = () =>{
     fetch(`${BASE_URL}/addAGroup`,{
       method:'POST',
@@ -160,16 +163,21 @@ const RegisterScreen = ({navigation}) => {
           title="Register"
           onPress={() => {
             register(name, email, password, groupID, 'new');
+            setRegLoading(true)
             // alert(userInfo.message)
             // myalert();
             //   setTimeout(() => {alert(userInfo.message)}, 5000)
 
           }}
         />
+            {isLoading && (
+                <Text style={{marginTop:10}}>Loading..</Text>
+            )}
+            {regLoading && (
+            <Text style={{marginTop:10, color:'red'}}>{userInfo.message}</Text>
+            )}
 
-
-
-        <View style={{flexDirection: 'row', marginTop: 20}}>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
           <Text>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.link}>Login</Text>
