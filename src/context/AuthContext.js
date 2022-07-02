@@ -34,12 +34,19 @@ export const AuthProvider = ({children}) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
         setIsLoading(false);
+        console.log('Testing');
         console.log(userInfo);
       })
-      .catch(e => {
-        console.log(`register error ${e}`);
+      .catch(
+          res => {
+            let userInfo = res.data;
+            // setUserInfo(userInfo);
+            AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            console.log(userInfo);
+        console.log(`register error0000 ${res}`);
         setIsLoading(false);
-      });
+      }
+      );
   };
 
   const login = (email, password) => {

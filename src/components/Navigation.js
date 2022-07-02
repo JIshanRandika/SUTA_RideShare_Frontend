@@ -23,7 +23,7 @@ const Navigation = () => {
                         component={SplashScreen}
                         options={{headerShown: false}}
                     />
-                ) : userInfo.message ? (
+                ) : userInfo.message ==="User created successfully" || userInfo.message ==="logged in successfully" ? (
                     <Stack.Screen name="AppNavigation" component={AppNavigation} options={{headerShown: false}}/>
                 ) : (
                     <>

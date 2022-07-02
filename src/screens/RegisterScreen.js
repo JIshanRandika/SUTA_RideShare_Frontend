@@ -59,7 +59,8 @@ const RegisterScreen = ({navigation}) => {
           title="Register"
           onPress={() => {
             register(name, email, password, 'new');
-              // setTimeout(() => {alert(userInfo.message)}, 5000)
+            alert(userInfo.message)
+            //   setTimeout(() => {alert(userInfo.message)}, 5000)
 
           }}
         />
