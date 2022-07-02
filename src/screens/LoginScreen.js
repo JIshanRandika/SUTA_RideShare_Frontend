@@ -34,12 +34,26 @@ const LoginScreen = ({navigation}) => {
           secureTextEntry
         />
 
-        <Button
-          title="Login"
-          onPress={() => {
-            login(email, password);
-          }}
-        />
+        {/*<Button*/}
+        {/*  title="Login"*/}
+        {/*  onPress={() => {*/}
+        {/*    login(email, password);*/}
+        {/*  }}*/}
+        {/*/>*/}
+
+        <TouchableOpacity
+            style={{
+              height:42,
+              backgroundColor: "#114953",
+              borderRadius:20,
+              padding:10
+            }}
+            onPress={() => {
+              login(email, password);
+            }}
+        >
+          <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Login</Text>
+        </TouchableOpacity>
 
         <View style={{flexDirection: 'row', marginTop: 20}}>
           <Text>Don't have an account? </Text>

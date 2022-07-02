@@ -19,7 +19,7 @@ function RiderScreen({ navigation }) {
                         paddingRight:10,
                         paddingTop:10,
                         paddingBottom:10,
-                        backgroundColor: "#e3b505",
+                        backgroundColor: "#114953",
 
                         borderRadius:10,
                         shadowColor: "#0090ff",
@@ -52,7 +52,7 @@ function RiderScreen({ navigation }) {
                         paddingRight:10,
                         paddingTop:10,
                         paddingBottom:10,
-                        backgroundColor: "#95e305",
+                        backgroundColor: "rgb(62,112,121)",
 
                         borderRadius:10,
                         shadowColor: "#0090ff",
@@ -85,7 +85,7 @@ function RiderScreen({ navigation }) {
                         paddingRight:10,
                         paddingTop:10,
                         paddingBottom:10,
-                        backgroundColor: "#e36505",
+                        backgroundColor: "rgb(100,144,154)",
 
                         borderRadius:10,
                         shadowColor: "#0090ff",

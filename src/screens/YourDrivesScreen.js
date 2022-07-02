@@ -212,27 +212,42 @@ function YourDrivesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#6ac131",
-                borderRadius:10,
-                shadowColor: "#0090ff",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.34,
-                shadowRadius: 6.27,
+                backgroundColor: "#ffffff",
+                borderWidth:10,
+                borderColor:"#2b1153",
 
-                elevation: 10,
+                borderRadius:10,
+                // shadowColor: "#0090ff",
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 5,
+                // },
+                // shadowOpacity: 0.34,
+                // shadowRadius: 6.27,
+                //
+                // elevation: 10,
             }}
 
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.availableSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Available Seats: {item.availableSeats}</Text>
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
             <View style={{margin:10}}>
-                <Button color='red' title='Delete' onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}/>
+                {/*<Button color='red' title='Delete' onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}/>*/}
+
+                <TouchableOpacity
+                    style={{
+                        height:42,
+                        backgroundColor: "#e00000",
+                        borderRadius:20,
+                        padding:10
+                    }}
+                    onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}
+                >
+                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
+                </TouchableOpacity>
             </View>
 
         </TouchableOpacity>
@@ -336,10 +351,34 @@ function YourDrivesScreen({ navigation }) {
             {item.status === 'Pending Request' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Driver')}}/>
+                        {/*<Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Driver')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#235311",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Driver')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Accept</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Driver')}}/>
+                        {/*<Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Driver')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#e00000",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Driver')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Reject</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             )}
@@ -396,12 +435,25 @@ function YourDrivesScreen({ navigation }) {
             {screen === '1' && (
                 <>
             <View style={{flex:1, margin:10}}>
-                <Button
+                {/*<Button*/}
 
-                    color='green'
-                    title="Add a Drive"
+                {/*    color='green'*/}
+                {/*    title="Add a Drive"*/}
+                {/*    onPress={() => navigation.navigate('Add a Drive')}*/}
+                {/*/>*/}
+
+                <TouchableOpacity
+                    style={{
+                        height:42,
+                        backgroundColor: "#2b1153",
+                        borderRadius:20,
+                        padding:10
+                    }}
                     onPress={() => navigation.navigate('Add a Drive')}
-                />
+                >
+                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a Drive</Text>
+                </TouchableOpacity>
+
             </View>
 
             <View style={{flex:11}}>
@@ -478,17 +530,51 @@ function YourDrivesScreen({ navigation }) {
 
           </MapView>
                 <View style={{flex: 2,margin:10}}>
-                    <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                    {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                    <TouchableOpacity
+                        style={{
+                            height:42,
+                            backgroundColor: "#2b1153",
+                            borderRadius:20,
+                            padding:10
+                        }}
+                        onPress={()=>{setScreen('1')}}
+                    >
+                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                    </TouchableOpacity>
                 </View>
                     <View style={{margin:10}}>
-                        <Button color='orange' title='Received Requests' onPress={()=>{setScreen('3')}}/>
+                        {/*<Button color='orange' title='Received Requests' onPress={()=>{setScreen('3')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#54397d",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('3')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Received Requests</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             )}
             {screen === '3' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.container}>
                         {/*<Spinner visible={isLoading} />*/}

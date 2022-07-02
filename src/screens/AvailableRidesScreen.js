@@ -205,29 +205,31 @@ function AvailableRidesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#05b7e3",
+                backgroundColor: "#ffffff",
+                borderWidth:10,
+                borderColor:"#2b1153",
 
                 borderRadius:10,
-                shadowColor: "#0090ff",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.34,
-                shadowRadius: 6.27,
-
-                elevation: 10,
+                // shadowColor: "#0090ff",
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 5,
+                // },
+                // shadowOpacity: 0.34,
+                // shadowRadius: 6.27,
+                //
+                // elevation: 10,
             }}
 
         >
 
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Name: {item.username}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Needed Seats: {item.neededSeats}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Contact Number: {item.contactNumber}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.destinationDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Name: {item.username}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Needed Seats: {item.neededSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Contact Number: {item.contactNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.destinationDateTime}</Text>
 
 
         </TouchableOpacity>
@@ -329,7 +331,18 @@ function AvailableRidesScreen({ navigation }) {
 
                     </MapView>
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*<TextInput*/}
                     {/*    style={{margin:10,backgroundColor:'yellow'}}*/}
@@ -338,7 +351,19 @@ function AvailableRidesScreen({ navigation }) {
                     {/*    onChangeText={text => setNeededSeats(text)}*/}
                     {/*/>*/}
                     <View style={{margin:10}}>
-                        <Button color={'green'} title='Send the Request' onPress={()=>{navigation.navigate('Driver');addARide();}}/>
+                        {/*<Button color={'green'} title='Send the Request' onPress={()=>{navigation.navigate('Driver');addARide();}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Driver');addARide();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Send the Request</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             )}

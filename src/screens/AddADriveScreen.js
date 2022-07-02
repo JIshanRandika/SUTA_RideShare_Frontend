@@ -54,7 +54,7 @@ function AddADriveScreen({ navigation }) {
         let fDate = tempOriginDate.getDate()+'/'+(tempOriginDate.getMonth()+ 1)+'/'+tempOriginDate.getFullYear();
         let fTime = 'Hours :'+tempOriginDate.getHours()+'| Minutes' + tempOriginDate.getMinutes();
         setOriginShow('F');
-        setOriginText('Origin Date : '+fDate + '\nOrigin Time :'+fTime);
+        setOriginText('Origin Date : '+fDate + '\nOrigin Time : '+fTime);
 
     }
 
@@ -516,20 +516,67 @@ function AddADriveScreen({ navigation }) {
                 <View style={{width:"100%", flex:1}}>
 
                     <View style={{margin:10, flex:1}}>
-                        <Button color='#96d600' title='Origin Date' onPress={()=>showOriginMode('date')}/>
+                        {/*<Button color='#96d600' title='Origin Date' onPress={()=>showOriginMode('date')}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>showOriginMode('date')}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Origin Date</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
-                        <Button color='#96d600' title='Origin Time' onPress={()=>showOriginMode('time')}/>
+                        {/*<Button color='#96d600' title='Origin Time' onPress={()=>showOriginMode('time')}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>showOriginMode('time')}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Origin Time</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
                         <Text style={{fontSize:15}}>{originText}</Text>
                     </View>
 
                     <View style={{margin:10, flex:1}}>
-                        <Button color='#f2d307' title='Destination Date' onPress={()=>showDestinationMode('date')}/>
+                        {/*<Button color='#f2d307' title='Destination Date' onPress={()=>showDestinationMode('date')}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#55308d",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>showDestinationMode('date')}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Destination Date</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
-                        <Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>
+                        {/*<Button color='#f2d307' title='Destination Time' onPress={()=>showDestinationMode('time')}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#55308d",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>showDestinationMode('time')}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Destination Time</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
                         <Text style={{fontSize:15}}>{destinationText}</Text>
@@ -537,10 +584,36 @@ function AddADriveScreen({ navigation }) {
 
                     <View style={{ flex:1, flexDirection:'row'}}>
                         <View style={{margin:10, flex:1}}>
-                        <Button color='#32a852' title='Saved Vehicle' onPress={()=>setVehicleSelector('1')}/>
+                        {/*<Button color='#32a852' title='Saved Vehicle' onPress={()=>setVehicleSelector('1')}/>*/}
+
+                            <TouchableOpacity
+                                style={{
+                                    height:42,
+                                    backgroundColor: "#32a852",
+                                    borderRadius:20,
+                                    padding:10
+                                }}
+                                onPress={()=>setVehicleSelector('1')}
+                            >
+                                <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Saved Vehicle</Text>
+                            </TouchableOpacity>
+
                         </View>
                         <View style={{margin:10, flex:1}}>
-                            <Button color='#3289a8' title='New Vehicle' onPress={()=>setVehicleSelector('2')}/>
+                            {/*<Button color='#3289a8' title='New Vehicle' onPress={()=>setVehicleSelector('2')}/>*/}
+
+                            <TouchableOpacity
+                                style={{
+                                    height:42,
+                                    backgroundColor: "#3289a8",
+                                    borderRadius:20,
+                                    padding:10
+                                }}
+                                onPress={()=>setVehicleSelector('2')}
+                            >
+                                <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>New Vehicle</Text>
+                            </TouchableOpacity>
+
                         </View>
 
                     </View>
@@ -570,6 +643,7 @@ function AddADriveScreen({ navigation }) {
                                     style={styles.input}
                                     value={availableSeats}
                                     placeholder="Number of Seats"
+                                    keyboardType="numeric"
                                     onChangeText={text => setAvailableSeats(text)}
                                 />
                             </View>
@@ -591,7 +665,20 @@ function AddADriveScreen({ navigation }) {
                             </View>
 
                             <View style={{margin:10, flex:1}}>
-                                <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
+                                {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
+
+                                <TouchableOpacity
+                                    style={{
+                                        height:42,
+                                        backgroundColor: "#114953",
+                                        borderRadius:20,
+                                        padding:10
+                                    }}
+                                    onPress={()=>{setScreen('2')}}
+                                >
+                                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                                </TouchableOpacity>
+
                             </View>
 
 
@@ -699,14 +786,48 @@ function AddADriveScreen({ navigation }) {
                     />
 
                     <View style={{flex: 2,margin:10 }}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{margin:10}}>
-                        <Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>
+                        {/*<Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#357e8b",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('4')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select favorite route</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>
+                        {/*<Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('3')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -798,11 +919,33 @@ function AddADriveScreen({ navigation }) {
                     />
 
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>
+                        {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Driver'); set();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -820,7 +963,18 @@ function AddADriveScreen({ navigation }) {
                         {isLoading ? <Text>Loading...</Text> :(
                             <>
                                 <View style={{margin:10 }}>
-                                    <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                                    {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#2b1153",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setScreen('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                                    </TouchableOpacity>
                                 </View>
                             <View style={{
                                 flex: 1,
@@ -897,11 +1051,34 @@ function AddADriveScreen({ navigation }) {
 
 
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('4')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('4')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('4')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>
+                        {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Driver'); set();}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Driver'); set();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                        </TouchableOpacity>
                     </View>
 
 

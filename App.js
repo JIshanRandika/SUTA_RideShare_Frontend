@@ -15,7 +15,7 @@ const App = () => {
   return (
       <AuthProvider>
           <Token/>
-        <StatusBar backgroundColor="#06bcee" />
+        <StatusBar backgroundColor="#4d4746" />
         <Navigation />
       </AuthProvider>
   );

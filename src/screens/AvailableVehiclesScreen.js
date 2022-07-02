@@ -209,30 +209,32 @@ function AvailableVehiclesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#e3b505",
+                backgroundColor: "#ffffff",
+                borderWidth:10,
+                borderColor:"#114953",
 
                 borderRadius:10,
-                shadowColor: "#0090ff",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.34,
-                shadowRadius: 6.27,
-
-                elevation: 10,
+                // shadowColor: "#0090ff",
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 5,
+                // },
+                // shadowOpacity: 0.34,
+                // shadowRadius: 6.27,
+                //
+                // elevation: 10,
             }}
 
         >
 
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Name: {item.username}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Vehicle Number: {item.VehicleNumber}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Available Seats: {item.availableSeats}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Contact Number: {item.contactNumber}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.destinationDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Name: {item.username}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Vehicle Number: {item.VehicleNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Available Seats: {item.availableSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Contact Number: {item.contactNumber}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>{item.destinationDateTime}</Text>
 
 
         </TouchableOpacity>
@@ -334,16 +336,44 @@ function AvailableVehiclesScreen({ navigation }) {
 
                     </MapView>
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
+
                     </View>
                     <TextInput
-                        style={{margin:10,backgroundColor:'yellow'}}
+                        style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={neededSeats}
                         placeholder="Number of Seats"
+                        keyboardType="numeric"
                         onChangeText={text => setNeededSeats(text)}
                     />
                     <View style={{margin:10}}>
-                        <Button color={'green'} title='Send the Request' onPress={()=>{navigation.navigate('Rider');addADrive();}}/>
+                        {/*<Button color={'green'} title='Send the Request' onPress={()=>{navigation.navigate('Rider');addADrive();}}/>*/}
+
+
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Rider');addADrive();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Send the Request</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             )}

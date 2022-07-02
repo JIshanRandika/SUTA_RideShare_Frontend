@@ -19,7 +19,7 @@ function DriverScreen({ navigation }) {
                     paddingRight:10,
                     paddingTop:10,
                     paddingBottom:10,
-                    backgroundColor: "#137801",
+                    backgroundColor: "#2b1153",
 
                     borderRadius:10,
                     shadowColor: "#0090ff",
@@ -51,7 +51,7 @@ function DriverScreen({ navigation }) {
                     paddingRight:10,
                     paddingTop:10,
                     paddingBottom:10,
-                    backgroundColor: "#2b1153",
+                    backgroundColor: "rgb(76,49,116)",
 
                     borderRadius:10,
                     shadowColor: "#0090ff",
@@ -83,7 +83,7 @@ function DriverScreen({ navigation }) {
                                     paddingRight:10,
                                     paddingTop:10,
                                     paddingBottom:10,
-                                    backgroundColor: "#114953",
+                                    backgroundColor: "rgb(99,76,135)",
 
                                     borderRadius:10,
                                     shadowColor: "#0090ff",

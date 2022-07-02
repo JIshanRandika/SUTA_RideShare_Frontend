@@ -1,5 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Button, FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+    ActivityIndicator,
+    Button,
+    FlatList,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 
@@ -78,7 +87,19 @@ function YourRequestToDriversScreen({navigation}) {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
             <View style={{margin:10}}>
-                <Button color='red' title='Delete' onPress={()=>{deleteARequest(item._id);navigation.navigate('Rider')}}/>
+                {/*<Button color='red' title='Delete' onPress={()=>{deleteARequest(item._id);navigation.navigate('Rider')}}/>*/}
+
+                <TouchableOpacity
+                    style={{
+                        height:42,
+                        backgroundColor: "#e00000",
+                        borderRadius:20,
+                        padding:10
+                    }}
+                    onPress={()=>{deleteARequest(item._id);navigation.navigate('Rider')}}
+                >
+                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
+                </TouchableOpacity>
             </View>
             {/*<View style={{margin:10}}>*/}
             {/*    <Button title='Reject' onPress={()=>{setScreen('2')}}/>*/}

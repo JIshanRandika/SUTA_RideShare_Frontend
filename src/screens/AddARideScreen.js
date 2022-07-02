@@ -53,7 +53,7 @@ function AddARideScreen({ navigation }) {
         let fDate = tempOriginDate.getDate()+'/'+(tempOriginDate.getMonth()+ 1)+'/'+tempOriginDate.getFullYear();
         let fTime = 'Hours :'+tempOriginDate.getHours()+'| Minutes' + tempOriginDate.getMinutes();
         setOriginShow('F');
-        setOriginText('Origin Date : '+fDate + '\nOrigin Time :'+fTime);
+        setOriginText('Origin Date : '+fDate + '\nOrigin Time : '+fTime);
 
     }
 
@@ -406,12 +406,38 @@ function AddARideScreen({ navigation }) {
                         <View style={{width:"100%", flex:1}}>
 
                             <View style={{margin:10, flex:1}}>
-                                <Button color='#f781d8' title='Origin Date' onPress={()=>showOriginMode('date')}/>
+                                {/*<Button color='#f781d8' title='Origin Date' onPress={()=>showOriginMode('date')}/>*/}
+
+                                <TouchableOpacity
+                                    style={{
+                                        height:42,
+                                        backgroundColor: "#114953",
+                                        borderRadius:20,
+                                        padding:10
+                                    }}
+                                    onPress={()=>showOriginMode('date')}
+                                >
+                                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Origin Date</Text>
+                                </TouchableOpacity>
+
                             </View>
                             <View style={{margin:10, flex:1}}>
-                                <Button color='#f781d8' title='Origin Time' onPress={()=>showOriginMode('time')}/>
+                                {/*<Button color='#f781d8' title='Origin Time' onPress={()=>showOriginMode('time')}/>*/}
+
+                                <TouchableOpacity
+                                    style={{
+                                        height:42,
+                                        backgroundColor: "#114953",
+                                        borderRadius:20,
+                                        padding:10
+                                    }}
+                                    onPress={()=>showOriginMode('time')}
+                                >
+                                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Origin Time</Text>
+                                </TouchableOpacity>
+
                             </View>
-                            <View style={{margin:10, flex:1}}>
+                            <View style={{margin:20, flex:1}}>
                                 <Text style={{fontSize:15}}>{originText}</Text>
                             </View>
 
@@ -430,6 +456,7 @@ function AddARideScreen({ navigation }) {
                                     style={styles.input}
                                     value={neededSeats}
                                     placeholder="Number of Seats"
+                                    keyboardType="numeric"
                                     onChangeText={text => setNeededSeats(text)}
                                 />
                             </View>
@@ -445,6 +472,7 @@ function AddARideScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={contactNumber}
+                                    keyboardType="numeric"
                                     placeholder="Your contact Number"
                                     onChangeText={text => setContactNumber(text)}
                                 />
@@ -452,7 +480,20 @@ function AddARideScreen({ navigation }) {
 
 
                             <View style={{margin:10, flex:1}}>
-                                <Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>
+                                {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
+
+                                <TouchableOpacity
+                                    style={{
+                                        height:42,
+                                        backgroundColor: "#2b1153",
+                                        borderRadius:20,
+                                        padding:10
+                                    }}
+                                    onPress={()=>{setScreen('2')}}
+                                >
+                                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                                </TouchableOpacity>
+
                             </View>
 
 
@@ -553,13 +594,46 @@ function AddARideScreen({ navigation }) {
                     />
 
                     <View style={{flex: 2,margin:10 }}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>
+                        {/*<Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: '#7a5da7',
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('4')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select favorite route</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>
+                        {/*<Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: '#2b1153',
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('3')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -651,7 +725,18 @@ function AddARideScreen({ navigation }) {
                     />
 
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*<View style={{margin:5}}>*/}
                     {/*    <Button*/}
@@ -662,7 +747,20 @@ function AddARideScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>
+                        {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Rider'); set();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                        </TouchableOpacity>
+
                     </View>
 
                 </>
@@ -678,7 +776,18 @@ function AddARideScreen({ navigation }) {
                         {isLoading ? <Text>Loading...</Text> :(
                             <>
                                 <View style={{margin:10 }}>
-                                    <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                                    {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#114953",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setScreen('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={{
                                     flex: 1,
@@ -754,7 +863,18 @@ function AddARideScreen({ navigation }) {
 
 
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('4')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('4')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('4')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*<View style={{margin:5}}>*/}
                     {/*    <Button*/}
@@ -765,7 +885,19 @@ function AddARideScreen({ navigation }) {
                     {/*    />*/}
                     {/*</View>*/}
                     <View style={{margin:10}}>
-                        <Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>
+                        {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{navigation.navigate('Rider'); set();}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
+                        </TouchableOpacity>
                     </View>
 
                 </>

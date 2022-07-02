@@ -172,26 +172,41 @@ function YourRidesScreen({ navigation }) {
                 paddingRight:10,
                 paddingTop:10,
                 paddingBottom:10,
-                backgroundColor: "#675fd7",
-                borderRadius:10,
-                shadowColor: "#0090ff",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.34,
-                shadowRadius: 6.27,
+                backgroundColor: "#ffffff",
+                borderWidth:10,
+                borderColor:"#114953",
 
-                elevation: 10,
+                borderRadius:10,
+                // shadowColor: "#0090ff",
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 5,
+                // },
+                // shadowOpacity: 0.34,
+                // shadowRadius: 6.27,
+                //
+                // elevation: 10,
             }}
 
         >
 
 
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Needed Seats: {item.neededSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Needed Seats: {item.neededSeats}</Text>
             <View style={{margin:10}}>
-                <Button color='red' title='Delete' onPress={()=>{deleteARide(item._id);navigation.navigate('Rider')}}/>
+                {/*<Button color='red' title='Delete' onPress={()=>{deleteARide(item._id);navigation.navigate('Rider')}}/>*/}
+
+                <TouchableOpacity
+                    style={{
+                        height:42,
+                        backgroundColor: "#e00000",
+                        borderRadius:20,
+                        padding:10
+                    }}
+                    onPress={()=>{deleteARide(item._id);navigation.navigate('Rider')}}
+                >
+                    <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
+                </TouchableOpacity>
             </View>
 
         </TouchableOpacity>
@@ -288,10 +303,34 @@ function YourRidesScreen({ navigation }) {
             {item.status === 'Pending Request' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Rider')}}/>
+                        {/*<Button color='green' title='Accept' onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Rider')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#235311",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Rider')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Accept</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Rider')}}/>
+                        {/*<Button color='red' title='Reject' onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Rider')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#e00000",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Rider')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Reject</Text>
+                        </TouchableOpacity>
+
                     </View>
                 </>
             )}
@@ -349,12 +388,23 @@ function YourRidesScreen({ navigation }) {
             {screen === '1' && (
                 <>
                     <View style={{flex:1, margin:10}}>
-                        <Button
+                        {/*<Button*/}
 
-                            color='#540eeb'
-                            title="Add a Ride"
+                        {/*    color='#540eeb'*/}
+                        {/*    title="Add a Ride"*/}
+                        {/*    onPress={() => navigation.navigate('Add a Ride')}*/}
+                        {/*/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
                             onPress={() => navigation.navigate('Add a Ride')}
-                        />
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a Ride</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{flex:11}}>
@@ -431,17 +481,51 @@ function YourRidesScreen({ navigation }) {
 
                     </MapView>
                     <View style={{flex: 2,margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('1')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{margin:10}}>
-                        <Button color='#7deb6a' title='Received Requests' onPress={()=>{setScreen('3')}}/>
+                        {/*<Button color='#7deb6a' title='Received Requests' onPress={()=>{setScreen('3')}}/>*/}
+
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#3a7079",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('3')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Received Requests</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             )}
             {screen === '3' && (
                 <>
                     <View style={{margin:10}}>
-                        <Button title='Back' onPress={()=>{setScreen('2')}}/>
+                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.container}>
                         {/*<Spinner visible={isLoading} />*/}
