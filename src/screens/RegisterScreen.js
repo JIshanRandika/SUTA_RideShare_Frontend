@@ -74,8 +74,25 @@ const RegisterScreen = ({navigation}) => {
           />
 
   <View style={{marginBottom:10}}>
-    <Button
-        title="Create the group"
+    {/*<Button*/}
+    {/*    title="Create the group"*/}
+    {/*    onPress={() => {*/}
+    {/*      setLoading(true)*/}
+    {/*      // setGroup(false)*/}
+    {/*      addData()*/}
+    {/*      // setTimeout(() => {alert(data.message)}, 5000)*/}
+    {/*      // setTimeout(alert(data.message), 5000);*/}
+
+    {/*    }}*/}
+    {/*/>*/}
+
+    <TouchableOpacity
+        style={{
+          height:42,
+          backgroundColor: "#2b1153",
+          borderRadius:20,
+          padding:10
+        }}
         onPress={() => {
           setLoading(true)
           // setGroup(false)
@@ -84,7 +101,11 @@ const RegisterScreen = ({navigation}) => {
           // setTimeout(alert(data.message), 5000);
 
         }}
-    />
+    >
+      <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Create the group</Text>
+    </TouchableOpacity>
+
+
   </View>
 
           {loading && (
@@ -95,18 +116,32 @@ const RegisterScreen = ({navigation}) => {
       <Text>{data.message}</Text>
   )}
           <View style={{marginTop:10}}>
-  <Button
-      color='orange'
-      title="Back"
-      onPress={() => {
-        // setLoading(true)
-        setGroup(false)
-        // addData()
-        // setTimeout(() => {alert(data.message)}, 5000)
-        // setTimeout(alert(data.message), 5000);
+  {/*<Button*/}
+  {/*    color='orange'*/}
+  {/*    title="Back"*/}
+  {/*    onPress={() => {*/}
+  {/*      // setLoading(true)*/}
+  {/*      setGroup(false)*/}
+  {/*      // addData()*/}
+  {/*      // setTimeout(() => {alert(data.message)}, 5000)*/}
+  {/*      // setTimeout(alert(data.message), 5000);*/}
 
-      }}
-  />
+  {/*    }}*/}
+  {/*/>*/}
+            <TouchableOpacity
+                style={{
+                  height:42,
+                  backgroundColor: "#114953",
+                  borderRadius:20,
+                  padding:10
+                }}
+                onPress={() => {
+                  setGroup(false)
+
+                }}
+            >
+              <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+            </TouchableOpacity>
           </View>
 
 </>
@@ -114,14 +149,28 @@ const RegisterScreen = ({navigation}) => {
 
       {!group && (
           <>
-      <Button
-          color='green'
-          title="New Group"
-          onPress={() => {
-              setGroup(true)
+      {/*<Button*/}
+      {/*    color='green'*/}
+      {/*    title="New Group"*/}
+      {/*    onPress={() => {*/}
+      {/*        setGroup(true)*/}
 
-          }}
-      />
+      {/*    }}*/}
+      {/*/>*/}
+            <TouchableOpacity
+                style={{
+                  height:42,
+                  backgroundColor: "#114953",
+                  borderRadius:20,
+                  padding:10
+                }}
+                onPress={() => {
+                  setGroup(true)
+
+                }}
+            >
+              <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Create a new group</Text>
+            </TouchableOpacity>
 
             <TextInput
                 style={{
@@ -159,17 +208,32 @@ const RegisterScreen = ({navigation}) => {
           secureTextEntry
         />
 
-        <Button
-          title="Register"
-          onPress={() => {
-            register(name, email, password, groupID, 'new');
-            setRegLoading(true)
-            // alert(userInfo.message)
-            // myalert();
-            //   setTimeout(() => {alert(userInfo.message)}, 5000)
+        {/*<Button*/}
+        {/*  title="Register"*/}
+        {/*  onPress={() => {*/}
+        {/*    register(name, email, password, groupID, 'new');*/}
+        {/*    setRegLoading(true)*/}
+        {/*    // alert(userInfo.message)*/}
+        {/*    // myalert();*/}
+        {/*    //   setTimeout(() => {alert(userInfo.message)}, 5000)*/}
 
-          }}
-        />
+        {/*  }}*/}
+        {/*/>*/}
+            <TouchableOpacity
+                style={{
+                  height:42,
+                  backgroundColor: "#2b1153",
+                  borderRadius:20,
+                  padding:10
+                }}
+                onPress={() => {
+                  register(name, email, password, groupID, 'new');
+                  setRegLoading(true)
+
+                }}
+            >
+              <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Register</Text>
+            </TouchableOpacity>
             {isLoading && (
                 <Text style={{marginTop:10}}>Loading..</Text>
             )}
