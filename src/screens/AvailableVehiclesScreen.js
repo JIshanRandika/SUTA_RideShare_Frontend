@@ -61,12 +61,28 @@ function AvailableVehiclesScreen({ navigation }) {
 
 
 
-        fetch(`${BASE_URL}/getDrives`)
+
+        // fetch(`${BASE_URL}/getDrives`)
+        //     .then((response) => response.json())
+        //     .then((json) => setData(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
+
+        fetch(`${BASE_URL}/drivesInGroup`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                groupID: userInfo.groupID,
+
+            }),
+        })
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
-
 
     }, []);
 
