@@ -19,6 +19,7 @@ import FavoriteRoutesScreen from '../screens/FavoriteRoutesScreen';
 import AddAFavoriteRouteScreen from '../screens/AddAFavoriteRouteScreen';
 import YourVehiclesScreen from '../screens/YourVehiclesScreen';
 import AddAVehicleScreen from '../screens/AddAVehicleScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -46,11 +47,12 @@ function HomeStackScreen() {
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-            <HomeStack.Screen name="Settings Screen" component={SettingsScreen} />
-            <HomeStack.Screen name="Favorite Routes Screen" component={FavoriteRoutesScreen} />
-            <HomeStack.Screen name="Add A Favorite Routes Screen" component={AddAFavoriteRouteScreen} />
-            <HomeStack.Screen name="Your Vehicles Screen" component={YourVehiclesScreen} />
-            <HomeStack.Screen name="Add A Vehicle Screen" component={AddAVehicleScreen} />
+            <HomeStack.Screen name="Settings" component={SettingsScreen} />
+            <HomeStack.Screen name="About" component={AboutScreen} />
+            <HomeStack.Screen name="Favorite Routes" component={FavoriteRoutesScreen} />
+            <HomeStack.Screen name="Add A Favorite Routes" component={AddAFavoriteRouteScreen} />
+            <HomeStack.Screen name="Your Vehicles" component={YourVehiclesScreen} />
+            <HomeStack.Screen name="Add A Vehicle" component={AddAVehicleScreen} />
         </HomeStack.Navigator>
     );
 }
