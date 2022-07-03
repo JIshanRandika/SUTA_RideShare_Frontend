@@ -21,7 +21,7 @@ function SettingsScreen({ navigation }) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={() => navigation.navigate('Favorite Routes Screen')}
+                    onPress={() => navigation.navigate('Favorite Routes')}
                 >
                     <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Favorite Routes</Text>
                 </TouchableOpacity>
@@ -41,7 +41,7 @@ function SettingsScreen({ navigation }) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={() => navigation.navigate('Your Vehicles Screen')}
+                    onPress={() => navigation.navigate('Your Vehicles')}
                 >
                     <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Your Vehicles</Text>
                 </TouchableOpacity>

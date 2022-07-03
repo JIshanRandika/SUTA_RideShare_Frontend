@@ -11,15 +11,16 @@ import Ionicons from 'react-native-vector-icons/MaterialIcons';
         // <SafeAreaView style={{flex:1, justifyContent: 'center'}}>
         //     <ScrollView>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <View style={{ flex: 10, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 9, justifyContent: 'center', alignItems: 'center' }}>
                 <Ionicons name="person" size={100}  />
                 <Text style={{fontSize:20}}>Hi {userInfo.name}</Text>
                 <Text style={{fontSize:15}}>Welcome to SL RideShare</Text>
                 <Text style={{fontSize:12}}>Powered by JSE Labs</Text>
 
             </View>
-            <View style={{ flex: 2,width:'100%' }}>
-
+            <View style={{ flex: 3,width:'100%' }}>
+                <SafeAreaView>
+                    <ScrollView>
                 <View style={{margin:10, flex:1}}>
 
                     <TouchableOpacity
@@ -29,16 +30,30 @@ import Ionicons from 'react-native-vector-icons/MaterialIcons';
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={() => navigation.navigate('Settings Screen')}
+                    onPress={() => navigation.navigate('Settings')}
                     >
                         <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Settings</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{
+                            marginTop:20,
+                            height:50,
+                            backgroundColor: "#2b1153",
+                            borderRadius:20,
+                            padding:10
+                        }}
+                        onPress={() => navigation.navigate('About')}
+                    >
+                        <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>About</Text>
                     </TouchableOpacity>
                     {/*<Button*/}
                     {/*    title="Settings"*/}
                     {/*    onPress={() => navigation.navigate('Settings Screen')}*/}
                     {/*/>*/}
                 </View>
-
+                    </ScrollView>
+                </SafeAreaView>
 
             </View>
 

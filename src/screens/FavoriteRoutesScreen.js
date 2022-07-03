@@ -182,7 +182,7 @@ function FavoriteRoutesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={() => navigation.navigate('Add A Favorite Routes Screen')}
+                            onPress={() => navigation.navigate('Add A Favorite Routes')}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a favorite</Text>
                         </TouchableOpacity>

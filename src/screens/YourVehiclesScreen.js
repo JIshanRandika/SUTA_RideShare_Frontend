@@ -178,7 +178,7 @@ function YourVehiclesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={() => navigation.navigate('Add A Vehicle Screen')}
+                            onPress={() => navigation.navigate('Add A Vehicle')}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Add a vehicle</Text>
                         </TouchableOpacity>
