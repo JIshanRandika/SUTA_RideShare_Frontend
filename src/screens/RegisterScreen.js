@@ -110,11 +110,15 @@ const RegisterScreen = ({navigation}) => {
 
           {loading && (
               <Text>Loading..</Text>
+
           )}
 
   {!loading && data && (
       <Text>{data.message}</Text>
+
   )}
+
+
           <View style={{marginTop:10}}>
   {/*<Button*/}
   {/*    color='orange'*/}
@@ -172,19 +176,51 @@ const RegisterScreen = ({navigation}) => {
               <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Create a new group</Text>
             </TouchableOpacity>
 
-            <TextInput
-                style={{
-                  marginBottom: 12,
-                  marginTop: 12,
-                  borderWidth: 1,
-                  borderColor: '#bbb',
-                  borderRadius: 5,
-                  paddingHorizontal: 14
-                }}
-                value={groupID}
-                placeholder="Group ID"
-                onChangeText={text => setGroupID(text)}
-            />
+            <View style={{flexDirection:'row', justifyContent:'center'}}>
+
+
+              <View style={{flex:6}}>
+                <TextInput
+                    style={{
+                      marginBottom: 12,
+                      marginTop: 12,
+                      borderWidth: 1,
+                      borderColor: '#bbb',
+                      borderRadius: 5,
+                      paddingHorizontal: 14
+                    }}
+                    value={groupID}
+                    placeholder="Group ID"
+                    onChangeText={text => setGroupID(text)}
+                />
+              </View>
+              <View style={{flex:1,justifyContent:'center'}}>
+                <Text style={{fontWeight:"bold"}}>OR</Text>
+              </View>
+              <View style={{flex:5 ,justifyContent:'center'}}>
+                <TouchableOpacity
+                    style={{
+                      alignContent:'center',
+                      // height:'80%',
+                      backgroundColor: "#39747f",
+                      borderRadius:10,
+                      padding:10
+                    }}
+                    onPress={() => setGroupID('PUBLIC')}
+                    // onPress={logout}
+                >
+                  <Text style={{ fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select Public Group</Text>
+                </TouchableOpacity>
+              </View>
+
+
+
+
+
+
+            </View>
+
+
 
         <TextInput
           style={styles.input}
