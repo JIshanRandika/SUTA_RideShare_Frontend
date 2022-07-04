@@ -145,6 +145,7 @@ function YourRidesScreen({ navigation }) {
     // const [userToken,setUserToken] = useState('');
 
     // ================================
+    const [originDateTime,setOriginDateTime] = useState('null')
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -158,7 +159,7 @@ function YourRidesScreen({ navigation }) {
                 setDestinationLatitude(item.destinationLatitude);
                 setDestinationLongitude(item.destinationLongitude);
                 setScreen('2');
-                // setUserToken(item.userToken);
+                setOriginDateTime(item.originDateTime);
                 getRiderReceivedRequestsForEach(item.originDateTime);
             }}
             }
@@ -203,7 +204,7 @@ function YourRidesScreen({ navigation }) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={()=>{deleteARide(item._id);navigation.navigate('Rider')}}
+                    onPress={()=>{deleteARide(item._id);}}
                 >
                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
                 </TouchableOpacity>
@@ -239,7 +240,8 @@ function YourRidesScreen({ navigation }) {
                 _id:_id
 
             }),
-        }).then(alert('Successfully Updated'));
+        }).then(alert('Successfully Updated'))
+            .finally(() => getRiderReceivedRequestsForEach(originDateTime));
 
 
         // =============
@@ -311,7 +313,7 @@ function YourRidesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Rider')}}
+                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Accept</Text>
                         </TouchableOpacity>
@@ -326,7 +328,7 @@ function YourRidesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Rider')}}
+                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Reject</Text>
                         </TouchableOpacity>
@@ -355,6 +357,24 @@ function YourRidesScreen({ navigation }) {
     };
 
 
+    const reloadRides = () => {
+        fetch(`${BASE_URL}/yourRides`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
     // ===========
     const deleteARide = (id) => {
         console.log(id)
@@ -370,7 +390,7 @@ function YourRidesScreen({ navigation }) {
             // let updatedItems = [...this.state.items].filter(i => i._id !== id);
             // this.setState({items: updatedItems});
 
-        });
+        }).finally(() => reloadRides());
     }
     // =====================
     // =====================

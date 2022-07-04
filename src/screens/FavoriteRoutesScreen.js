@@ -64,6 +64,48 @@ function FavoriteRoutesScreen({ navigation }) {
 
 
     // ================================
+    const reloadRoute = () => {
+        fetch(`${BASE_URL}/yourFavoriteRoutes`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+
+
+
+    }
+    // ===========
+    const deleteRoute = (id) => {
+        console.log(id)
+        fetch(`${BASE_URL}/deleteRoute/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // this.getOrderDetail
+            console.log("Remove Done!");
+
+            // let updatedItems = [...this.state.items].filter(i => i._id !== id);
+            // this.setState({items: updatedItems});
+
+        }).finally(() => reloadRoute());
+
+    }
+    // =====================
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -108,7 +150,25 @@ function FavoriteRoutesScreen({ navigation }) {
 
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
-            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.routeName}</Text>
+            <View style={{flexDirection:'row'}}>
+                <TouchableOpacity
+                    style={{
+                        justifyContent:'center',
+                        // height:20,
+                        marginRight:20,
+                        backgroundColor: "#e00000",
+                        borderRadius:20,
+                        paddingLeft:10,
+                        paddingRight:10
+                    }}
+                    onPress={()=>{deleteRoute(item._id);}}
+                >
+                    <Text style={{fontSize: 10, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
+                </TouchableOpacity>
+                <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.routeName}</Text>
+
+            </View>
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.routeName}</Text>*/}
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
 
 

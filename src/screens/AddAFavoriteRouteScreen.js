@@ -485,7 +485,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}
+                            onPress={()=>{navigation.navigate('Settings'); addADrive();}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
                         </TouchableOpacity>

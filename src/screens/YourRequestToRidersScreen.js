@@ -96,7 +96,7 @@ function YourRequestToRidersScreen({navigation}) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={()=>{deleteARequest(item._id);navigation.navigate('Driver')}}
+                    onPress={()=>{deleteARequest(item._id);}}
                 >
                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
                 </TouchableOpacity>
@@ -135,10 +135,28 @@ function YourRequestToRidersScreen({navigation}) {
             // let updatedItems = [...this.state.items].filter(i => i._id !== id);
             // this.setState({items: updatedItems});
 
-        });
+        }).finally(() => reloadRequests());;
     }
     // =====================
 
+    const reloadRequests = () => {
+        fetch(`${BASE_URL}/yourRequestsToRiders`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setRequestData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setRequestLoading(false));
+    }
     return (
         <View style={styles.container}>
             {/*<Spinner visible={isLoading} />*/}

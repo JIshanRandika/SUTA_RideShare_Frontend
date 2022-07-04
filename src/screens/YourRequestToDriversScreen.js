@@ -96,7 +96,7 @@ function YourRequestToDriversScreen({navigation}) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={()=>{deleteARequest(item._id);navigation.navigate('Rider')}}
+                    onPress={()=>{deleteARequest(item._id);}}
                 >
                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
                 </TouchableOpacity>
@@ -119,6 +119,24 @@ function YourRequestToDriversScreen({navigation}) {
         );
     };
 
+    const reloadRequests = () => {
+        fetch(`${BASE_URL}/yourRequestsToDrivers`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setRequestData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setRequestLoading(false));
+    }
 
 // ===========
     const deleteARequest = (id) => {
@@ -135,7 +153,7 @@ function YourRequestToDriversScreen({navigation}) {
             // let updatedItems = [...this.state.items].filter(i => i._id !== id);
             // this.setState({items: updatedItems});
 
-        });
+        }).finally(() => reloadRequests());
     }
     // =====================
 

@@ -8,6 +8,7 @@ import {
     Text,
     TouchableOpacity,
     View,
+    DevSettings,
 } from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
@@ -24,7 +25,6 @@ function YourVehiclesScreen({ navigation }) {
     console.log(data);
 
     useEffect(() => {
-
 
 
         fetch(`${BASE_URL}/yourVehicles`,{
@@ -107,6 +107,17 @@ function YourVehiclesScreen({ navigation }) {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Available Seats : {item.availableSeats}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Contact Number : {item.contactNumber}</Text>
 
+            <TouchableOpacity
+                style={{
+                    height:42,
+                    backgroundColor: "#e00000",
+                    borderRadius:20,
+                    padding:10
+                }}
+                onPress={()=>{deleteVehicle(item._id);}}
+            >
+                <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
+            </TouchableOpacity>
 
         </TouchableOpacity>
     );
@@ -120,36 +131,68 @@ function YourVehiclesScreen({ navigation }) {
 
 
     // ================================
+    // setInterval(function () {
+    //     console.log('reloadInterval')
+    //
+    //     fetch(`${BASE_URL}/yourVehicles`,{
+    //         method:'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //
+    //         body: JSON.stringify({
+    //             username: userInfo.name,
+    //             email:userInfo.email
+    //
+    //         }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((json) => setData(json))
+    //         .catch((error) => console.error(error))
+    //         .finally(() => setLoading(false));
+    //
+    // }, 500);
+    const reloadVehicles = () => {
+        console.log('reloadVehicles')
 
-    // ==========request=======
-
-
-    const updateStatus = (status,_id,userToken) => {
-
-
-
-
-        fetch(`${BASE_URL}/updateRiderToDriverRequests`, {
-            method: 'PUT',
+        fetch(`${BASE_URL}/yourVehicles`,{
+            method:'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
 
             body: JSON.stringify({
-
-                status: status,
-                _id:_id
+                username: userInfo.name,
+                email:userInfo.email
 
             }),
-        }).then(alert('Successfully Updated'));
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
+    // ===========
+    const deleteVehicle = (id) => {
+        console.log(id)
+        fetch(`${BASE_URL}/deleteVehicle/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // this.getOrderDetail
+            console.log("Remove Done!");
 
+            // let updatedItems = [...this.state.items].filter(i => i._id !== id);
+            // this.setState({items: updatedItems});
 
-        // ==========
-
+        }).finally(() => reloadVehicles());
 
     }
-
     // =====================
     return (
 

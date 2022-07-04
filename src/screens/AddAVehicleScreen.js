@@ -43,7 +43,8 @@ function SettingsScreen({ navigation }) {
                 groupID: userInfo.groupID,
 
             }),
-        }).then(alert('Successfully Completed'));
+        }).then(alert('Successfully Completed'))
+            .finally(() => navigation.navigate('Your Vehicles'));
 
     }
 
@@ -101,7 +102,10 @@ function SettingsScreen({ navigation }) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={()=>{navigation.navigate('Settings Screen');addAVehicle()}}
+                    onPress={()=>{
+                        addAVehicle()
+
+                    }}
                 >
                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
                 </TouchableOpacity>

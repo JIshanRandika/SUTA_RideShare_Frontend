@@ -148,6 +148,25 @@ function YourDrivesScreen({ navigation }) {
     //     console.log('asd')
     // },[]);
 
+    const reloadYourDrives = () => {
+
+        fetch(`${BASE_URL}/yourDrives`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.name,
+                email:userInfo.email
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
 
     const getDriverReceivedRequestsForEach = (originDateTime) => {
         fetch(`${BASE_URL}/driverReceivedRequestsForEach`,{
@@ -182,6 +201,7 @@ function YourDrivesScreen({ navigation }) {
 
     const [userToken,setUserToken] = useState('');
 
+    // const [originDateTime,setOriginDateTime] = useState('')
     // ================================
 
     const [selectedId, setSelectedId] = useState(null);
@@ -244,7 +264,7 @@ function YourDrivesScreen({ navigation }) {
                         borderRadius:20,
                         padding:10
                     }}
-                    onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}
+                    onPress={()=>{deleteADrive(item._id);}}
                 >
                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Delete</Text>
                 </TouchableOpacity>
@@ -284,7 +304,8 @@ function YourDrivesScreen({ navigation }) {
                 _id:_id
 
             }),
-        }).then(alert('Successfully Updated'));
+        }).then(alert('Successfully Updated'))
+            .finally(() => getDriverReceivedRequestsForEach(originDateTime));
 
 
         // ==========
@@ -360,7 +381,7 @@ function YourDrivesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);navigation.navigate('Driver')}}
+                            onPress={()=>{updateStatus('Accepted',item._id,item.userToken);}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Accept</Text>
                         </TouchableOpacity>
@@ -375,7 +396,7 @@ function YourDrivesScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);navigation.navigate('Driver')}}
+                            onPress={()=>{updateStatus('Rejected',item._id,item.userToken);}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Reject</Text>
                         </TouchableOpacity>
@@ -418,7 +439,7 @@ function YourDrivesScreen({ navigation }) {
             // let updatedItems = [...this.state.items].filter(i => i._id !== id);
             // this.setState({items: updatedItems});
 
-        });
+        }).finally(() => reloadYourDrives());
     }
     // =====================
     return (
