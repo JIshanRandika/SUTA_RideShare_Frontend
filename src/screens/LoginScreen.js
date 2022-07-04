@@ -33,7 +33,15 @@ const LoginScreen = ({navigation}) => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
+        <View style={{flexDirection: 'row', width:'100%',marginBottom:10,marginTop:-10}}>
+          <View style={{flex:6}}></View>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
+              <Text style={{color: 'blue'}}>Forgot your password?</Text>
+            </TouchableOpacity>
+          </View>
 
+        </View>
         {/*<Button*/}
         {/*  title="Login"*/}
         {/*  onPress={() => {*/}
@@ -61,6 +69,7 @@ const LoginScreen = ({navigation}) => {
             <Text style={styles.link}>Register</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </View>
   );
