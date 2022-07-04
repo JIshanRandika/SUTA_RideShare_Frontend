@@ -13,6 +13,21 @@ function SettingsScreen({ navigation }) {
             {/*<Text style={styles.welcome}>Welcome {userInfo.message}</Text>*/}
 
             <View style={{margin:10}}>
+                <TouchableOpacity
+                    style={{
+                        height:50,
+                        backgroundColor: "#434145",
+                        borderRadius:20,
+                        padding:10
+                    }}
+                    onPress={() => navigation.navigate('Groups Manage')}
+                >
+                    <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Group Manage</Text>
+                </TouchableOpacity>
+
+            </View>
+
+            <View style={{margin:10}}>
 
                 <TouchableOpacity
                     style={{
@@ -33,6 +48,8 @@ function SettingsScreen({ navigation }) {
                 {/*/>*/}
             </View>
 
+
+
             <View style={{margin:10}}>
                 <TouchableOpacity
                     style={{
@@ -46,11 +63,6 @@ function SettingsScreen({ navigation }) {
                     <Text style={{fontSize: 18, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Your Vehicles</Text>
                 </TouchableOpacity>
 
-                {/*<Button*/}
-                {/*    title="Your Vehicles"*/}
-                {/*    color="green"*/}
-                {/*    onPress={() => navigation.navigate('Your Vehicles Screen')}*/}
-                {/*/>*/}
             </View>
 
             <View style={{margin:10}}>

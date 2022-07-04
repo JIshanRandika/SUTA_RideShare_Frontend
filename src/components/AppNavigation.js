@@ -20,6 +20,7 @@ import AddAFavoriteRouteScreen from '../screens/AddAFavoriteRouteScreen';
 import YourVehiclesScreen from '../screens/YourVehiclesScreen';
 import AddAVehicleScreen from '../screens/AddAVehicleScreen';
 import AboutScreen from '../screens/AboutScreen';
+import GroupsManageScreen from '../screens/GroupsManageScreen';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -53,6 +54,7 @@ function HomeStackScreen() {
             <HomeStack.Screen name="Add A Favorite Routes" component={AddAFavoriteRouteScreen} />
             <HomeStack.Screen name="Your Vehicles" component={YourVehiclesScreen} />
             <HomeStack.Screen name="Add A Vehicle" component={AddAVehicleScreen} />
+            <HomeStack.Screen name="Groups Manage" component={GroupsManageScreen} />
         </HomeStack.Navigator>
     );
 }
