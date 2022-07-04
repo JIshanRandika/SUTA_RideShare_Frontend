@@ -5,7 +5,6 @@ import {AuthContext} from '../context/AuthContext';
 
 function ForgotPasswordScreen({ navigation }) {
     const {userInfo, isLoading, logout} = useContext(AuthContext);
-
     return (
         <View style={{ flex: 1,width:'100%',justifyContent:'center' }}>
 

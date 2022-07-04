@@ -1,11 +1,21 @@
-import React, {useContext, useState} from 'react';
-import {ActivityIndicator, Button, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {
+    ActivityIndicator,
+    Button, FlatList,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+    ScrollView
+} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 // import Token from './Token';
 
 function GroupsManageScreen({ navigation }) {
-    const {userInfo, isLoading, logout} = useContext(AuthContext);
+    const {userInfo, logout} = useContext(AuthContext);
 
     const [groupID,setGroupID] = useState(null);
 
@@ -26,8 +36,98 @@ function GroupsManageScreen({ navigation }) {
             }),
         }).finally(logout);
     }
+
+    const [isLoading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+
+
+        fetch(`${BASE_URL}/usersInGroup`,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                groupID: userInfo.groupID,
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+
+
+
+    }, []);
+
+    // const [isLoading, setLoading] = useState(true);
+
+    // =====================
+    const [data, setData] = useState([]);
+
+    const [selectedId, setSelectedId] = useState(null);
+    const Item = ({ item }) => (
+
+
+
+        <TouchableOpacity
+
+            style={{
+                // flex: 1,
+                marginTop:"3%",
+                alignSelf: 'center',
+                width: "90%",
+                // height: 37,
+                paddingLeft:10,
+                paddingRight:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: "#50534e",
+                borderRadius:10,
+                shadowColor: "#0090ff",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
+
+                elevation: 10,
+            }}
+
+        >
+
+
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.name}</Text>
+            {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
+
+
+        </TouchableOpacity>
+    );
+    const renderItem = ({ item }) => {
+        return (
+            <Item
+                item={item}
+            />
+        );
+    };
+
+
+    // ================================
+
+
     return (
         <View style={{ flex: 1,width:'100%',justifyContent:'center' }}>
+
+            <View style={{flex:4,justifyContent:'center'}}>
+                <SafeAreaView>
+                    <ScrollView>
+
             <View style={{margin:10,flexDirection:'row'}}>
 
 
@@ -65,14 +165,12 @@ function GroupsManageScreen({ navigation }) {
 
 
 
-
-
-
             </View>
 
 
 
-            <View style={{margin:10}}>
+
+            <View style={{margin:9}}>
 
                 <TouchableOpacity
                     style={{
@@ -88,6 +186,47 @@ function GroupsManageScreen({ navigation }) {
                 </TouchableOpacity>
 
             </View>
+
+                    </ScrollView>
+                </SafeAreaView>
+            </View>
+            {/*===========================*/}
+            <View style={{flex:8}}>
+                {/*<Spinner visible={isLoading} />*/}
+                <View style={{margin:10}}>
+                    <Text style={{fontWeight:'bold', fontSize:15}}>Other members in current group:</Text>
+                </View>
+
+                {isLoading ? <Text>Loading...</Text> :(
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width:'100%'
+                    }}>
+
+                        {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
+                        <View style={{width:'100%'}}>
+                            <SafeAreaView style={{width:'100%'}}>
+
+                                <FlatList
+                                    style={{height:"90%", width:'100%'}}
+                                    data={data.reverse()}
+                                    renderItem={renderItem}
+                                    keyExtractor={(data) => data._id}
+                                    extraData={selectedId}
+                                />
+
+                            </SafeAreaView>
+                        </View>
+                    </View>
+                )}
+
+            </View>
+
+
+            {/*==================*/}
+
         </View>
     );
 }

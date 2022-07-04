@@ -105,6 +105,7 @@ function FavoriteRoutesScreen({ navigation }) {
         }).finally(() => reloadRoute());
 
     }
+
     // =====================
 
     const [selectedId, setSelectedId] = useState(null);
