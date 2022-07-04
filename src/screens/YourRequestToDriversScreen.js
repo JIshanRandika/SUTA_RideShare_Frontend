@@ -85,6 +85,7 @@ function YourRequestToDriversScreen({navigation}) {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Vehicle Number: {item.vehicleNumber}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Driver Name: {item.driverName}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Group ID: {item.groupID}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
             <View style={{margin:10}}>
                 {/*<Button color='red' title='Delete' onPress={()=>{deleteARequest(item._id);navigation.navigate('Rider')}}/>*/}

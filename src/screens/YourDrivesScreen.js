@@ -253,6 +253,8 @@ function YourDrivesScreen({ navigation }) {
 
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Available Seats: {item.availableSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Group ID: {item.groupID}</Text>
+
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.contactNumber}</Text>*/}
             <View style={{margin:10}}>
                 {/*<Button color='red' title='Delete' onPress={()=>{deleteADrive(item._id);navigation.navigate('Driver')}}/>*/}
@@ -367,6 +369,7 @@ function YourDrivesScreen({ navigation }) {
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Rider Name: {item.riderName}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Needed Seats: {item.neededSeats}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Group ID: {item.groupID}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
 
             {item.status === 'Pending Request' && (
