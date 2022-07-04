@@ -38,7 +38,11 @@ const Navigation = () => {
                     <Stack.Screen name="AppNavigation" component={AppNavigation} options={{headerShown: false}}/>
                 ) : (
                     <>
-
+                        <Stack.Screen
+                            name="OnboardingScreen"
+                            component={OnboardingScreen}
+                            options={{headerShown: false}}
+                        />
                         <Stack.Screen
                             name="Login"
                             component={LoginScreen}
