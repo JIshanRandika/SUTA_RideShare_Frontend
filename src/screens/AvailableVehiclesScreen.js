@@ -241,6 +241,8 @@ function AvailableVehiclesScreen({ navigation }) {
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Name: {item.username}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Start From: {item.startLocation}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Destination: {item.endLocation}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Vehicle Number: {item.VehicleNumber}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Available Seats: {item.availableSeats}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Contact Number: {item.contactNumber}</Text>
@@ -268,16 +270,30 @@ function AvailableVehiclesScreen({ navigation }) {
         //     console.log('filter')
         //     return contains(user, formattedQuery);
         // });
-        const filteredDatabyContact = fullData.filter(x=>x.contactNumber.includes(text));
-        const filteredDatabyGroupID = fullData.filter(x=>x.groupID.includes(text));
-        const filteredDatabyVehicleNumber = fullData.filter(x=>x.VehicleNumber.includes(text));
+        // const filteredDatabyContact = fullData.filter(x=>x.contactNumber.includes(text));
+        // const filteredDatabyGroupID = fullData.filter(x=>x.groupID.includes(text));
+        // const filteredDatabyVehicleNumber = fullData.filter(x=>x.VehicleNumber.includes(text));
+        const filteredDatabyStartLocation = fullData.filter(x=>x.startLocation.includes(text));
+        const filteredDatabyDestination = fullData.filter(x=>x.endLocation.includes(text));
 
-        if(filteredDatabyContact.length>0){
-            setData(filteredDatabyContact);
-        }else if(filteredDatabyGroupID.length>0){
-            setData(filteredDatabyGroupID);
-        }else if(filteredDatabyVehicleNumber.length>0){
-        setData(filteredDatabyVehicleNumber);
+        // if(filteredDatabyContact.length>0){
+        //     setData(filteredDatabyContact);
+        // }
+        // if
+        // (filteredDatabyGroupID.length>0){
+        //     setData(filteredDatabyGroupID);
+        // }
+        // else if
+        // (filteredDatabyVehicleNumber.length>0){
+        // setData(filteredDatabyVehicleNumber);
+        // }
+        if
+        (filteredDatabyStartLocation.length>0){
+            setData(filteredDatabyStartLocation);
+        }
+        else if
+        (filteredDatabyDestination.length>0){
+            setData(filteredDatabyDestination);
         }
 
 
