@@ -1,5 +1,5 @@
 import React, {Component, useContext, useEffect, useState} from 'react';
-import {Alert, StatusBar, Text, View, Button, StyleSheet} from 'react-native';
+import {Alert, StatusBar, Text, View, Button, StyleSheet,PermissionsAndroid} from 'react-native';
 import Navigation from './src/components/Navigation';
 import {AuthProvider} from './src/context/AuthContext';
 import {AuthContext} from './src/context/AuthContext';
@@ -17,13 +17,35 @@ import OnboardingNavigation from './src/components/OnboardingNavigation';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 
-
+const requestDeviceLocationPermission = async () => {
+    try {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+                title: "Cool Photo App Device Location Permission",
+                message:
+                    "Cool Photo App needs access to your device location ",
+                buttonNeutral: "Ask Me Later",
+                buttonNegative: "Cancel",
+                buttonPositive: "OK"
+            }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can use the device location");
+        } else {
+            console.log("Device Location permission denied");
+        }
+    } catch (err) {
+        console.warn(err);
+    }
+};
 
 const App = () => {
 
     const [isFirstLaunch, setIsFirstLaunch] = useState(null);
 
     useEffect(() => {
+        requestDeviceLocationPermission();
         AsyncStorage.getItem('alreadyLaunched').then((value) => {
             if (value == null) {
                 AsyncStorage.setItem('alreadyLaunched', 'true'); // No need to wait for `setItem` to finish, although you might want to handle errors
@@ -38,6 +60,7 @@ const App = () => {
     if (isFirstLaunch === null) {
         return null; // This is the 'tricky' part: The query to AsyncStorage is not finished, but we have to present something to the user. Null will just render nothing, so you can also put a placeholder of some sort, but effectively the interval between the first mount and AsyncStorage retrieving your data won't be noticeable to the user. But if you want to display anything then you can use a LOADER here
     } else if (isFirstLaunch == true) {
+
         return (
             <AuthProvider>
                 <Token/>
@@ -47,6 +70,7 @@ const App = () => {
         )
     } else {
         return (
+
             <AuthProvider>
                 <Token/>
                 <StatusBar backgroundColor="#4d4746" />
