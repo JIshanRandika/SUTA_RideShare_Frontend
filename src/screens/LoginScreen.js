@@ -13,7 +13,11 @@ import {AuthContext} from '../context/AuthContext';
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const {isLoading, login} = useContext(AuthContext);
+  // const {isLoading, login} = useContext(AuthContext);
+  const {isLoading, login, userInfo} = useContext(AuthContext);
+
+  const [logLoading,setLogLoading] = useState(false)
+
 
   return (
     <View style={styles.container}>
@@ -58,11 +62,17 @@ const LoginScreen = ({navigation}) => {
             }}
             onPress={() => {
               login(email, password);
+              setLogLoading(true);
             }}
         >
           <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Login</Text>
         </TouchableOpacity>
-
+        {isLoading && (
+            <Text style={{marginTop:10}}>Loading..</Text>
+        )}
+        {logLoading && (
+            <Text style={{marginTop:10, color:'red'}}>{userInfo.message}</Text>
+        )}
         <View style={{flexDirection: 'row', marginTop: 20}}>
           <Text>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
