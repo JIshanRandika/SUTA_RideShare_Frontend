@@ -25,6 +25,7 @@ function AddADriveScreen({ navigation }) {
 
     const [count, setCount] = useState(0);
 
+
     const [screen, setScreen] = useState('1');
 
     const [originDate, setOriginDate] = useState(new Date());
@@ -1202,7 +1203,7 @@ function AddADriveScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{setScreen('4');setShow('0')}}
+                            onPress={()=>{setScreen('4');setShow('0');}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
                         </TouchableOpacity>

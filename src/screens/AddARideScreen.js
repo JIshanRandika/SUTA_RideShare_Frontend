@@ -42,6 +42,8 @@ function AddARideScreen({ navigation }) {
     const [neededSeats, setNeededSeats] = useState(null);
     const [contactNumber, setContactNumber] = useState(null);
 
+    const [startLocation, setStartLocation] = useState(null);
+    const [endLocation, setEndLocation] = useState(null);
 
     const onOriginChange = (event, selectedDate) => {
         const currentOriginDate = selectedDate || originDate;
@@ -147,6 +149,8 @@ function AddARideScreen({ navigation }) {
                 username: userInfo.name,
                 email:userInfo.email,
                 groupID: userInfo.groupID,
+                startLocation:startLocation,
+                endLocation:endLocation,
                 userToken:userToken
 
             }),
@@ -393,9 +397,15 @@ function AddARideScreen({ navigation }) {
             />
         );
     };
+
+
+    const [show, setShow] = useState('0')
+
+
     return (
         <View style={styles.addADriveContainer}>
             {/*<Spinner visible={isLoading} />*/}
+
 
 
 
@@ -489,7 +499,7 @@ function AddARideScreen({ navigation }) {
                                         borderRadius:20,
                                         padding:10
                                     }}
-                                    onPress={()=>{setScreen('2')}}
+                                    onPress={()=>{setScreen('2');setShow('0');}}
                                 >
                                     <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
                                 </TouchableOpacity>
@@ -561,7 +571,46 @@ function AddARideScreen({ navigation }) {
                         />
                         <Circle center={originLocation} radius={1000} />
                     </MapView>
+                    <View style={{flex: 2,margin:10 }}>
+                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('1');setShow('0');}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {show === '2' && (
+                        <View
+                            style={{
+                                // width:'90%',
+                                backgroundColor: '#fff',
+                                padding: 5,
+                                // marginLeft:20,
+                                // marginRight:20,
+                                marginHorizontal:10,
+                                marginVertical: 10,
+                                borderRadius: 20
+                            }}
+                        >
+                            <TextInput
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                clearButtonMode="always"
+                                value={startLocation}
+                                onChangeText={text => setStartLocation(text)}
+                                placeholder="Start Location Name"
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                            />
+                        </View>
+                    )}
 
+                    {show === '1' && (
                     <GooglePlacesAutocomplete
 
                         placeholder="Search"
@@ -572,6 +621,8 @@ function AddARideScreen({ navigation }) {
                         onPress={(data, details = null) => {
                             // 'details' is provided when fetchDetails = true
                             console.log(data, details)
+                            console.log(data.description)
+                            setStartLocation(data.description)
                             setOriginLocation({
                                 latitude: details.geometry.location.lat,
                                 longitude: details.geometry.location.lng,
@@ -592,21 +643,51 @@ function AddARideScreen({ navigation }) {
                             listView: { backgroundColor: "white" }
                         }}
                     />
+                    )}
 
-                    <View style={{flex: 2,margin:10 }}>
-                        {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
-                        <TouchableOpacity
-                            style={{
-                                height:42,
-                                backgroundColor: "#114953",
-                                borderRadius:20,
-                                padding:10
-                            }}
-                            onPress={()=>{setScreen('1')}}
-                        >
-                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
-                        </TouchableOpacity>
-                    </View>
+
+
+                    {show === '0' && (
+
+                        <View style={{margin:10,backgroundColor:'gray',padding:10,borderRadius:10}}>
+                            <Text style={{color:'white',fontWeight:'bold'}}>Start Location:</Text>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{flex:6, marginRight:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#05afa1",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Search</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex:1,justifyContent:'center'}}>
+                                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                                </View>
+                                <View style={{flex:6,marginLeft:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#7736d9",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('2')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Custom</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    )}
+
+
                     <View style={{margin:10}}>
                         {/*<Button color='orange' title='Select favorite route' onPress={()=>{setScreen('4')}}/>*/}
                         <TouchableOpacity
@@ -630,7 +711,7 @@ function AddARideScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{setScreen('3')}}
+                            onPress={()=>{setScreen('3');setShow('0');}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
                         </TouchableOpacity>
@@ -692,7 +773,46 @@ function AddARideScreen({ navigation }) {
                         />
 
                     </MapView>
+                    <View style={{flex: 2,margin:10}}>
+                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#114953",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2');setShow('0');}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {show === '2' && (
+                        <View
+                            style={{
+                                // width:'90%',
+                                backgroundColor: '#fff',
+                                padding: 5,
+                                // marginLeft:20,
+                                // marginRight:20,
+                                marginHorizontal:10,
+                                marginVertical: 10,
+                                borderRadius: 20
+                            }}
+                        >
+                            <TextInput
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                clearButtonMode="always"
+                                value={startLocation}
+                                onChangeText={text => setEndLocation(text)}
+                                placeholder="Destination Location Name"
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                            />
+                        </View>
+                    )}
 
+                    {show === '1' && (
                     <GooglePlacesAutocomplete
 
                         placeholder="Search"
@@ -703,6 +823,9 @@ function AddARideScreen({ navigation }) {
                         onPress={(data, details = null) => {
                             // 'details' is provided when fetchDetails = true
                             console.log(data, details)
+                            console.log(data.description)
+                            setEndLocation(data.description)
+
                             setDestinationLocation({
                                 latitude: details.geometry.location.lat,
                                 longitude: details.geometry.location.lng,
@@ -724,20 +847,8 @@ function AddARideScreen({ navigation }) {
                         }}
                     />
 
-                    <View style={{flex: 2,margin:10}}>
-                        {/*<Button title='Back' onPress={()=>{setScreen('2')}}/>*/}
-                        <TouchableOpacity
-                            style={{
-                                height:42,
-                                backgroundColor: "#114953",
-                                borderRadius:20,
-                                padding:10
-                            }}
-                            onPress={()=>{setScreen('2')}}
-                        >
-                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
-                        </TouchableOpacity>
-                    </View>
+                    )}
+
                     {/*<View style={{margin:5}}>*/}
                     {/*    <Button*/}
                     {/*        title="Change Origin Location"*/}
@@ -746,6 +857,49 @@ function AddARideScreen({ navigation }) {
                     {/*        }}*/}
                     {/*    />*/}
                     {/*</View>*/}
+
+
+                    {show === '0' && (
+
+                        <View style={{margin:10,backgroundColor:'gray',padding:10,borderRadius:10}}>
+                            <Text style={{color:'white',fontWeight:'bold'}}>Destination Location:</Text>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{flex:6, marginRight:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#05afa1",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Search</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex:1,justifyContent:'center'}}>
+                                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                                </View>
+                                <View style={{flex:6,marginLeft:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#7736d9",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('2')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Custom</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    )}
+
+
                     <View style={{margin:10}}>
                         {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>*/}
 
@@ -784,7 +938,7 @@ function AddARideScreen({ navigation }) {
                                             borderRadius:20,
                                             padding:10
                                         }}
-                                        onPress={()=>{setScreen('1')}}
+                                        onPress={()=>{setScreen('1');setShow('0');}}
                                     >
                                         <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
                                     </TouchableOpacity>
@@ -871,7 +1025,7 @@ function AddARideScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{setScreen('4')}}
+                            onPress={()=>{setScreen('4');setShow('0');}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
                         </TouchableOpacity>
