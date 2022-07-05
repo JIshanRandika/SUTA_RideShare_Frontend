@@ -260,8 +260,8 @@ function AvailableRidesScreen({ navigation }) {
         // const filteredDatabyContact = fullData.filter(x=>x.contactNumber.includes(text));
         // const filteredDatabyGroupID = fullData.filter(x=>x.groupID.includes(text));
         // const filteredDatabyVehicleNumber = fullData.filter(x=>x.VehicleNumber.includes(text));
-        const filteredDatabyStartLocation = fullData.filter(x=>x.startLocation.includes(text));
-        const filteredDatabyDestination = fullData.filter(x=>x.endLocation.includes(text));
+        const filteredDatabyStartLocation = fullData.filter(x=>x.startLocation.toLowerCase().includes(formattedQuery));
+        const filteredDatabyDestination = fullData.filter(x=>x.endLocation.toLowerCase().includes(formattedQuery));
 
         // if(filteredDatabyContact.length>0){
         //     setData(filteredDatabyContact);
