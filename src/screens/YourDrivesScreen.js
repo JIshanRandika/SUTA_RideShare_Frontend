@@ -250,7 +250,8 @@ function YourDrivesScreen({ navigation }) {
 
         >
 
-
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Start From: {item.startLocation}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Destination: {item.endLocation}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Available Seats: {item.availableSeats}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Group ID: {item.groupID}</Text>

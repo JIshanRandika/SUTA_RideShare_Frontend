@@ -191,7 +191,8 @@ function YourRidesScreen({ navigation }) {
 
         >
 
-
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Start From: {item.startLocation}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Destination: {item.endLocation}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>{item.originDateTime}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Needed Seats: {item.neededSeats}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#114953"}}>Group ID: {item.groupID}</Text>
@@ -300,6 +301,7 @@ function YourRidesScreen({ navigation }) {
 
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Driver Name: {item.driverName}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>{item.originDateTime}</Text>
+
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Needed Seats: {item.neededSeats}</Text>*/}
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Group ID: {item.groupID}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#ffffff"}}>Status: {item.status}</Text>
