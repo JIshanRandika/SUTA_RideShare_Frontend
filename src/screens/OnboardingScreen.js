@@ -65,13 +65,13 @@ const OnboardingScreen = ({navigation}) => {
                 },
                 {
                     backgroundColor: '#9cf3ff',
-                    image: <Image source={require('../assets/onboarding-img2.png')} />,
+                    image: <Image source={require('../assets/fuel.png')} />,
                     title: 'Reduce Fuel Consumption',
                     // subtitle: 'Share Your Thoughts With Similar Kind of People',
                 },
                 {
                     backgroundColor: '#b1b1b1',
-                    image: <Image source={require('../assets/onboarding-img3.png')} />,
+                    image: <Image source={require('../assets/traffic.png')} />,
                     title: 'Let\'s reduce the traffic',
                     // subtitle: "Let The Spot Light Capture You",
                 },
