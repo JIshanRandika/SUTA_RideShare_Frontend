@@ -6,7 +6,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 const Dots = ({selected}) => {
     let backgroundColor;
 
-    backgroundColor = selected ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)';
+    backgroundColor = selected ? 'rgb(43,17,83)' : 'rgb(17,73,83)';
 
     return (
         <View

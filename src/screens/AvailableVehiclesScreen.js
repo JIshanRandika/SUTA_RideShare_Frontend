@@ -13,7 +13,8 @@ import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-
+import filter from 'lodash.filter';
+// import SearchableFlatlist from "searchable-flatlist";
 var FCM = require('fcm-node');
 
 
@@ -23,7 +24,11 @@ function AvailableVehiclesScreen({ navigation }) {
     const [isLoading, setLoading] = useState(true);
 
     const [data, setData] = useState([]);
+    const [fullData, setFullData] = useState([]);
+    console.log('data');
     console.log(data);
+    console.log('fullData');
+    console.log(fullData);
 
     const [userData, setUserData] = useState(null);
 
@@ -80,7 +85,13 @@ function AvailableVehiclesScreen({ navigation }) {
             }),
         })
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then((json) => {
+                setData(json);
+                setFullData(json)
+            })
+            // .then((json) => setData(json))
+            // .then((json) => setFullData(json))
+            // .then((json) => setData(json.filter(x=>x.VehicleNumber === 'H')))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
 
@@ -246,6 +257,74 @@ function AvailableVehiclesScreen({ navigation }) {
             />
         );
     };
+
+
+    // ==========================
+    const handleSearch = text => {
+        console.log('handle')
+        const formattedQuery = text.toLowerCase();
+        console.log(text)
+        // const filteredData = filter(fullData, user => {
+        //     console.log('filter')
+        //     return contains(user, formattedQuery);
+        // });
+        const filteredDatabyContact = fullData.filter(x=>x.contactNumber.includes(text));
+        const filteredDatabyGroupID = fullData.filter(x=>x.groupID.includes(text));
+        const filteredDatabyVehicleNumber = fullData.filter(x=>x.VehicleNumber.includes(text));
+
+        if(filteredDatabyContact.length>0){
+            setData(filteredDatabyContact);
+        }else if(filteredDatabyGroupID.length>0){
+            setData(filteredDatabyGroupID);
+        }else if(filteredDatabyVehicleNumber.length>0){
+        setData(filteredDatabyVehicleNumber);
+        }
+
+
+
+        // setData(filteredData);
+        setQuery(text);
+    };
+
+    const contains = ({ originDateTime,originLongitude, originLatitude, destinationDateTime, destinationLongitude, destinationLatitude, availableSeats, VehicleNumber, contactNumber, username, email, groupID, userToken }, query) => {
+
+        console.log('contains')
+        const { first, last } = name;
+
+        if (VehicleNumber.includes(query) || availableSeats.includes(query) || contactNumber.includes(query)) {
+            return true;
+        }
+
+        return false;
+    };
+
+    const [searchData, setSearchData] = useState('');
+    const [query, setQuery] = useState('');
+    // const renderHeader = () => {
+    //     return (
+    //         <View
+    //             style={{
+    //                 backgroundColor: '#fff',
+    //                 padding: 5,
+    //                 marginLeft:20,
+    //                 marginRight:20,
+    //                 marginVertical: 10,
+    //                 borderRadius: 20
+    //             }}
+    //         >
+    //             <TextInput
+    //                 autoCapitalize="none"
+    //                 autoCorrect={false}
+    //                 clearButtonMode="always"
+    //                 value={query}
+    //                 onChangeText={queryText => handleSearch(queryText)}
+    //                 placeholder="Search"
+    //                 style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+    //             />
+    //         </View>
+    //     )
+    // }
+
     return (
 
         <View style={{
@@ -266,6 +345,28 @@ function AvailableVehiclesScreen({ navigation }) {
 
 
                         {isLoading ? <Text>Loading...</Text> :(
+                            <>
+                            <View
+                                style={{
+                                    width:'90%',
+                                    backgroundColor: '#fff',
+                                    padding: 5,
+                                    // marginLeft:20,
+                                    // marginRight:20,
+                                    marginVertical: 10,
+                                    borderRadius: 20
+                                }}
+                            >
+                                <TextInput
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    clearButtonMode="always"
+                                    value={query}
+                                    onChangeText={queryText => handleSearch(queryText)}
+                                    placeholder="Search"
+                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                />
+                            </View>
                             <View style={{
                                 flex: 12,
                                 height:'100%',
@@ -275,9 +376,16 @@ function AvailableVehiclesScreen({ navigation }) {
                             }}>
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
+                                    {/*<TextInput*/}
+                                    {/*    placeholder={"Search ==="}*/}
+                                    {/*    // style={sSearchBar}*/}
+                                    {/*    onChangeText={text => setSearchData(text)}*/}
+                                    {/*/>*/}
+
                                     <SafeAreaView style={{width:'100%'}}>
 
                                         <FlatList
+                                            // ListHeaderComponent={renderHeader}
                                             style={{height:"100%", width:'100%'}}
                                             data={data.reverse()}
                                             renderItem={renderItem}
@@ -285,9 +393,19 @@ function AvailableVehiclesScreen({ navigation }) {
                                             extraData={selectedId}
                                         />
 
+                                        {/*<SearchableFlatlist*/}
+                                        {/*    searchProperty={"VehicleNumber"}*/}
+                                        {/*    searchTerm={searchData}*/}
+                                        {/*    data={data}*/}
+                                        {/*    containerStyle={{height:"100%", width:'100%'}}*/}
+                                        {/*    renderItem={renderItem}*/}
+                                        {/*    keyExtractor={item => item.id}*/}
+                                        {/*/>*/}
+
                                     </SafeAreaView>
                                 </View>
                             </View>
+                            </>
                         )}
 
                     </View>
