@@ -23,6 +23,7 @@ function AvailableRidesScreen({ navigation }) {
     const [isLoading, setLoading] = useState(true);
 
     const [data, setData] = useState([]);
+    const [fullData, setFullData] = useState([]);
     console.log(data);
 
     const [userData, setUserData] = useState(null);
@@ -75,7 +76,10 @@ function AvailableRidesScreen({ navigation }) {
             }),
         })
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then((json) => {
+                setData(json);
+                setFullData(json)
+            })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
 
@@ -226,6 +230,8 @@ function AvailableRidesScreen({ navigation }) {
 
             {/*<Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>{item.originDateTime}</Text>*/}
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Name: {item.username}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Start From: {item.startLocation}</Text>
+            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Destination: {item.endLocation}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Needed Seats: {item.neededSeats}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>Contact Number: {item.contactNumber}</Text>
             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"left",color:"#2b1153"}}>{item.originDateTime}</Text>
@@ -241,6 +247,49 @@ function AvailableRidesScreen({ navigation }) {
             />
         );
     };
+    const [query, setQuery] = useState('');
+    // ==========================
+    const handleSearch = text => {
+        console.log('handle')
+        const formattedQuery = text.toLowerCase();
+        console.log(text)
+        // const filteredData = filter(fullData, user => {
+        //     console.log('filter')
+        //     return contains(user, formattedQuery);
+        // });
+        // const filteredDatabyContact = fullData.filter(x=>x.contactNumber.includes(text));
+        // const filteredDatabyGroupID = fullData.filter(x=>x.groupID.includes(text));
+        // const filteredDatabyVehicleNumber = fullData.filter(x=>x.VehicleNumber.includes(text));
+        const filteredDatabyStartLocation = fullData.filter(x=>x.startLocation.includes(text));
+        const filteredDatabyDestination = fullData.filter(x=>x.endLocation.includes(text));
+
+        // if(filteredDatabyContact.length>0){
+        //     setData(filteredDatabyContact);
+        // }
+        // if
+        // (filteredDatabyGroupID.length>0){
+        //     setData(filteredDatabyGroupID);
+        // }
+        // else if
+        // (filteredDatabyVehicleNumber.length>0){
+        // setData(filteredDatabyVehicleNumber);
+        // }
+        if
+        (filteredDatabyStartLocation.length>0){
+            setData(filteredDatabyStartLocation);
+        }
+        else if
+        (filteredDatabyDestination.length>0){
+            setData(filteredDatabyDestination);
+        }
+
+
+
+
+        // setData(filteredData);
+        setQuery(text);
+    };
+    // ========================
     return (
 
         <View style={{
@@ -261,6 +310,30 @@ function AvailableRidesScreen({ navigation }) {
 
 
                         {isLoading ? <Text>Loading...</Text> :(
+
+                            <>
+                            <View
+                                style={{
+                                    width:'90%',
+                                    backgroundColor: '#fff',
+                                    padding: 5,
+                                    // marginLeft:20,
+                                    // marginRight:20,
+                                    marginVertical: 10,
+                                    borderRadius: 20
+                                }}
+                            >
+                                <TextInput
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    clearButtonMode="always"
+                                    value={query}
+                                    onChangeText={queryText => handleSearch(queryText)}
+                                    placeholder="Search"
+                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                />
+                            </View>
+
                             <View style={{
                                 flex: 12,
                                 height:'100%',
@@ -283,6 +356,7 @@ function AvailableRidesScreen({ navigation }) {
                                     </SafeAreaView>
                                 </View>
                             </View>
+                            </>
                         )}
 
                     </View>

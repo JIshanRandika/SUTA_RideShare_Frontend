@@ -298,6 +298,7 @@ function AvailableVehiclesScreen({ navigation }) {
 
 
 
+
         // setData(filteredData);
         setQuery(text);
     };

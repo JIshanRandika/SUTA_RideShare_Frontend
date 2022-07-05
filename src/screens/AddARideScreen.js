@@ -804,7 +804,7 @@ function AddARideScreen({ navigation }) {
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 clearButtonMode="always"
-                                value={startLocation}
+                                value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
                                 placeholder="Destination Location Name"
                                 style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
