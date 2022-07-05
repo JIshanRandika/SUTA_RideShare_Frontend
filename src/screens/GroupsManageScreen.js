@@ -194,7 +194,7 @@ function GroupsManageScreen({ navigation }) {
             <View style={{flex:8}}>
                 {/*<Spinner visible={isLoading} />*/}
                 <View style={{margin:10}}>
-                    <Text style={{fontWeight:'bold', fontSize:15}}>Other members in current group:</Text>
+                    <Text style={{fontWeight:'bold', fontSize:15}}>Other members in current group : {userInfo.groupID}</Text>
                 </View>
 
                 {isLoading ? <Text>Loading...</Text> :(
