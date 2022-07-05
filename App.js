@@ -50,7 +50,7 @@ const App = () => {
             <AuthProvider>
                 <Token/>
                 <StatusBar backgroundColor="#4d4746" />
-                <OnboardingNavigation/>
+                <Navigation/>
             </AuthProvider>
         )
     }
