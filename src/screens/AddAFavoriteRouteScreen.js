@@ -43,6 +43,8 @@ function AddAFavoriteRouteScreen({ navigation }) {
     const [vehicleNumber, setVehicleNumber] = useState(null);
     const [contactNumber, setContactNumber] = useState(null);
 
+    const [startLocation, setStartLocation] = useState(null);
+    const [endLocation, setEndLocation] = useState(null);
 
     const onOriginChange = (event, selectedDate) => {
         const currentOriginDate = selectedDate || originDate;
@@ -116,6 +118,10 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
                 routeName:routeName,
                 email:userInfo.email,
+
+                startLocation:startLocation,
+                endLocation:endLocation,
+
                 groupID: userInfo.groupID,
 
             }),
@@ -243,6 +249,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                 const currentLatitude =
                     JSON.stringify(position.coords.latitude);
 
+
                 //Setting Longitude state
                 setCurrentLongitude(currentLongitude);
 
@@ -261,6 +268,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
         );
     };
 
+    const [show, setShow] = useState('0')
 
     return (
         <View style={styles.addADriveContainer}>
@@ -308,9 +316,49 @@ function AddAFavoriteRouteScreen({ navigation }) {
                         />
                         <Circle center={originLocation} radius={1000} />
                     </MapView>
+                    {show !== '0' && (
 
+                    <View style={{margin:10}}>
+                        {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
+                        <TouchableOpacity
+                            style={{
+                                height:42,
+                                backgroundColor: "#2b1153",
+                                borderRadius:20,
+                                padding:10
+                            }}
+                            onPress={()=>{setScreen('2'); setShow('0')}}
+                        >
+                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
+                        </TouchableOpacity>
+                    </View>
+                    )}
+                    {show === '2' && (
+                        <View
+                            style={{
+                                // width:'90%',
+                                backgroundColor: '#fff',
+                                padding: 5,
+                                // marginLeft:20,
+                                // marginRight:20,
+                                marginHorizontal:10,
+                                marginVertical: 10,
+                                borderRadius: 20
+                            }}
+                        >
+                            <TextInput
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                clearButtonMode="always"
+                                value={startLocation}
+                                onChangeText={text => setStartLocation(text)}
+                                placeholder="Start Location Name"
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                            />
+                        </View>
+                    )}
 
-
+                    {show === '1' && (
                     <View style={{flex: 2,margin:10 }}>
                         <GooglePlacesAutocomplete
 
@@ -322,6 +370,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
                             onPress={(data, details = null) => {
                                 // 'details' is provided when fetchDetails = true
                                 console.log(data, details)
+                                console.log(data.description)
+                                setStartLocation(data.description)
+
                                 setOriginLocation({
                                     latitude: details.geometry.location.lat,
                                     longitude: details.geometry.location.lng,
@@ -345,20 +396,49 @@ function AddAFavoriteRouteScreen({ navigation }) {
                         {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
                     </View>
 
-                    <View style={{margin:10}}>
-                        {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
-                        <TouchableOpacity
-                            style={{
-                                height:42,
-                                backgroundColor: "#2b1153",
-                                borderRadius:20,
-                                padding:10
-                            }}
-                            onPress={()=>{setScreen('2')}}
-                        >
-                            <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
-                        </TouchableOpacity>
-                    </View>
+                    )}
+
+                    {show === '0' && (
+
+                        <View style={{margin:10,backgroundColor:'gray',padding:10,borderRadius:10}}>
+                            <Text style={{color:'white',fontWeight:'bold'}}>Start Location:</Text>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{flex:6, marginRight:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#05afa1",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Search</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex:1,justifyContent:'center'}}>
+                                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                                </View>
+                                <View style={{flex:6,marginLeft:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#7736d9",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('2')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Custom</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    )}
+
+
 
 
                 </>
@@ -416,7 +496,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                         />
 
                     </MapView>
-
+                    {show === '1' && (
                     <GooglePlacesAutocomplete
 
                         placeholder="Search"
@@ -447,6 +527,8 @@ function AddAFavoriteRouteScreen({ navigation }) {
                             listView: { backgroundColor: "white" }
                         }}
                     />
+                    )}
+
 
                     <View style={{flex: 2,margin:10}}>
                         {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
@@ -457,7 +539,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{setScreen('1')}}
+                            onPress={()=>{setScreen('1');setShow('0')}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Back</Text>
                         </TouchableOpacity>
@@ -470,12 +552,79 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     {/*        }}*/}
                     {/*    />*/}
                     {/*</View>*/}
+
+
+                    {show === '2' && (
+                        <View
+                            style={{
+                                // width:'90%',
+                                backgroundColor: '#fff',
+                                padding: 5,
+                                // marginLeft:20,
+                                // marginRight:20,
+                                marginHorizontal:10,
+                                marginVertical: 10,
+                                borderRadius: 20
+                            }}
+                        >
+                            <TextInput
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                clearButtonMode="always"
+                                value={endLocation}
+                                onChangeText={text => setEndLocation(text)}
+                                placeholder="Destination Location Name"
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                            />
+                        </View>
+                    )}
+
+                    {show === '0' && (
+
+                        <View style={{margin:10,backgroundColor:'gray',padding:10,borderRadius:10}}>
+                            <Text style={{color:'white',fontWeight:'bold'}}>Destination Location:</Text>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{flex:6, marginRight:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#05afa1",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('1')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Search</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex:1,justifyContent:'center'}}>
+                                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                                </View>
+                                <View style={{flex:6,marginLeft:5}}>
+
+                                    <TouchableOpacity
+                                        style={{
+                                            height:42,
+                                            backgroundColor: "#7736d9",
+                                            borderRadius:20,
+                                            padding:10
+                                        }}
+                                        onPress={()=>{setShow('2')}}
+                                    >
+                                        <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Custom</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    )}
                     <TextInput
                         style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={routeName}
                         placeholder="Route Name"
                         onChangeText={text => setRouteName(text)}
                     />
+                    {show !== '0' && (
                     <View style={{margin:10}}>
                         {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Settings Screen'); addADrive();}}/>*/}
                         <TouchableOpacity
@@ -485,11 +634,27 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{navigation.navigate('Settings'); addADrive();}}
+                            onPress={()=>{
+                                if(routeName && startLocation && endLocation){
+                                    navigation.navigate('Settings'); addADrive();
+                                }else {
+
+                                    if(!routeName){
+                                        alert('Please input route name')
+                                    }else if(!startLocation){
+                                        alert('Please input start location')
+                                    }else if(!endLocation){
+                                        alert('Please input destination')
+                                    }
+                                    // alert('Please input the all details')
+                                }
+
+                            }}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
                         </TouchableOpacity>
                     </View>
+                    )}
                     {/*<Dialog*/}
                     {/*    width={400}*/}
                     {/*    height={400}*/}
@@ -550,7 +715,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
