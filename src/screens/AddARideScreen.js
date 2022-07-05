@@ -30,14 +30,14 @@ function AddARideScreen({ navigation }) {
     const [originDate, setOriginDate] = useState(new Date());
     const [originMode, setOriginMode] = useState('date');
     const [originShow, setOriginShow] = useState('F');
-    const [originText, setOriginText] = useState('Select The Origin Date and Time');
+    const [originText, setOriginText] = useState(null);
 
     const [originVisible, setOriginVisible] = useState(false);
 
     const [destinationDate, setDestinationDate] = useState(new Date());
     const [destinationMode, setDestinationMode] = useState('date');
     const [destinationShow, setDestinationShow] = useState('F');
-    const [destinationText, setDestinationText] = useState('Select The Destination Date and Time');
+    const [destinationText, setDestinationText] = useState(null);
 
     const [neededSeats, setNeededSeats] = useState(null);
     const [contactNumber, setContactNumber] = useState(null);
@@ -352,6 +352,9 @@ function AddARideScreen({ navigation }) {
                     longitude: item.destinationLongitude,
                 })
 
+                setStartLocation(item.startLocation);
+                setEndLocation(item.endLocation);
+
                 setScreen('5');
                 // setUserToken(item.userToken);
 
@@ -488,7 +491,7 @@ function AddARideScreen({ navigation }) {
                                 />
                             </View>
 
-
+                            {/*{show !== '0' && (*/}
                             <View style={{margin:10, flex:1}}>
                                 {/*<Button color='blue' title='Next' onPress={()=>{setScreen('2')}}/>*/}
 
@@ -505,6 +508,7 @@ function AddARideScreen({ navigation }) {
                                 </TouchableOpacity>
 
                             </View>
+                            {/*)}*/}
 
 
 
@@ -702,6 +706,7 @@ function AddARideScreen({ navigation }) {
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Select favorite route</Text>
                         </TouchableOpacity>
                     </View>
+                    {show !== '0' && (
                     <View style={{margin:10}}>
                         {/*<Button color='blue' title='Next' onPress={()=>{setScreen('3')}}/>*/}
                         <TouchableOpacity
@@ -716,6 +721,7 @@ function AddARideScreen({ navigation }) {
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Next</Text>
                         </TouchableOpacity>
                     </View>
+                    )}
 
 
                 </>
@@ -899,7 +905,7 @@ function AddARideScreen({ navigation }) {
                         </View>
                     )}
 
-
+                    {show !== '0' && (
                     <View style={{margin:10}}>
                         {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>*/}
 
@@ -910,12 +916,31 @@ function AddARideScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{navigation.navigate('Rider'); set();}}
+                            onPress={()=>{
+                                if(originText && neededSeats && contactNumber && startLocation && endLocation){
+                                    navigation.navigate('Rider'); set();
+                                }else {
+                                    if(!originText){
+                                        alert('Please input origin date and time')
+                                    }else if(!neededSeats){
+                                        alert('Please input needed seats')
+                                    }else if(!contactNumber){
+                                        alert('Please input contact number')
+                                    }else if(!startLocation){
+                                        alert('Please input start location')
+                                    }else if(!endLocation){
+                                        alert('Please input destination')
+                                    }
+                                    // alert('Please input the all details')
+                                }
+
+                            }}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
                         </TouchableOpacity>
 
                     </View>
+                    )}
 
                 </>
 
@@ -1038,6 +1063,8 @@ function AddARideScreen({ navigation }) {
                     {/*        }}*/}
                     {/*    />*/}
                     {/*</View>*/}
+
+                    {/*{show !== '0' && (*/}
                     <View style={{margin:10}}>
                         {/*<Button color='green' title='Submit' onPress={()=>{navigation.navigate('Rider'); set();}}/>*/}
 
@@ -1048,18 +1075,38 @@ function AddARideScreen({ navigation }) {
                                 borderRadius:20,
                                 padding:10
                             }}
-                            onPress={()=>{navigation.navigate('Rider'); set();}}
+                            onPress={()=>{
+                                if(originText && neededSeats && contactNumber && startLocation && endLocation){
+                                    navigation.navigate('Rider'); set();
+                                }else {
+                                    if(!originText){
+                                        alert('Please input origin date and time')
+                                    }else if(!neededSeats){
+                                        alert('Please input needed seats')
+                                    }else if(!contactNumber){
+                                        alert('Please input contact number')
+                                    }else if(!startLocation){
+                                        alert('Please input start location')
+                                    }else if(!endLocation){
+                                        alert('Please input destination')
+                                    }
+                                    // alert('Please input the all details')
+                                }
+
+                            }}
+                            // onPress={()=>{navigation.navigate('Rider'); set();}}
                         >
                             <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Submit</Text>
                         </TouchableOpacity>
                     </View>
+                    {/*)}*/}
 
                 </>
 
             )}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
