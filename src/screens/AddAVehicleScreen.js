@@ -44,7 +44,7 @@ function SettingsScreen({ navigation }) {
 
             }),
         }).then(alert('Successfully Completed'))
-            .finally(() => navigation.navigate('Your Vehicles'));
+            .finally(() => navigation.navigate('Settings'));
 
     }
 
@@ -103,7 +103,12 @@ function SettingsScreen({ navigation }) {
                         padding:10
                     }}
                     onPress={()=>{
-                        addAVehicle()
+                        if(title && type && vehicleNumber && availableSeats && contactNumber){
+                            addAVehicle()
+                        }else {
+                            alert('Please fill the all text inputs')
+                        }
+
 
                     }}
                 >
