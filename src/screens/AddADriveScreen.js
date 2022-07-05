@@ -1231,7 +1231,7 @@ function AddADriveScreen({ navigation }) {
             )}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
