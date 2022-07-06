@@ -69,6 +69,7 @@ const RegisterScreen = ({navigation}) => {
           <TextInput
               style={styles.input}
               value={groupID}
+              placeholderTextColor='black'
               placeholder="Group ID"
               onChangeText={text => setGroupID(text)}
           />
@@ -190,6 +191,7 @@ const RegisterScreen = ({navigation}) => {
                       paddingHorizontal: 14
                     }}
                     value={groupID}
+                    placeholderTextColor='black'
                     placeholder="Group ID"
                     onChangeText={text => setGroupID(text)}
                 />
@@ -225,6 +227,7 @@ const RegisterScreen = ({navigation}) => {
         <TextInput
           style={styles.input}
           value={name}
+          placeholderTextColor='black'
           placeholder="Enter name"
           onChangeText={text => setName(text)}
         />
@@ -232,6 +235,7 @@ const RegisterScreen = ({navigation}) => {
         <TextInput
           style={styles.input}
           value={email}
+          placeholderTextColor='black'
           placeholder="Enter email"
           onChangeText={text => setEmail(text)}
         />
@@ -239,6 +243,7 @@ const RegisterScreen = ({navigation}) => {
         <TextInput
           style={styles.input}
           value={password}
+          placeholderTextColor='black'
           placeholder="Enter password"
           onChangeText={text => setPassword(text)}
           secureTextEntry
@@ -311,6 +316,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   input: {
+    color:'black',
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#bbb',

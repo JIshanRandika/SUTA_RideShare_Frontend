@@ -468,6 +468,7 @@ function AddARideScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={neededSeats}
+                                    placeholderTextColor='black'
                                     placeholder="Number of Seats"
                                     keyboardType="numeric"
                                     onChangeText={text => setNeededSeats(text)}
@@ -486,6 +487,7 @@ function AddARideScreen({ navigation }) {
                                     style={styles.input}
                                     value={contactNumber}
                                     keyboardType="numeric"
+                                    placeholderTextColor='black'
                                     placeholder="Your contact Number"
                                     onChangeText={text => setContactNumber(text)}
                                 />
@@ -608,8 +610,9 @@ function AddARideScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={startLocation}
                                 onChangeText={text => setStartLocation(text)}
+                                placeholderTextColor='black'
                                 placeholder="Start Location Name"
-                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
                         </View>
                     )}
@@ -812,8 +815,9 @@ function AddARideScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
+                                placeholderTextColor='black'
                                 placeholder="Destination Location Name"
-                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
                         </View>
                     )}
@@ -1120,6 +1124,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     input: {
+        color:'black',
         // margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',

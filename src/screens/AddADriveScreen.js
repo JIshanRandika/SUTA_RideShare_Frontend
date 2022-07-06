@@ -651,6 +651,7 @@ function AddADriveScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={availableSeats}
+                                    placeholderTextColor='black'
                                     placeholder="Number of Seats"
                                     keyboardType="numeric"
                                     onChangeText={text => setAvailableSeats(text)}
@@ -660,6 +661,7 @@ function AddADriveScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={vehicleNumber}
+                                    placeholderTextColor='black'
                                     placeholder="Vehicle Number"
                                     onChangeText={text => setVehicleNumber(text)}
                                 />
@@ -669,6 +671,7 @@ function AddADriveScreen({ navigation }) {
                                     style={styles.input}
                                     value={contactNumber}
                                     keyboardType="numeric"
+                                    placeholderTextColor='black'
                                     placeholder="Your contact Number"
                                     onChangeText={text => setContactNumber(text)}
                                 />
@@ -798,8 +801,9 @@ function AddADriveScreen({ navigation }) {
                             clearButtonMode="always"
                             value={startLocation}
                             onChangeText={text => setStartLocation(text)}
+                            placeholderTextColor='black'
                             placeholder="Start Location Name"
-                            style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                            style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                         />
                     </View>
                     )}
@@ -971,6 +975,7 @@ function AddADriveScreen({ navigation }) {
                     {show === '1' && (
                     <GooglePlacesAutocomplete
 
+                        placeholderTextColor='red'
                         placeholder="Search"
                         fetchDetails={true}
                         GooglePlacesSearchQuery={{
@@ -1038,8 +1043,9 @@ function AddADriveScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
+                                placeholderTextColor='black'
                                 placeholder="Destination Location Name"
-                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20,color:'black' }}
                             />
                         </View>
                     )}
@@ -1300,6 +1306,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     input: {
+        color:'black',
         // margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',

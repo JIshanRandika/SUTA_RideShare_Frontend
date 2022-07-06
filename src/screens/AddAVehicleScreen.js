@@ -59,24 +59,28 @@ function SettingsScreen({ navigation }) {
                     <TextInput
                         style={styles.input}
                         value={title}
+                        placeholderTextColor='black'
                         placeholder="Title for vehicle"
                         onChangeText={text => setTitle(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={type}
+                        placeholderTextColor='black'
                         placeholder="Type for vehicle"
                         onChangeText={text => setType(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={vehicleNumber}
+                        placeholderTextColor='black'
                         placeholder="Vehicle Number"
                         onChangeText={text => setVehicleNumber(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={availableSeats}
+                        placeholderTextColor='black'
                         placeholder="Available Seats"
                         keyboardType="numeric"
                         onChangeText={text => setAvailableSeats(text)}
@@ -84,6 +88,7 @@ function SettingsScreen({ navigation }) {
                     <TextInput
                         style={styles.input}
                         value={contactNumber}
+                        placeholderTextColor='black'
                         placeholder="Contact Number"
                         keyboardType="numeric"
                         onChangeText={text => setContactNumber(text)}
@@ -130,6 +135,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     input: {
+        color:'black',
         margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',

@@ -385,8 +385,9 @@ function AvailableVehiclesScreen({ navigation }) {
                                     clearButtonMode="always"
                                     value={query}
                                     onChangeText={queryText => handleSearch(queryText)}
+                                    placeholderTextColor='black'
                                     placeholder="Search"
-                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20,color:'black' }}
                                 />
                             </View>
                             <View style={{
@@ -501,6 +502,7 @@ function AvailableVehiclesScreen({ navigation }) {
                     <TextInput
                         style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={neededSeats}
+                        placeholderTextColor='white'
                         placeholder="Number of Seats"
                         keyboardType="numeric"
                         onChangeText={text => setNeededSeats(text)}

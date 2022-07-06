@@ -140,6 +140,7 @@ function GroupsManageScreen({ navigation }) {
                             borderRadius: 5,
                             paddingHorizontal: 14,}}
                         value={groupID}
+                        placeholderTextColor='black'
                         placeholder="Enter Custom Group ID"
                         onChangeText={text => setGroupID(text)}
                     />
@@ -237,6 +238,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input: {
+        color:'black',
         margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',

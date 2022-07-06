@@ -352,8 +352,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={startLocation}
                                 onChangeText={text => setStartLocation(text)}
+                                placeholderTextColor='black'
                                 placeholder="Start Location Name"
-                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
                         </View>
                     )}
@@ -577,7 +578,8 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
                                 placeholder="Destination Location Name"
-                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                placeholderTextColor='black'
+                                style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
                         </View>
                     )}
@@ -624,6 +626,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     <TextInput
                         style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={routeName}
+                        placeholderTextColor='black'
                         placeholder="Route Name"
                         onChangeText={text => setRouteName(text)}
                     />
@@ -732,6 +735,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     input: {
+        color:'black',
         // margin: 10,
         borderWidth: 1,
         borderColor: '#bbb',

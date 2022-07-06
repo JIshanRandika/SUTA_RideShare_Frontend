@@ -335,8 +335,10 @@ function AvailableRidesScreen({ navigation }) {
                                     clearButtonMode="always"
                                     value={query}
                                     onChangeText={queryText => handleSearch(queryText)}
+
+                                    placeholderTextColor='black'
                                     placeholder="Search"
-                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                                    style={{ backgroundColor: '#fff', paddingHorizontal: 20,color:'black' }}
                                 />
                             </View>
 

@@ -24,7 +24,8 @@ const LoginScreen = ({navigation}) => {
       {/*<Spinner visible={isLoading} />*/}
       <View style={styles.wrapper}>
         <TextInput
-          style={styles.input}
+            style={styles.input}
+          placeholderTextColor='black'
           value={email}
           placeholder="Enter email"
           onChangeText={text => setEmail(text)}
@@ -33,6 +34,7 @@ const LoginScreen = ({navigation}) => {
         <TextInput
           style={styles.input}
           value={password}
+          placeholderTextColor='black'
           placeholder="Enter password"
           onChangeText={text => setPassword(text)}
           secureTextEntry
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   input: {
+    color:'black',
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#bbb',
