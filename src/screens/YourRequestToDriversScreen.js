@@ -174,7 +174,10 @@ function YourRequestToDriversScreen({navigation}) {
                     {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                     <View style={{width:'100%'}}>
                         <SafeAreaView style={{width:'100%'}}>
+                            {requestData.length === 0 && (
+                                <Text style={{color:'black',margin:50,marginTop:200}}>No requests</Text>
 
+                            )}
                             <FlatList
                                 style={{height:"100%", width:'100%'}}
                                 data={requestData.reverse()}

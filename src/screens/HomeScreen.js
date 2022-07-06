@@ -12,10 +12,10 @@ import Ionicons from 'react-native-vector-icons/MaterialIcons';
         //     <ScrollView>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ flex: 9, justifyContent: 'center', alignItems: 'center' }}>
-                <Ionicons name="person" size={100}  />
-                <Text style={{fontSize:20}}>Hi {userInfo.name}</Text>
-                <Text style={{fontSize:15}}>Welcome to SL RideShare</Text>
-                <Text style={{fontSize:12}}>Powered by JSE Labs</Text>
+                <Ionicons name="person" size={100} color='gray'  />
+                <Text style={{fontSize:20, color:'black'}}>Hi {userInfo.name}</Text>
+                <Text style={{fontSize:15, color:'black'}}>Welcome to SL RideShare</Text>
+                <Text style={{fontSize:12, color:'black'}}>Powered by JSE Labs</Text>
 
             </View>
             <View style={{ flex: 3,width:'100%' }}>

@@ -146,7 +146,7 @@ function GroupsManageScreen({ navigation }) {
                     />
                 </View>
                 <View style={{flex:1,justifyContent:'center'}}>
-                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                    <Text style={{fontWeight:"bold", color:'black'}}>OR</Text>
                 </View>
                 <View style={{flex:5}}>
                     <TouchableOpacity
@@ -198,7 +198,7 @@ function GroupsManageScreen({ navigation }) {
                     <Text style={{fontWeight:'bold', fontSize:15}}>Other members in current group : {userInfo.groupID}</Text>
                 </View>
 
-                {isLoading ? <Text>Loading...</Text> :(
+                {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                     <View style={{
                         flex: 1,
                         alignItems: 'center',
@@ -209,7 +209,10 @@ function GroupsManageScreen({ navigation }) {
                         {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                         <View style={{width:'100%'}}>
                             <SafeAreaView style={{width:'100%'}}>
+                                {data.length === 0 && (
+                                    <Text style={{color:'black',margin:50}}>No group members</Text>
 
+                                )}
                                 <FlatList
                                     style={{height:"90%", width:'100%'}}
                                     data={data.reverse()}

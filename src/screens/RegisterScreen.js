@@ -110,12 +110,12 @@ const RegisterScreen = ({navigation}) => {
   </View>
 
           {loading && (
-              <Text>Loading..</Text>
+              <Text style={{color:'black'}}>Loading..</Text>
 
           )}
 
   {!loading && data && (
-      <Text>{data.message}</Text>
+      <Text style={{color:'black'}}>{data.message}</Text>
 
   )}
 
@@ -183,6 +183,7 @@ const RegisterScreen = ({navigation}) => {
               <View style={{flex:6}}>
                 <TextInput
                     style={{
+                      color:'black',
                       marginBottom: 12,
                       marginTop: 12,
                       borderWidth: 1,
@@ -197,7 +198,7 @@ const RegisterScreen = ({navigation}) => {
                 />
               </View>
               <View style={{flex:1,justifyContent:'center'}}>
-                <Text style={{fontWeight:"bold"}}>OR</Text>
+                <Text style={{fontWeight:"bold", color:'black'}}>OR</Text>
               </View>
               <View style={{flex:5 ,justifyContent:'center'}}>
                 <TouchableOpacity
@@ -276,25 +277,25 @@ const RegisterScreen = ({navigation}) => {
               <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Register</Text>
             </TouchableOpacity>
             {isLoading && (
-                <Text style={{marginTop:10}}>Loading..</Text>
+                <Text style={{marginTop:10, color:'black'}}>Loading..</Text>
             )}
             {regLoading && (
             <Text style={{marginTop:10, color:'red'}}>{userInfo.message}</Text>
             )}
 
         <View style={{flexDirection: 'row', marginTop: 10}}>
-          <Text>Already have an account? </Text>
+          <Text style={{color:'black'}}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.link}>Login</Text>
           </TouchableOpacity>
         </View>
-        <Text style={{marginTop:40}}>Your password need: </Text>
-        <Text style={{marginLeft:10}}>Minimum 8 characters</Text>
-        <Text style={{marginLeft:10}}>Maximum 26 characters</Text>
-        <Text style={{marginLeft:10}}>At least 1 lowe case letter</Text>
-        <Text style={{marginLeft:10}}>At least 1 upper case letter</Text>
-        <Text style={{marginLeft:10}}>At least 1 numerical value</Text>
-        <Text style={{marginLeft:10}}>At least 1 symbol</Text>
+        <Text style={{marginTop:40, color:'black'}}>Your password need: </Text>
+        <Text style={{marginLeft:10, color:'black'}}>Minimum 8 characters</Text>
+        <Text style={{marginLeft:10, color:'black'}}>Maximum 26 characters</Text>
+        <Text style={{marginLeft:10, color:'black'}}>At least 1 lowe case letter</Text>
+        <Text style={{marginLeft:10, color:'black'}}>At least 1 upper case letter</Text>
+        <Text style={{marginLeft:10, color:'black'}}>At least 1 numerical value</Text>
+        <Text style={{marginLeft:10, color:'black'}}>At least 1 symbol</Text>
           </>
           )}
   </ScrollView>

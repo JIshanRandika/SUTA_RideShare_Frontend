@@ -451,7 +451,7 @@ function AddARideScreen({ navigation }) {
 
                             </View>
                             <View style={{margin:20, flex:1}}>
-                                <Text style={{fontSize:15}}>{originText}</Text>
+                                <Text style={{fontSize:15, color:'black'}}>{originText}</Text>
                             </View>
 
                             {/*<View style={{margin:10, flex:1}}>*/}
@@ -674,7 +674,7 @@ function AddARideScreen({ navigation }) {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{flex:1,justifyContent:'center'}}>
-                                    <Text style={{fontWeight:"bold"}}>OR</Text>
+                                    <Text style={{fontWeight:"bold", color:'black'}}>OR</Text>
                                 </View>
                                 <View style={{flex:6,marginLeft:5}}>
 
@@ -982,7 +982,10 @@ function AddARideScreen({ navigation }) {
                                     {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                     <View style={{width:'100%'}}>
                                         <SafeAreaView style={{width:'100%'}}>
+                                            {data.length === 0 && (
+                                                <Text style={{color:'black',margin:50}}>No previously saved routes</Text>
 
+                                            )}
                                             <FlatList
                                                 style={{height:"90%", width:'100%'}}
                                                 data={data.reverse()}

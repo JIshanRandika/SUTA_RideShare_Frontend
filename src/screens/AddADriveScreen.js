@@ -554,7 +554,7 @@ function AddADriveScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
-                        <Text style={{fontSize:15}}>{originText}</Text>
+                        <Text style={{fontSize:15, color:'black'}}>{originText}</Text>
                     </View>
 
                     <View style={{margin:10, flex:1}}>
@@ -588,7 +588,7 @@ function AddADriveScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={{margin:10, flex:1}}>
-                        <Text style={{fontSize:15}}>{destinationText}</Text>
+                        <Text style={{fontSize:15, color:'black'}}>{destinationText}</Text>
                     </View>
 
                     <View style={{ flex:1, flexDirection:'row'}}>
@@ -631,6 +631,11 @@ function AddADriveScreen({ navigation }) {
                         <View style={{width:'100%'}}>
 
                             <SafeAreaView style={{width:'100%'}}>
+
+                                {vehiclesData.length === 0 && (
+                                    <Text style={{color:'black',margin:50}}>No previously saved vehicles</Text>
+
+                                )}
 
                                 <FlatList
                                     style={{height:"100%", width:'100%'}}
@@ -1168,6 +1173,11 @@ function AddADriveScreen({ navigation }) {
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
+
+                                        {data.length === 0 && (
+                                            <Text style={{color:'black',margin:50}}>No previously saved routes</Text>
+
+                                        )}
 
                                         <FlatList
                                             style={{height:"90%", width:'100%'}}

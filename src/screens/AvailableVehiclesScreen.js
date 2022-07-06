@@ -366,7 +366,7 @@ function AvailableVehiclesScreen({ navigation }) {
                         {/*<Spinner visible={isLoading} />*/}
 
 
-                        {isLoading ? <Text>Loading...</Text> :(
+                        {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                             <>
                             <View
                                 style={{
@@ -406,7 +406,10 @@ function AvailableVehiclesScreen({ navigation }) {
                                     {/*/>*/}
 
                                     <SafeAreaView style={{width:'100%'}}>
+                                        {data.length === 0 && (
+                                            <Text style={{color:'black',margin:50}}>No Available vehicles</Text>
 
+                                        )}
                                         <FlatList
                                             // ListHeaderComponent={renderHeader}
                                             style={{height:"100%", width:'100%'}}

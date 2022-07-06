@@ -492,7 +492,7 @@ function YourDrivesScreen({ navigation }) {
                 {/*<Spinner visible={isLoading} />*/}
 
 
-                {isLoading ? <Text>Loading...</Text> :(
+                {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                     <View style={{
                         flex: 1,
                         alignItems: 'center',
@@ -503,7 +503,10 @@ function YourDrivesScreen({ navigation }) {
                         {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                         <View style={{width:'100%'}}>
                             <SafeAreaView style={{width:'100%'}}>
+                                {data.length === 0 && (
+                                    <Text style={{color:'black',margin:50}}>No previously added drives</Text>
 
+                                )}
                                 <FlatList
                                     style={{height:"90%", width:'100%'}}
                                     data={data.reverse()}
@@ -629,7 +632,10 @@ function YourDrivesScreen({ navigation }) {
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
+                                        {data.length === 0 && (
+                                            <Text style={{color:'black',margin:50,marginTop:200}}>No requests</Text>
 
+                                        )}
                                         <FlatList
                                             style={{height:"100%", width:'100%'}}
                                             data={requestData.reverse()}

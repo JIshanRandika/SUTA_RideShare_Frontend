@@ -626,7 +626,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                     <TextInput
                         style={{margin:10,backgroundColor:'#7a5da7',borderRadius:10,padding:10,color:'#ffffff'}}
                         value={routeName}
-                        placeholderTextColor='black'
+                        placeholderTextColor='white'
                         placeholder="Route Name"
                         onChangeText={text => setRouteName(text)}
                     />

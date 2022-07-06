@@ -261,7 +261,7 @@ function FavoriteRoutesScreen({ navigation }) {
                         {/*<Spinner visible={isLoading} />*/}
 
 
-                        {isLoading ? <Text>Loading...</Text> :(
+                        {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                             <View style={{
                                 flex: 1,
                                 alignItems: 'center',
@@ -272,7 +272,10 @@ function FavoriteRoutesScreen({ navigation }) {
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
+                                        {data.length === 0 && (
+                                            <Text style={{color:'black',margin:50}}>No previously saved routes</Text>
 
+                                        )}
                                         <FlatList
                                             style={{height:"90%", width:'100%'}}
                                             data={data.reverse()}

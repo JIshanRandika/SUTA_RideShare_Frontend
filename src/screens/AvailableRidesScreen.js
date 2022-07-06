@@ -315,7 +315,7 @@ function AvailableRidesScreen({ navigation }) {
                         {/*<Spinner visible={isLoading} />*/}
 
 
-                        {isLoading ? <Text>Loading...</Text> :(
+                        {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
 
                             <>
                             <View
@@ -352,7 +352,10 @@ function AvailableRidesScreen({ navigation }) {
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
+                                        {data.length === 0 && (
+                                            <Text style={{color:'black',margin:50}}>No Available Rides</Text>
 
+                                        )}
                                         <FlatList
                                             style={{height:"100%", width:'100%'}}
                                             data={data.reverse()}

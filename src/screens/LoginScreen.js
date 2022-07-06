@@ -70,13 +70,13 @@ const LoginScreen = ({navigation}) => {
           <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Login</Text>
         </TouchableOpacity>
         {isLoading && (
-            <Text style={{marginTop:10}}>Loading..</Text>
+            <Text style={{marginTop:10, color:'black'}}>Loading..</Text>
         )}
         {logLoading && (
             <Text style={{marginTop:10, color:'red'}}>{userInfo.message}</Text>
         )}
         <View style={{flexDirection: 'row', marginTop: 20}}>
-          <Text>Don't have an account? </Text>
+          <Text style={{color:'black'}}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text style={styles.link}>Register</Text>
           </TouchableOpacity>

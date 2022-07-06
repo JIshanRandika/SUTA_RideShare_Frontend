@@ -239,9 +239,15 @@ function YourVehiclesScreen({ navigation }) {
                                 width:'100%'
                             }}>
 
+
+
                                 {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                                 <View style={{width:'100%'}}>
                                     <SafeAreaView style={{width:'100%'}}>
+                                        {data.length===0 && (
+                                            <Text style={{color:'black',margin:50}}>No previously saved vehicles</Text>
+
+                                        )}
 
                                         <FlatList
                                             style={{height:"90%", width:'100%'}}
