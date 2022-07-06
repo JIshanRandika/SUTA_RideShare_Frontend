@@ -50,6 +50,10 @@ function AboutScreen({ navigation }) {
                 <Text style={{margin:10}}>
                     Email: jishanrandika@gmail.com
                 </Text>
+
+                <Text style={{margin:10}}>
+                    Version: 1.1
+                </Text>
             </View>
                 </ScrollView>
             </SafeAreaView>
