@@ -352,7 +352,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={startLocation}
                                 onChangeText={text => setStartLocation(text)}
-                                placeholderTextColor='black'
+                                placeholderTextColor='gray'
                                 placeholder="Start Location Name"
                                 style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
@@ -365,6 +365,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
                             placeholder="Search"
                             fetchDetails={true}
+                            textInputProps={{
+                                placeholderTextColor: 'gray',
+                            }}
                             GooglePlacesSearchQuery={{
                                 rankby: "distance"
                             }}
@@ -390,8 +393,45 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 location: `${originLocation.latitude}, ${originLocation.longitude}`
                             }}
                             styles={{
-                                container: { flex: 0, position: "absolute", width: "100%", zIndex: 1 },
-                                listView: { backgroundColor: "white" }
+                                container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55, color:'black',textColor: 'black' },
+                                listView: { backgroundColor: "black",textColor:'black',color: '#5d5d5d'},
+                                separator: {
+                                    height: 0.5,
+                                    backgroundColor: 'black',textColor:'black',color: '#5d5d5d'
+                                },
+                                textInput: {
+                                    height: 38,
+                                    color: '#5d5d5d',
+                                    fontSize: 16,
+                                },
+                                textInputContainer: {
+                                    flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                                },
+
+
+                                poweredContainer: {
+                                    justifyContent: 'flex-end',
+                                    alignItems: 'center',
+                                    borderBottomRightRadius: 5,
+                                    borderBottomLeftRadius: 5,
+                                    borderColor: '#c8c7cc',
+                                    borderTopWidth: 0.5,
+                                },
+                                powered: {textColor:'black',color: '#5d5d5d'},
+
+                                row: {
+                                    backgroundColor: '#FFFFFF',
+                                    padding: 13,
+                                    height: 44,
+                                    flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                                },
+
+                                description: {textColor:'black',color: '#5d5d5d'},
+                                loader: {
+                                    flexDirection: 'row',
+                                    justifyContent: 'flex-end',
+                                    height: 20,
+                                },
                             }}
                         />
                         {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}
@@ -502,6 +542,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
 
                         placeholder="Search"
                         fetchDetails={true}
+                        textInputProps={{
+                            placeholderTextColor: 'gray',
+                        }}
                         GooglePlacesSearchQuery={{
                             rankby: "distance"
                         }}
@@ -527,8 +570,45 @@ function AddAFavoriteRouteScreen({ navigation }) {
                             location: `${destinationLocation.latitude}, ${destinationLocation.longitude}`
                         }}
                         styles={{
-                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55 },
-                            listView: { backgroundColor: "white" }
+                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55, color:'black',textColor: 'black' },
+                            listView: { backgroundColor: "black",textColor:'black',color: '#5d5d5d'},
+                            separator: {
+                                height: 0.5,
+                                backgroundColor: 'black',textColor:'black',color: '#5d5d5d'
+                            },
+                            textInput: {
+                                height: 38,
+                                color: '#5d5d5d',
+                                fontSize: 16,
+                            },
+                            textInputContainer: {
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+
+                            poweredContainer: {
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                borderBottomRightRadius: 5,
+                                borderBottomLeftRadius: 5,
+                                borderColor: '#c8c7cc',
+                                borderTopWidth: 0.5,
+                            },
+                            powered: {textColor:'black',color: '#5d5d5d'},
+
+                            row: {
+                                backgroundColor: '#FFFFFF',
+                                padding: 13,
+                                height: 44,
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+                            description: {textColor:'black',color: '#5d5d5d'},
+                            loader: {
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                                height: 20,
+                            },
                         }}
                     />
                     )}
@@ -578,7 +658,7 @@ function AddAFavoriteRouteScreen({ navigation }) {
                                 value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
                                 placeholder="Destination Location Name"
-                                placeholderTextColor='black'
+                                placeholderTextColor='gray'
                                 style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                             />
                         </View>

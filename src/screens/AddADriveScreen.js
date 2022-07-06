@@ -656,7 +656,7 @@ function AddADriveScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={availableSeats}
-                                    placeholderTextColor='black'
+                                    placeholderTextColor='gray'
                                     placeholder="Number of Seats"
                                     keyboardType="numeric"
                                     onChangeText={text => setAvailableSeats(text)}
@@ -666,7 +666,7 @@ function AddADriveScreen({ navigation }) {
                                 <TextInput
                                     style={styles.input}
                                     value={vehicleNumber}
-                                    placeholderTextColor='black'
+                                    placeholderTextColor='gray'
                                     placeholder="Vehicle Number"
                                     onChangeText={text => setVehicleNumber(text)}
                                 />
@@ -676,7 +676,7 @@ function AddADriveScreen({ navigation }) {
                                     style={styles.input}
                                     value={contactNumber}
                                     keyboardType="numeric"
-                                    placeholderTextColor='black'
+                                    placeholderTextColor='gray'
                                     placeholder="Your contact Number"
                                     onChangeText={text => setContactNumber(text)}
                                 />
@@ -806,7 +806,7 @@ function AddADriveScreen({ navigation }) {
                             clearButtonMode="always"
                             value={startLocation}
                             onChangeText={text => setStartLocation(text)}
-                            placeholderTextColor='black'
+                            placeholderTextColor='gray'
                             placeholder="Start Location Name"
                             style={{ backgroundColor: '#fff', paddingHorizontal: 20 ,color:'black'}}
                         />
@@ -815,8 +815,12 @@ function AddADriveScreen({ navigation }) {
                     {show === '1' && (
                     <GooglePlacesAutocomplete
 
+
                         placeholder="Search"
                         fetchDetails={true}
+                        textInputProps={{
+                            placeholderTextColor: 'gray',
+                        }}
                         GooglePlacesSearchQuery={{
                             rankby: "distance"
                         }}
@@ -843,8 +847,45 @@ function AddADriveScreen({ navigation }) {
                             location: `${originLocation.latitude}, ${originLocation.longitude}`
                         }}
                         styles={{
-                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55 },
-                            listView: { backgroundColor: "white" }
+                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55, color:'black',textColor: 'black' },
+                            listView: { backgroundColor: "black",textColor:'black',color: '#5d5d5d'},
+                            separator: {
+                                height: 0.5,
+                                backgroundColor: 'black',textColor:'black',color: '#5d5d5d'
+                            },
+                            textInput: {
+                                height: 38,
+                                color: '#5d5d5d',
+                                fontSize: 16,
+                            },
+                            textInputContainer: {
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+
+                            poweredContainer: {
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                borderBottomRightRadius: 5,
+                                borderBottomLeftRadius: 5,
+                                borderColor: '#c8c7cc',
+                                borderTopWidth: 0.5,
+                            },
+                            powered: {textColor:'black',color: '#5d5d5d'},
+
+                            row: {
+                                backgroundColor: '#FFFFFF',
+                                padding: 13,
+                                height: 44,
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+                            description: {textColor:'black',color: '#5d5d5d'},
+                            loader: {
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                                height: 20,
+                            },
                         }}
                     />
                     )}
@@ -980,9 +1021,11 @@ function AddADriveScreen({ navigation }) {
                     {show === '1' && (
                     <GooglePlacesAutocomplete
 
-                        placeholderTextColor='red'
                         placeholder="Search"
                         fetchDetails={true}
+                        textInputProps={{
+                            placeholderTextColor: 'gray',
+                        }}
                         GooglePlacesSearchQuery={{
                             rankby: "distance"
                         }}
@@ -1007,8 +1050,45 @@ function AddADriveScreen({ navigation }) {
                             location: `${destinationLocation.latitude}, ${destinationLocation.longitude}`
                         }}
                         styles={{
-                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55 },
-                            listView: { backgroundColor: "white" }
+                            container: { flex: 0, position: "absolute", width: "95%", zIndex: 1,margin:10, marginTop:55, color:'black',textColor: 'black' },
+                            listView: { backgroundColor: "black",textColor:'black',color: '#5d5d5d'},
+                            separator: {
+                                height: 0.5,
+                                backgroundColor: 'black',textColor:'black',color: '#5d5d5d'
+                            },
+                            textInput: {
+                                height: 38,
+                                color: '#5d5d5d',
+                                fontSize: 16,
+                            },
+                            textInputContainer: {
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+
+                            poweredContainer: {
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                borderBottomRightRadius: 5,
+                                borderBottomLeftRadius: 5,
+                                borderColor: '#c8c7cc',
+                                borderTopWidth: 0.5,
+                            },
+                            powered: {textColor:'black',color: '#5d5d5d'},
+
+                            row: {
+                                backgroundColor: '#FFFFFF',
+                                padding: 13,
+                                height: 44,
+                                flexDirection: 'row',textColor:'black',color: '#5d5d5d'
+                            },
+
+                            description: {textColor:'black',color: '#5d5d5d'},
+                            loader: {
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                                height: 20,
+                            },
                         }}
                     />
 
@@ -1048,7 +1128,7 @@ function AddADriveScreen({ navigation }) {
                                 clearButtonMode="always"
                                 value={endLocation}
                                 onChangeText={text => setEndLocation(text)}
-                                placeholderTextColor='black'
+                                placeholderTextColor='gray'
                                 placeholder="Destination Location Name"
                                 style={{ backgroundColor: '#fff', paddingHorizontal: 20,color:'black' }}
                             />
@@ -1147,7 +1227,7 @@ function AddADriveScreen({ navigation }) {
                         {/*<Spinner visible={isLoading} />*/}
 
 
-                        {isLoading ? <Text>Loading...</Text> :(
+                        {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                             <>
                                 <View style={{margin:10 }}>
                                     {/*<Button title='Back' onPress={()=>{setScreen('1')}}/>*/}

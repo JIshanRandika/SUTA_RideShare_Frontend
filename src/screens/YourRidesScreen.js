@@ -441,7 +441,7 @@ function YourRidesScreen({ navigation }) {
                         {/*<Spinner visible={isLoading} />*/}
 
 
-                        {isLoading ? <Text>Loading...</Text> :(
+                        {isLoading ? <Text style={{color:'black'}}>Loading...</Text> :(
                             <View style={{
                                 flex: 1,
                                 alignItems: 'center',

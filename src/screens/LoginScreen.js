@@ -25,7 +25,7 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.wrapper}>
         <TextInput
             style={styles.input}
-          placeholderTextColor='black'
+          placeholderTextColor='gray'
           value={email}
           placeholder="Enter email"
           onChangeText={text => setEmail(text)}
@@ -34,7 +34,7 @@ const LoginScreen = ({navigation}) => {
         <TextInput
           style={styles.input}
           value={password}
-          placeholderTextColor='black'
+          placeholderTextColor='gray'
           placeholder="Enter password"
           onChangeText={text => setPassword(text)}
           secureTextEntry

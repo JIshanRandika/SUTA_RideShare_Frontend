@@ -59,28 +59,28 @@ function SettingsScreen({ navigation }) {
                     <TextInput
                         style={styles.input}
                         value={title}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Title for vehicle"
                         onChangeText={text => setTitle(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={type}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Type for vehicle"
                         onChangeText={text => setType(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={vehicleNumber}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Vehicle Number"
                         onChangeText={text => setVehicleNumber(text)}
                     />
                     <TextInput
                         style={styles.input}
                         value={availableSeats}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Available Seats"
                         keyboardType="numeric"
                         onChangeText={text => setAvailableSeats(text)}
@@ -88,7 +88,7 @@ function SettingsScreen({ navigation }) {
                     <TextInput
                         style={styles.input}
                         value={contactNumber}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Contact Number"
                         keyboardType="numeric"
                         onChangeText={text => setContactNumber(text)}

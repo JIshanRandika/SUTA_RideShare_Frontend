@@ -385,7 +385,7 @@ function AvailableVehiclesScreen({ navigation }) {
                                     clearButtonMode="always"
                                     value={query}
                                     onChangeText={queryText => handleSearch(queryText)}
-                                    placeholderTextColor='black'
+                                    placeholderTextColor='gray'
                                     placeholder="Search"
                                     style={{ backgroundColor: '#fff', paddingHorizontal: 20,color:'black' }}
                                 />

@@ -140,7 +140,7 @@ function GroupsManageScreen({ navigation }) {
                             borderRadius: 5,
                             paddingHorizontal: 14,}}
                         value={groupID}
-                        placeholderTextColor='black'
+                        placeholderTextColor='gray'
                         placeholder="Enter Custom Group ID"
                         onChangeText={text => setGroupID(text)}
                     />
