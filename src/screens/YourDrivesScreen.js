@@ -205,12 +205,19 @@ function YourDrivesScreen({ navigation }) {
     // ================================
 
     const [selectedId, setSelectedId] = useState(null);
+
+    const [startLocation, setStartLocation] = useState(null);
+    const [endLocation, setEndLocation] = useState(null);
+
     const Item = ({ item }) => (
 
 
 
         <TouchableOpacity
             onPress={()=>{{
+                setStartLocation(item.startLocation)
+                setEndLocation(item.endLocation);
+
                 setOriginLatitude(item.originLatitude);
                 setOriginLongitude(item.originLongitude);
                 setDestinationLatitude(item.destinationLatitude)
@@ -531,7 +538,10 @@ function YourDrivesScreen({ navigation }) {
 
 
 
-              <Marker coordinate={{latitude: originLatitude, longitude: originLongitude}}/>
+              <Marker coordinate={{latitude: originLatitude, longitude: originLongitude}}
+                      title="Origin"
+                      description={startLocation}
+              />
 
                     <Circle center={{
                         latitude: originLatitude,
@@ -539,7 +549,10 @@ function YourDrivesScreen({ navigation }) {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421}} radius={500} />
 
-                    <Marker coordinate={{latitude: destinationLatitude, longitude: destinationLongitude}}/>
+                    <Marker coordinate={{latitude: destinationLatitude, longitude: destinationLongitude}}
+                            title="Destination"
+                            description={endLocation}
+                    />
                     <Circle center={{
                         latitude: destinationLatitude,
                         longitude: destinationLongitude,

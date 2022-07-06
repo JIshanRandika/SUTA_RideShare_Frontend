@@ -507,6 +507,9 @@ function AddAFavoriteRouteScreen({ navigation }) {
                         onPress={(data, details = null) => {
                             // 'details' is provided when fetchDetails = true
                             console.log(data, details)
+                            console.log(data.description)
+                            setEndLocation(data.description)
+
                             setDestinationLocation({
                                 latitude: details.geometry.location.lat,
                                 longitude: details.geometry.location.lng,
