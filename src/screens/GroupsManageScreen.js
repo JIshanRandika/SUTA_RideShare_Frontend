@@ -34,11 +34,30 @@ function GroupsManageScreen({ navigation }) {
                 groupID:groupID
 
             }),
-        }).finally(logout);
+        }).finally(
+            fetch(`${BASE_URL}/updateGoogleUserGroup`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+
+                email: userInfo.email,
+                groupID:groupID
+
+            }),
+        }).finally(logout)
+        );
     }
 
     const [isLoading, setLoading] = useState(true);
 
+    const [dataUser, setUserData] = useState([]);
+    const [dataGoogleUser, setGoogleUserData] = useState([]);
+
+    const [data, setData] = useState([]);
 
     useEffect(() => {
 
@@ -57,9 +76,32 @@ function GroupsManageScreen({ navigation }) {
             }),
         })
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then((json) => setUserData(json))
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+            .finally(() => {
+
+                fetch(`${BASE_URL}/googleUsersInGroup`,{
+                    method:'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        groupID: userInfo.groupID,
+
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((json) => setGoogleUserData(json))
+                    // .then(setData(dataUser))
+                    .catch((error) => console.error(error))
+                    .finally(() => setLoading(false));
+            })
+
+
+
+
 
 
 
@@ -68,7 +110,7 @@ function GroupsManageScreen({ navigation }) {
     // const [isLoading, setLoading] = useState(true);
 
     // =====================
-    const [data, setData] = useState([]);
+
 
     const [selectedId, setSelectedId] = useState(null);
     const Item = ({ item }) => (
@@ -209,13 +251,13 @@ function GroupsManageScreen({ navigation }) {
                         {/*<Text style={{justifyContent:'center'}}>Loaded</Text>*/}
                         <View style={{width:'100%'}}>
                             <SafeAreaView style={{width:'100%'}}>
-                                {data.length === 0 && (
+                                {(dataUser.length + dataGoogleUser.length) === 0 && (
                                     <Text style={{color:'black',margin:50}}>No group members</Text>
 
                                 )}
                                 <FlatList
                                     style={{height:"90%", width:'100%'}}
-                                    data={data.reverse()}
+                                    data={dataUser.concat(dataGoogleUser).reverse()}
                                     renderItem={renderItem}
                                     keyExtractor={(data) => data._id}
                                     extraData={selectedId}
