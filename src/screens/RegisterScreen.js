@@ -333,10 +333,18 @@ const RegisterScreen = ({navigation}) => {
             >
               <Text style={{fontSize: 15, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Sign Up</Text>
             </TouchableOpacity>
+            <View style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin:10,
 
+
+            }}>
+              <Text style={{fontWeight:'bold',color:'black'}}>OR</Text>
+            </View>
             <TouchableOpacity
                 style={{
-                  marginTop:10,
+                  // marginTop:10,
                   height:42,
                   backgroundColor: "#fa5600",
                   borderRadius:20,
