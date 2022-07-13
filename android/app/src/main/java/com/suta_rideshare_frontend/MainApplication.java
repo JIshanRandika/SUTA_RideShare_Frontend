@@ -37,6 +37,11 @@ import com.airbnb.android.react.maps.MapsPackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
 
+import com.reactnativegooglesignin.RNGoogleSigninPackage;
+
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+
 public class MainApplication extends Application implements ReactApplication {
     @Override
      protected void attachBaseContext(Context base) {
@@ -66,7 +71,12 @@ public class MainApplication extends Application implements ReactApplication {
                     new RNGestureHandlerPackage(),
                     new SafeAreaContextPackage(),
                     new RNDateTimePickerPackage(),
-                    new VectorIconsPackage()
+                    new VectorIconsPackage(),
+                    new RNGoogleSigninPackage(),
+                    new ReactNativeFirebaseAppPackage(),
+                    new ReactNativeFirebaseAuthPackage()
+
+//                    new RNGoogleSigninPackage()
 //                    new RNGeolocationPackage()
 //                    new RNCSafeAreaProviderPackage()
 //                    new SafeAreaContextPackage()

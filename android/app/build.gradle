@@ -272,9 +272,11 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
+//apply plugin: 'com.google.gms.google-services.react-native-firebase_auth'
 
 dependencies {
+//    implementation project(':react-native-firebase_auth')
+
     implementation project(':react-native-vector-icons')
 
     implementation project(':react-native-push-notification')
