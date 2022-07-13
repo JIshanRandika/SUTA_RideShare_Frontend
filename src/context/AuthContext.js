@@ -103,6 +103,26 @@ export const AuthProvider = ({children}) => {
       });
   };
 
+    const googleLogin = (email) => {
+        setIsLoading(true);
+
+        axios
+            .post(`${BASE_URL}/googleAuth`, {
+                email,
+            })
+            .then(res => {
+                let userInfo = res.data;
+                console.log(userInfo);
+                setUserInfo(userInfo);
+                AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+                setIsLoading(false);
+            })
+            .catch(e => {
+                console.log(`login error ${e}`);
+                setIsLoading(false);
+            });
+    };
+
   const logout = () => {
     setIsLoading(true);
 
@@ -157,6 +177,7 @@ export const AuthProvider = ({children}) => {
         register,
           registerbygoogle,
         login,
+          googleLogin,
         logout,
       }}>
       {children}

@@ -50,6 +50,21 @@ export default class Token extends Component {
                 }),
             })
 
+            fetch(`${BASE_URL}/updateGoogleUserToken`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+
+                    email: userInfo.email,
+                    deviseToken:this.state.registerToken
+
+                }),
+            })
+
             console.log(this.state.registerToken);
 
         }, 2000);
