@@ -31,11 +31,12 @@ const LoginScreen = ({navigation}) => {
 
     user_sign_in.then(user => {
       // console.log(user);
-      console.log(user.additionalUserInfo.profile.name);
+      console.log(user.additionalUserInfo);
       console.log(user.additionalUserInfo.profile.email);
       googleLogin(
 
           user.additionalUserInfo.profile.email,
+          user.additionalUserInfo.profile.picture,
 
           );
     });

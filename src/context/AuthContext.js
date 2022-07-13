@@ -103,12 +103,13 @@ export const AuthProvider = ({children}) => {
       });
   };
 
-    const googleLogin = (email) => {
+    const googleLogin = (email,picture) => {
         setIsLoading(true);
 
         axios
             .post(`${BASE_URL}/googleAuth`, {
                 email,
+                picture,
             })
             .then(res => {
                 let userInfo = res.data;

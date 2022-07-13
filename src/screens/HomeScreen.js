@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {ActivityIndicator, Button, Text, View,TouchableOpacity,SafeAreaView,ScrollView} from 'react-native';
+import {ActivityIndicator, Button, Text, View,TouchableOpacity,SafeAreaView,ScrollView, Image} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
@@ -12,8 +12,20 @@ import Ionicons from 'react-native-vector-icons/MaterialIcons';
         //     <ScrollView>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ flex: 9, justifyContent: 'center', alignItems: 'center' }}>
-                <Ionicons name="person" size={100} color='gray'  />
+                {userInfo.picture && (
+                    <Image
+                        style={{width:150,height:150,borderRadius:100}}
+                        source={{
+                            uri: userInfo.picture,
+                        }}
+                    />
+                    // <Text style={{fontSize:20, color:'black'}}>{userInfo.picture}</Text>
+                )}
+                {!userInfo.picture && (
+                    <Ionicons name="person" size={100} color='gray'  />
+                )}
                 <Text style={{fontSize:20, color:'black'}}>Hi {userInfo.name}</Text>
+
                 <Text style={{fontSize:15, color:'black'}}>Welcome to SL RideShare</Text>
                 <Text style={{fontSize:12, color:'black'}}>Powered by JSE Labs</Text>
 
