@@ -19,6 +19,38 @@ export const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
+
+    const registerbygoogle = (name, email,groupID, deviseToken) => {
+        setIsLoading(true);
+
+        axios
+            .post(`${BASE_URL}/googleUsers`, {
+                name,
+                email,
+                groupID,
+                deviseToken
+            })
+            .then(res => {
+                let userInfo = res.data;
+                setUserInfo(userInfo);
+                AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+                setIsLoading(false);
+                console.log('Testing');
+                console.log(userInfo);
+            })
+            .catch(
+                res => {
+                    let userInfo = res.data;
+                    // setUserInfo(userInfo);
+                    AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    console.log(userInfo);
+                    console.log(`register error0000 ${res}`);
+                    setIsLoading(false);
+                }
+            );
+    };
+
+
   const register = (name, email, password,groupID, deviseToken) => {
     setIsLoading(true);
 
@@ -123,6 +155,7 @@ export const AuthProvider = ({children}) => {
         userInfo,
         splashLoading,
         register,
+          registerbygoogle,
         login,
         logout,
       }}>
