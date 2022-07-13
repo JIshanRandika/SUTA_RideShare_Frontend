@@ -25,10 +25,10 @@ function AvailableVehiclesScreen({ navigation }) {
 
     const [data, setData] = useState([]);
     const [fullData, setFullData] = useState([]);
-    console.log('data');
-    console.log(data);
-    console.log('fullData');
-    console.log(fullData);
+    // console.log('data');
+    // console.log(data);
+    // console.log('fullData');
+    // console.log(fullData);
 
     const [userData, setUserData] = useState(null);
 
@@ -60,9 +60,33 @@ function AvailableVehiclesScreen({ navigation }) {
             }),
         })
             .then((response) => response.json())
-            .then((json) => setUserData(json))
-            .catch((error) => console.error(error))
+            .then((json) => {setUserData(json);
 
+                if(json.length===0){
+                    fetch(`${BASE_URL}/googleUserToken`,{
+                        method:'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: userInfo.name,
+                            email:userInfo.email
+
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {setUserData(json);console.log(json)})
+                        .catch((error) => console.error(error))
+                    // .finally(() => console.log(json));
+                }
+
+            })
+            .catch((error) => console.error(error))
+            // .finally(() => {}
+            //
+            // );
+            // ==========
 
 
 
@@ -268,9 +292,9 @@ function AvailableVehiclesScreen({ navigation }) {
 
     // ==========================
     const handleSearch = text => {
-        console.log('handle')
+        // console.log('handle')
         const formattedQuery = text.toLowerCase();
-        console.log(text)
+        // console.log(text)
         // const filteredData = filter(fullData, user => {
         //     console.log('filter')
         //     return contains(user, formattedQuery);
@@ -310,7 +334,7 @@ function AvailableVehiclesScreen({ navigation }) {
 
     const contains = ({ originDateTime,originLongitude, originLatitude, destinationDateTime, destinationLongitude, destinationLatitude, availableSeats, VehicleNumber, contactNumber, username, email, groupID, userToken }, query) => {
 
-        console.log('contains')
+        // console.log('contains')
         const { first, last } = name;
 
         if (VehicleNumber.includes(query) || availableSeats.includes(query) || contactNumber.includes(query)) {

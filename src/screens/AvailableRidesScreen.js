@@ -40,6 +40,24 @@ function AvailableRidesScreen({ navigation }) {
     useEffect(() => {
 
         // ==========
+        // fetch(`${BASE_URL}/userToken`,{
+        //     method:'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         username: userInfo.name,
+        //         email:userInfo.email
+        //
+        //     }),
+        // })
+        //     .then((response) => response.json())
+        //     .then((json) => setUserData(json))
+        //     .catch((error) => console.error(error))
+
+
+        // ==========
         fetch(`${BASE_URL}/userToken`,{
             method:'POST',
             headers: {
@@ -53,8 +71,33 @@ function AvailableRidesScreen({ navigation }) {
             }),
         })
             .then((response) => response.json())
-            .then((json) => setUserData(json))
+            .then((json) => {setUserData(json);
+
+                if(json.length===0){
+                    fetch(`${BASE_URL}/googleUserToken`,{
+                        method:'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: userInfo.name,
+                            email:userInfo.email
+
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {setUserData(json);console.log(json)})
+                        .catch((error) => console.error(error))
+                    // .finally(() => console.log(json));
+                }
+
+            })
             .catch((error) => console.error(error))
+        // .finally(() => {}
+        //
+        // );
+        // ==========
 
 
         // fetch(`${BASE_URL}/getRides`)
