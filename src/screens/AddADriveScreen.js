@@ -9,7 +9,7 @@ import {
     View,
     SafeAreaView,
     ScrollView,
-    TouchableOpacity, FlatList,
+    TouchableOpacity, FlatList, Image,
 } from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
@@ -811,7 +811,9 @@ function AddADriveScreen({ navigation }) {
                             }}
                             title="Origin"
                             description="Origin location"
-                        />
+                        >
+                            <Image source={require('../assets/start.png')} style={{height: 80, width:40 }} />
+                        </Marker>
                         <Circle center={originLocation} radius={1000} />
                     </MapView>
 
@@ -1037,7 +1039,9 @@ function AddADriveScreen({ navigation }) {
                             }}
                             title="Origin"
                             description="Origin location"
-                        />
+                        >
+                            <Image source={require('../assets/start.png')} style={{height: 80, width:40 }} />
+                        </Marker>
                         <Circle center={originLocation} radius={1000} />
                         <Marker
                             coordinate={{
@@ -1046,7 +1050,10 @@ function AddADriveScreen({ navigation }) {
                             }}
                             title="Destination"
                             description="Destination location"
-                        />
+                        >
+                            <Image source={require('../assets/stop.png')} style={{height: 80, width:40 }} />
+
+                        </Marker>
                         <Circle center={destinationLocation} radius={1000} />
                         <MapViewDirections
                             origin={{latitude: originLocation.latitude, longitude: originLocation.longitude}}
@@ -1342,7 +1349,10 @@ function AddADriveScreen({ navigation }) {
                             }}
                             title="Origin"
                             description="Origin location"
-                        />
+                        >
+                            <Image source={require('../assets/start.png')} style={{height: 80, width:40 }} />
+
+                        </Marker>
                         <Circle center={originLocation} radius={1000} />
                         <Marker
                             coordinate={{
@@ -1351,7 +1361,10 @@ function AddADriveScreen({ navigation }) {
                             }}
                             title="Destination"
                             description="Destination location"
-                        />
+                        >
+                            <Image source={require('../assets/stop.png')} style={{height: 80, width:40 }} />
+
+                        </Marker>
                         <Circle center={destinationLocation} radius={1000} />
                         <MapViewDirections
                             origin={{latitude: originLocation.latitude, longitude: originLocation.longitude}}

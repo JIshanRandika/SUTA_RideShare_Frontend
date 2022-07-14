@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {
     ActivityIndicator,
     Button,
-    FlatList,
+    FlatList, Image,
     SafeAreaView,
     StyleSheet,
     Text, TextInput,
@@ -437,7 +437,10 @@ function AvailableRidesScreen({ navigation }) {
                         <Marker coordinate={{latitude: originLatitude, longitude: originLongitude}}
                                 title="Origin"
                                 description={startLocation}
-                        />
+                        >
+                            <Image source={require('../assets/start.png')} style={{height: 80, width:40 }} />
+
+                        </Marker>
 
                         <Circle center={{
                             latitude: originLatitude,
@@ -448,7 +451,10 @@ function AvailableRidesScreen({ navigation }) {
                         <Marker coordinate={{latitude: destinationLatitude, longitude: destinationLongitude}}
                                 title="Destination"
                                 description={endLocation}
-                        />
+                        >
+                            <Image source={require('../assets/stop.png')} style={{height: 80, width:40 }} />
+
+                        </Marker>
                         <Circle center={{
                             latitude: destinationLatitude,
                             longitude: destinationLongitude,
