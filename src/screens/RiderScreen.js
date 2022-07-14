@@ -129,7 +129,7 @@ function RiderScreen({ navigation }) {
                             paddingRight:10,
                             paddingTop:10,
                             paddingBottom:10,
-                            backgroundColor: "rgb(62,112,121)",
+                            backgroundColor: "#114953",
 
                             borderRadius:10,
                             shadowColor: "#0090ff",
@@ -144,8 +144,8 @@ function RiderScreen({ navigation }) {
                         }}
                         onPress={() => navigation.navigate('Your Rides')}
                     >
-                        <Text style={{fontSize: 22, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Your Rides</Text>
-                        <Image source={require('../assets/rider.png')} style={{height: 80, width:40,marginTop:10 }} />
+                        <Text style={{fontSize: 20, fontWeight:"bold", textAlign:"center",color:"#ffffff"}}>Your Rides</Text>
+                        <Image source={require('../assets/rider.png')} style={{height: 80, width:50,marginTop:10 }} />
 
                     </TouchableOpacity>
                 </View>
@@ -164,7 +164,7 @@ function RiderScreen({ navigation }) {
                             paddingRight:10,
                             paddingTop:10,
                             paddingBottom:10,
-                            backgroundColor: "rgb(100,144,154)",
+                            backgroundColor: "#114953",
 
                             borderRadius:10,
                             shadowColor: "#0090ff",
