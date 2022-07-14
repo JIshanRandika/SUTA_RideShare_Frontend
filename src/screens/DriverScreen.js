@@ -85,7 +85,7 @@ function DriverScreen({ navigation }) {
 
                         elevation: 10,
                     }}
-                    onPress={() => navigation.navigate('Available Rides')}
+                    onPress={() => navigation.navigate('Available Rides - Map')}
                 >
 
                     <View style={{flexDirection:'row'}}>

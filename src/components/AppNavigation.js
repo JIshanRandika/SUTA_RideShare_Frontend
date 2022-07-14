@@ -22,6 +22,7 @@ import AddAVehicleScreen from '../screens/AddAVehicleScreen';
 import AboutScreen from '../screens/AboutScreen';
 import GroupsManageScreen from '../screens/GroupsManageScreen';
 import AvailableVehiclesMapViewScreen from '../screens/AvailableVehiclesMapViewScreen';
+import AvailableRidesMapViewScreen from '../screens/AvailableRidesMapViewScreen';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -34,6 +35,7 @@ function DriverStackScreen() {
             <DriverStack.Screen name="Driver" component={DriverScreen} options={{headerShown: false}}/>
             <DriverStack.Screen name="Your Drives" component={YourDrivesScreen} />
             <DriverStack.Screen name="Available Rides" component={AvailableRidesScreen} />
+            <RiderStack.Screen name="Available Rides - Map" component={AvailableRidesMapViewScreen} />
             <DriverStack.Screen name="Your Request To Riders" component={YourRequestToRidersScreen} />
             <DriverStack.Screen name="Add a Drive" component={AddADriveScreen} />
         </DriverStack.Navigator>
