@@ -114,13 +114,13 @@ export default function AppNavigation() {
                 <Tab.Screen name="Home" component={HomeStackScreen}
                             options={{
                                 tabBarIcon:() =>(
-                                    <Ionicons name="home" size={30} color="#2b1153"/>
+                                    <Ionicons name="home" size={30} color="#8f8d8d"/>
                                 ),}}
                 />
                 <Tab.Screen name="Driver" component={DriverStackScreen}
                             options={{
                                 tabBarIcon:() =>(
-                                    <Ionicons name="directions-car" size={30} color="#114953" />
+                                    <Ionicons name="directions-car" size={30} color="#2b1153" />
                                 ),
 
 
